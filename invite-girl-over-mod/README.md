@@ -17,6 +17,13 @@ A mod for X-Change Life that allows players to invite girlfriends over in the ev
 - Uses existing ff media from the game (Jia/Callie workout scenes)
 - Trait-based dialogue for lesbian encounters
 
+### Lesbian Bar Pickup
+- Override for `bar chat girl options female` passage
+- Female players can flirt with women at the bar
+- Pickup lines, buy drinks, ask for number, ask to hook up
+- Full integration with ff sex scenes
+- Girls automatically become girlfriends after hooking up
+
 ### General
 - Track relationships with girls who become "girlfriends"
 - Relationship progression (friendship, attraction)
@@ -48,9 +55,17 @@ The "Invite girl over" option appears in evening activities when:
 
 - Requires X-Change Life version 0.17f or later
 - Overrides the `refresh possible activities relationships` passage
+- Overrides the `bar chat girl options female` passage
 - Compatible with other mods that add bar girls (uses dynamic detection)
 
 ## Changelog
+
+### v1.2.0
+- Added lesbian bar pickup for female players
+- Override for `bar chat girl options female` passage
+- Pickup lines, buying drinks, asking for number, asking to hook up
+- Full bar-to-bedroom flow for lesbian encounters
+- Girls from bar become girlfriends automatically
 
 ### v1.1.0
 - Added lesbian hookup support for female players
