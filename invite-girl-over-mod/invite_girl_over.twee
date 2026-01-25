@@ -209,9 +209,7 @@ baseGameVersion:
   (set:$ambience to "bedroom")
   (display:"play ambience")
 
-  (if:$girl contains "img")[
-    (pic:$girl's "img")
-  ]
+  [(vid:"places/home/bedroom/bedroom 1.mp4")]<image|
 
   You bring (print:$girl's "name") to your bedroom.
 
@@ -226,7 +224,21 @@ baseGameVersion:
 
   (nl:2)
 
-  "(twirl:"So... what did you have in mind?","I've been thinking about you...","Ready to have some fun?","I missed you.")" she says with a playful smile.
+  (if:$girl contains "traits")[
+    (if:$girl's "traits" contains "slut")[
+      "(twirl:"Mmm, I've been thinking about this all day...","I'm already wet for you...","Let's not waste any time, I want you now.","I've been horny all day thinking about you.")" she says, biting her lip.
+    ](else-if:$girl's "traits" contains "bimbo")[
+      "(twirl:"Hehe, so like... what are we gonna do?","This is so exciting, hehe!","I've been like, thinking about you all day!","Hehe, your room is nice!")" she giggles.
+    ](else-if:$girl's "traits" contains "religious")[
+      "(twirl:"I know I shouldn't be here, but...","This feels so... forbidden.","I've been praying for strength, but...","I can't stop thinking about you.")" she says, blushing.
+    ](else-if:$girl's "traits" contains "likes assertive")[
+      "(twirl:"So... what did you have in mind?","I'm all yours tonight...","Tell me what you want me to do.","I like a man who takes charge.")" she says with a submissive smile.
+    ](else:)[
+      "(twirl:"So... what did you have in mind?","I've been thinking about you...","Ready to have some fun?","I missed you.")" she says with a playful smile.
+    ]
+  ](else:)[
+    "(twirl:"So... what did you have in mind?","I've been thinking about you...","Ready to have some fun?","I missed you.")" she says with a playful smile.
+  ]
 
   <div class='options'>
     (link:"Kiss her")[(cs:"invite girl sex start")]
@@ -290,7 +302,12 @@ baseGameVersion:
   (set:$stats's "sex as guy" to it + 1)
 
   <div class='options'>
-    (link:"Continue...")[(cs:"invite girl sex scene")]
+    (if:(a:"leah","harley","kendra","gabbie","mariselle","alexia") contains $girl's "id")[
+      (set:$npc to $girl)
+      (link:"Continue...")[(cs:"girl fuck")]
+    ](else:)[
+      (link:"Continue...")[(cs:"invite girl sex scene")]
+    ]
   </div>
 }
 
@@ -303,12 +320,53 @@ baseGameVersion:
     (pic:$girl's "img")
   ]
 
-  (twirl:
-    "You spend the evening enjoying each other's company in the most intimate way.",
-    "What follows is a passionate encounter that leaves you both satisfied.",
-    "You lose track of time as you explore each other's bodies.",
-    "The night becomes a blur of pleasure and intimacy."
-  )
+  (set:$her_name to $girl's "name")
+
+  (if:$girl contains "traits")[
+    (if:$girl's "traits" contains "slut")[
+      (twirl:
+        "$her_name moans loudly as you take her, clearly experienced and eager for more.",
+        "She knows exactly what she wants and isn't shy about telling you. The sex is intense and passionate.",
+        "Her body moves with practiced ease as she matches your rhythm perfectly.",
+        "$her_name proves to be an enthusiastic lover, urging you on with her moans and gasps."
+      )
+    ](else-if:$girl's "traits" contains "bimbo")[
+      (twirl:
+        "$her_name giggles between moans, clearly enjoying every moment.",
+        "She's not the most coordinated, but her enthusiasm more than makes up for it.",
+        "Her airheaded comments between gasps of pleasure are strangely endearing.",
+        "$her_name squeals with delight as you explore her body."
+      )
+    ](else-if:$girl's "traits" contains "religious")[
+      (twirl:
+        "$her_name tries to stay quiet, biting her lip to suppress her moans of pleasure.",
+        "There's something extra exciting about her forbidden desire - the guilt seems to heighten her pleasure.",
+        "She whispers that she'll need to confess this later, but right now she doesn't care.",
+        "$her_name surrenders to her desires, her religious inhibitions melting away."
+      )
+    ](else-if:$girl's "traits" contains "likes assertive")[
+      (twirl:
+        "$her_name responds perfectly to your every command, loving being directed.",
+        "She loves when you take charge, following your lead with eager submission.",
+        "The more assertive you are, the more she seems to enjoy it.",
+        "$her_name moans approvingly whenever you tell her what to do."
+      )
+    ](else:)[
+      (twirl:
+        "You spend the evening enjoying each other's company in the most intimate way.",
+        "What follows is a passionate encounter that leaves you both satisfied.",
+        "You lose track of time as you explore each other's bodies.",
+        "The night becomes a blur of pleasure and intimacy."
+      )
+    ]
+  ](else:)[
+    (twirl:
+      "You spend the evening enjoying each other's company in the most intimate way.",
+      "What follows is a passionate encounter that leaves you both satisfied.",
+      "You lose track of time as you explore each other's bodies.",
+      "The night becomes a blur of pleasure and intimacy."
+    )
+  ]
 
   (nl:2)
 
@@ -316,7 +374,19 @@ baseGameVersion:
 
   (nl:2)
 
-  "(twirl:"That was amazing...","Wow... we should do this more often.","I really needed that.","You're incredible.")" she says, satisfied.
+  (if:$girl contains "traits")[
+    (if:$girl's "traits" contains "slut")[
+      "(twirl:"Fuck, I needed that...","God, you really know how to fuck...","Mmm, we're definitely doing this again.","That was exactly what I needed.")" she purrs, satisfied.
+    ](else-if:$girl's "traits" contains "bimbo")[
+      "(twirl:"That was like, so good!","Hehe, wow...","I feel all tingly, hehe!","That was amazing!")" she giggles.
+    ](else-if:$girl's "traits" contains "religious")[
+      "(twirl:"I know that was sinful, but... it felt so right.","God forgive me... but that was incredible.","I shouldn't have enjoyed that so much...","That was... wow. I'll deal with the guilt later.")" she whispers.
+    ](else:)[
+      "(twirl:"That was amazing...","Wow... we should do this more often.","I really needed that.","You're incredible.")" she says, satisfied.
+    ]
+  ](else:)[
+    "(twirl:"That was amazing...","Wow... we should do this more often.","I really needed that.","You're incredible.")" she says, satisfied.
+  ]
 
   (set:$gain_attraction to (twist:1,3))
   (set:$gain_friendship to (twist:0,2))
