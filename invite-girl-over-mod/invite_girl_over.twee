@@ -302,7 +302,7 @@ baseGameVersion:
   (set:$stats's "sex as guy" to it + 1)
 
   <div class='options'>
-    (if:(a:"leah","harley","kendra","gabbie","mariselle","alexia") contains $girl's "id")[
+    (if:$girl contains "sex positions")[
       (set:$npc to $girl)
       (link:"Continue...")[(cs:"girl fuck")]
     ](else:)[
