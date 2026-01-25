@@ -1,7 +1,7 @@
 # meta
 metaVersion: 1
 name: "Invite Girl Over"
-version: "1.3.2"
+version: "1.3.3"
 author: "Mod Author"
 baseGameVersion:
   atLeast: "0.17f"
@@ -140,22 +140,26 @@ baseGameVersion:
       *You don't have any girlfriends to invite over.*
     ](else:)[
       (for: each _girlfriend, ...$girlfriends)[
-        (set:$girl_to_load to _girlfriend)
-        (if:$npcs contains _girlfriend)[
-          (set:$girl to $npcs's _girlfriend)
-        ](else-if:$relationships contains _girlfriend)[
-          (set:$girl to $relationships's _girlfriend)
+        (set:$girl to 0)
+        (set:_gf_id to _girlfriend)
+        (if:$npcs contains _gf_id)[
+          (set:$girl to $npcs's _gf_id)
+        ](else-if:$relationships contains _gf_id)[
+          (set:$girl to $relationships's _gf_id)
         ]
         (if:$girl is not 0)[
+          (set:_gf_name to $girl's "name")
+          (set:_gf_img to "")
+          (if:$girl contains "img")[(set:_gf_img to $girl's "img")]
           <div style="float:left;max-width:33.33%;">
-            (if:$girl contains "img")[
-              (link:(pic:$girl's "img","squared","noborder") + $girl's "name")[
-                (set:$girl_to_load to _girlfriend)
+            (if:_gf_img is not "")[
+              (link:(pic:_gf_img,"squared","noborder") + _gf_name)[
+                (set:$girl_to_load to _gf_id)
                 (go-to:"invite girl load")
               ]
             ](else:)[
-              (link:$girl's "name")[
-                (set:$girl_to_load to _girlfriend)
+              (link:_gf_name)[
+                (set:$girl_to_load to _gf_id)
                 (go-to:"invite girl load")
               ]
             ]
@@ -176,20 +180,27 @@ baseGameVersion:
 
 :: invite girl load
 {
+  (set:$girl to 0)
   (if:$npcs contains $girl_to_load)[
     (set:$girl to $npcs's $girl_to_load)
   ](else-if:$relationships contains $girl_to_load)[
     (set:$girl to $relationships's $girl_to_load)
   ]
 
-  (pic:"scenes/generic/pregnancy/phone.jpg")
-  (set:$se to "phone call")
-  (display:"play sound")
+  (if:$girl is 0)[
+    Something went wrong - couldn't find that contact.
+    <div class='options'>
+      (link:"Back")[(go-to:"Invite girl over")]
+    </div>
+  ](else:)[
+    (pic:"scenes/generic/pregnancy/phone.jpg")
+    (set:$se to "phone call")
+    (display:"play sound")
 
-  (set:$ambience to "bedroom")
-  (display:"play ambience")
+    (set:$ambience to "bedroom")
+    (display:"play ambience")
 
-  You call up (print:$girl's "name") and invite her over.
+    You call up (print:$girl's "name") and invite her over.
 
   (set:$roll to (twist:1,10))
   (if:$roll > 3)[
@@ -208,6 +219,7 @@ baseGameVersion:
         (display:"advance time")
       ]
     </div>
+  ]
   ]
 }
 
