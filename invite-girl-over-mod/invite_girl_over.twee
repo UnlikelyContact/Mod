@@ -1,7 +1,7 @@
 # meta
 metaVersion: 1
 name: "Invite Girl Over"
-version: "1.0.0"
+version: "1.1.0"
 author: "Mod Author"
 baseGameVersion:
   atLeast: "0.17f"
@@ -71,7 +71,7 @@ baseGameVersion:
 :: refresh possible activities girlfriends
 {
   (display:"npc find girlfriends")
-  (activities:(length of $girlfriends > 0) and (is_male:),"Invite girl over","evening")
+  (activities:(length of $girlfriends > 0),"Invite girl over","evening")
 }
 
 :: refresh possible activities relationships [override]
@@ -91,38 +91,34 @@ baseGameVersion:
   (screen:"location and time", [{
     (set:$clothing_type to "casual")
     (set:$option to "you called her")
-    (if:(is_male:))[
-      (set:$girlfriends to (a:))
-      (display:"npc find girlfriends")
-      (if:length of $girlfriends is 0)[
-        *You don't have any girlfriends to invite over.*
-      ](else:)[
-        (for: each _girlfriend, ...$girlfriends)[
-          (set:$girl_to_load to _girlfriend)
-          (if:$npcs contains _girlfriend)[
-            (set:$girl to $npcs's _girlfriend)
-          ](else-if:$relationships contains _girlfriend)[
-            (set:$girl to $relationships's _girlfriend)
-          ]
-          (if:$girl is not 0)[
-            <div style="float:left;max-width:33.33%;">
-              (if:$girl contains "img")[
-                (link:(pic:$girl's "img","squared","noborder") + $girl's "name")[
-                  (set:$girl_to_load to _girlfriend)
-                  (cs:"invite girl load")
-                ]
-              ](else:)[
-                (link:$girl's "name")[
-                  (set:$girl_to_load to _girlfriend)
-                  (cs:"invite girl load")
-                ]
+    (set:$girlfriends to (a:))
+    (display:"npc find girlfriends")
+    (if:length of $girlfriends is 0)[
+      *You don't have any girlfriends to invite over.*
+    ](else:)[
+      (for: each _girlfriend, ...$girlfriends)[
+        (set:$girl_to_load to _girlfriend)
+        (if:$npcs contains _girlfriend)[
+          (set:$girl to $npcs's _girlfriend)
+        ](else-if:$relationships contains _girlfriend)[
+          (set:$girl to $relationships's _girlfriend)
+        ]
+        (if:$girl is not 0)[
+          <div style="float:left;max-width:33.33%;">
+            (if:$girl contains "img")[
+              (link:(pic:$girl's "img","squared","noborder") + $girl's "name")[
+                (set:$girl_to_load to _girlfriend)
+                (cs:"invite girl load")
               ]
-            </div>
-          ]
+            ](else:)[
+              (link:$girl's "name")[
+                (set:$girl_to_load to _girlfriend)
+                (cs:"invite girl load")
+              ]
+            ]
+          </div>
         ]
       ]
-    ](else:)[
-      *You can only invite a girl over while male.*
     ]
   }])
   (replace:?right_pre_options)[
@@ -299,16 +295,22 @@ baseGameVersion:
 
   (nl:2)
 
-  (set:$stats's "sex as guy" to it + 1)
-
-  <div class='options'>
-    (if:$girl contains "sex positions")[
-      (set:$npc to $girl)
-      (link:"Continue...")[(cs:"girl fuck")]
-    ](else:)[
-      (link:"Continue...")[(cs:"invite girl sex scene")]
-    ]
-  </div>
+  (if:(is_male:))[
+    (set:$stats's "sex as guy" to it + 1)
+    <div class='options'>
+      (if:$girl contains "sex positions")[
+        (set:$npc to $girl)
+        (link:"Continue...")[(cs:"girl fuck")]
+      ](else:)[
+        (link:"Continue...")[(cs:"invite girl sex scene")]
+      ]
+    </div>
+  ](else:)[
+    (set:$stats's "sex as girl" to it + 1)
+    <div class='options'>
+      (link:"Continue...")[(cs:"invite girl ff sex scene")]
+    </div>
+  ]
 }
 
 :: invite girl sex scene
@@ -409,7 +411,7 @@ baseGameVersion:
 
   (print:$girl's "name") gets dressed and gives you a kiss goodbye.
 
-  "(twirl:"Thanks for tonight. Call me again sometime!","That was fun. Let's do it again soon.","See you later, handsome.","I had a great time.")" she says as she leaves.
+  "(twirl:"Thanks for tonight. Call me again sometime!","That was fun. Let's do it again soon.","See you later.","I had a great time.")" she says as she leaves.
 
   <div class='options'>
     (link:"Go to sleep")[
@@ -445,6 +447,330 @@ baseGameVersion:
     (nl:2)
 
     She gets dressed and heads out.
+  ]
+
+  <div class='options'>
+    (link:"Sleep")[
+      (display:"advance time")
+    ]
+  </div>
+}
+
+:: invite girl ff sex scene
+{
+  (set:$current_location to "Your Bedroom")
+  (set:$scene_type to "ff")
+  (display:"play sex music")
+
+  (set:$her_name to $girl's "name")
+
+  [(vid:"scenes/characters/jia/sex/workout/ff/09 start licking.mp4")]<image|
+
+  [{
+    (if:$girl contains "traits")[
+      (if:$girl's "traits" contains "slut")[
+        (twirl:
+          "$her_name wastes no time, pushing you onto the bed and kissing down your body.",
+          "She's clearly experienced with women. Her hands and lips know exactly where to go.",
+          "$her_name grins wickedly as she spreads your legs.",
+          "Her fingers trace teasing patterns on your inner thighs."
+        )
+      ](else-if:$girl's "traits" contains "bimbo")[
+        (twirl:
+          "$her_name giggles as she explores your body. 'Like, this is so hot!'",
+          "She's clumsy but enthusiastic, her hands wandering everywhere.",
+          "'Hehe, I've like, always wanted to try this,' she admits.",
+          "Her inexperience is endearing as she figures out what feels good."
+        )
+      ](else-if:$girl's "traits" contains "religious")[
+        (twirl:
+          "$her_name blushes deeply as her hands explore forbidden territory.",
+          "'This is so wrong...' she whispers, but her actions say otherwise.",
+          "The forbidden nature of this seems to excite her even more.",
+          "She prays for forgiveness between kisses, but doesn't stop."
+        )
+      ](else:)[
+        (twirl:
+          "$her_name kisses you deeply as your bodies intertwine.",
+          "Her soft hands explore your curves with growing confidence.",
+          "You feel her breath hot against your neck as she works her way down.",
+          "She looks up at you with desire in her eyes."
+        )
+      ]
+    ](else:)[
+      (twirl:
+        "$her_name kisses you deeply as your bodies intertwine.",
+        "Her soft hands explore your curves with growing confidence.",
+        "You feel her breath hot against your neck as she works her way down.",
+        "She looks up at you with desire in her eyes."
+      )
+    ]
+  }]<text|
+
+  <div class='options'>
+    (link:"Let her take the lead")[(cs:"invite girl ff passive")]
+    (link:"Take control")[(cs:"invite girl ff active")]
+  </div>
+}
+
+:: invite girl ff passive
+{
+  (set:$current_location to "Your Bedroom")
+
+  (set:$her_name to $girl's "name")
+  (set:$ff_position to (twirl:"passive yoga block","passive slow licking","passive fingering from behind","passive fast fingering","passive licking lips","passive pussy sucking"))
+
+  [(vid:"scenes/characters/jia/sex/workout/ff/" + (text:(twist:20,27)) + " " + $ff_position + ".mp4")]<image|
+
+  [{
+    (if:$ff_position contains "licking")[
+      (twirl:
+        "$her_name's tongue finds your most sensitive spots, making you gasp.",
+        "Her mouth works magic on your pussy, and you can't help but moan.",
+        "She licks you slowly, building the pleasure until you're trembling.",
+        "Your fingers grip the sheets as her tongue circles your clit."
+      )
+    ](else-if:$ff_position contains "fingering")[
+      (twirl:
+        "$her_name's fingers slide inside you, finding your G-spot with surprising accuracy.",
+        "She curls her fingers just right, making your back arch.",
+        "Her skilled fingers work you toward the edge of ecstasy.",
+        "You moan as she thrusts her fingers in and out."
+      )
+    ](else:)[
+      (twirl:
+        "$her_name explores every inch of your body with her hands and lips.",
+        "She takes her time, making sure you feel every sensation.",
+        "Her touch is electric, sending shivers through your body.",
+        "You surrender to the pleasure she's giving you."
+      )
+    ]
+
+    (nl:2)
+
+    (if:$girl contains "traits")[
+      (if:$girl's "traits" contains "slut")[
+        "(twirl:'You like that, don't you?','Mmm, you taste so good...','I'm gonna make you cum so hard...','Tell me how much you love this.')" she purrs.
+      ](else-if:$girl's "traits" contains "bimbo")[
+        "(twirl:'Like, is this good?','Hehe, you're so wet!','Am I doing it right?','This is so fun!')" she giggles.
+      ](else:)[
+        "(twirl:'You're so beautiful...','I love making you feel good...','Tell me what you want...','Just relax and enjoy...')" she whispers.
+      ]
+    ](else:)[
+      "(twirl:'You're so beautiful...','I love making you feel good...','Tell me what you want...','Just relax and enjoy...')" she whispers.
+    ]
+  }]<text|
+
+  ($gain_arousal:(twist:3,6))
+
+  <div class='options'>
+    (link:"Keep going...")[(cs:"invite girl ff climax")]
+    (link:"Switch - your turn")[(cs:"invite girl ff active")]
+  </div>
+}
+
+:: invite girl ff active
+{
+  (set:$current_location to "Your Bedroom")
+
+  (set:$her_name to $girl's "name")
+  (set:$ff_position to (twirl:"active going down","active circular licking","active tongue and fingers","active clit focus","active fingering","active up and down"))
+
+  [(vid:"scenes/characters/jia/sex/workout/ff/" + (text:(twist:30,36)) + " " + $ff_position + ".mp4")]<image|
+
+  [{
+    (if:$ff_position contains "licking" or $ff_position contains "tongue")[
+      (twirl:
+        "You bury your face between her thighs, tasting her arousal.",
+        "Your tongue traces slow circles around her clit as she moans.",
+        "You lick her pussy with long, slow strokes that make her squirm.",
+        "She grabs your hair as you work your tongue inside her."
+      )
+    ](else-if:$ff_position contains "fingering")[
+      (twirl:
+        "You slide your fingers inside her, feeling her warmth envelop you.",
+        "Your fingers pump in and out as she gasps with pleasure.",
+        "You curl your fingers against her G-spot, making her cry out.",
+        "She clenches around your fingers as you find her sweet spot."
+      )
+    ](else:)[
+      (twirl:
+        "You take control, kissing down her body to her waiting pussy.",
+        "She trembles as you tease her with your breath.",
+        "You explore her folds with your tongue, savoring her taste.",
+        "She moans your name as you pleasure her."
+      )
+    ]
+
+    (nl:2)
+
+    $her_name (twirl:"moans loudly","gasps with pleasure","writhes beneath you","grabs your hair","arches her back","cries out in ecstasy").
+
+    (if:$girl contains "traits")[
+      (if:$girl's "traits" contains "slut")[
+        "(twirl:'Fuck yes, right there!','Don't stop, I'm so close!','God, you're good at this!','More, I need more!')" she begs.
+      ](else-if:$girl's "traits" contains "religious")[
+        "(twirl:'Oh God... oh God...','This is so wrong but so good...','Forgive me... don't stop...','I can't believe how good this feels...')" she whimpers.
+      ](else:)[
+        "(twirl:'That feels amazing...','Yes, just like that...','You're incredible...','I'm getting close...')" she moans.
+      ]
+    ](else:)[
+      "(twirl:'That feels amazing...','Yes, just like that...','You're incredible...','I'm getting close...')" she moans.
+    ]
+  }]<text|
+
+  <div class='options'>
+    (link:"Make her cum")[(cs:"invite girl ff climax")]
+    (link:"69 together")[(cs:"invite girl ff 69")]
+  </div>
+}
+
+:: invite girl ff 69
+{
+  (set:$current_location to "Your Bedroom")
+  (set:$her_name to $girl's "name")
+
+  [(vid:"scenes/characters/jia/sex/workout/ff/37 active 69.mp4")]<image|
+
+  [{
+    (twirl:
+      "You flip into a 69 position, both pleasuring each other simultaneously.",
+      "Her tongue works on your pussy as you lick hers - it's overwhelming.",
+      "The mutual pleasure is incredible as you both race toward orgasm.",
+      "You can barely concentrate on pleasuring her as waves of pleasure wash over you."
+    )
+
+    (nl:2)
+
+    (if:$girl contains "traits" and $girl's "traits" contains "slut")[
+      "Mmm, I love 69ing," she moans into your pussy. "Let's see who cums first!"
+    ](else:)[
+      She moans against you, the vibrations adding to your pleasure.
+    ]
+
+    (nl:2)
+
+    (twirl:
+      "You feel your orgasm building as her tongue works its magic.",
+      "It's a race to see who can make the other cum first.",
+      "Your bodies move in sync, both giving and receiving pleasure.",
+      "The room fills with the sounds of your mutual pleasure."
+    )
+  }]<text|
+
+  ($gain_arousal:(twist:4,8))
+
+  <div class='options'>
+    (link:"Cum together")[(cs:"invite girl ff climax")]
+  </div>
+}
+
+:: invite girl ff climax
+{
+  (set:$current_location to "Your Bedroom")
+  (set:$her_name to $girl's "name")
+
+  [(vid:"scenes/characters/jia/sex/workout/ff/pics/32 lick callie.jpg")]<image|
+
+  [{
+    (if:(twist:1,2) is 1)[
+      (twirl:
+        "Your body tenses and you cry out as the orgasm crashes over you.",
+        "Waves of pleasure radiate through your body as you cum hard.",
+        "You can't hold back any longer - you scream as you climax.",
+        "The orgasm hits you like a tidal wave, leaving you breathless."
+      )
+
+      (nl:2)
+
+      (if:$girl contains "traits" and $girl's "traits" contains "slut")[
+        "(twirl:'That's it, cum for me!','Fuck yes, I love watching you cum!','Mmm, you're so hot when you orgasm!')" $her_name encourages you.
+      ](else:)[
+        $her_name watches you with satisfaction, pleased to have brought you such pleasure.
+      ]
+    ](else:)[
+      (twirl:
+        "$her_name's body shudders as she reaches her peak, crying out your name.",
+        "She cums hard, her whole body trembling with release.",
+        "You watch as waves of pleasure wash over her face.",
+        "She moans loudly as the orgasm takes her."
+      )
+
+      (nl:2)
+
+      "(twirl:'Oh god... oh god yes!','I'm cumming!','Don't stop, don't stop!','Yesss!')" she cries.
+    ]
+
+    (nl:2)
+
+    Afterwards, you both collapse onto the bed, breathing heavily and satisfied.
+
+    (nl:2)
+
+    "(twirl:'That was incredible...','Wow... just wow...','We definitely need to do this again.','You're amazing.')" $her_name sighs contentedly.
+  }]<text|
+
+  (set:$gain_attraction to (twist:2,4))
+  (set:$gain_friendship to (twist:1,3))
+  (if:$relationships contains $girl_to_load)[
+    (set:$npc_select to $girl_to_load)
+    (display:"change relationship")
+  ]
+
+  <div class='options'>
+    (link:"She leaves")[(cs:"invite girl leaves ff")]
+    (link:"Ask her to stay the night")[(cs:"invite girl stays ff")]
+  </div>
+}
+
+:: invite girl leaves ff
+{
+  (if:$girl contains "img")[
+    (pic:$girl's "img")
+  ]
+
+  (set:$her_name to $girl's "name")
+
+  $her_name gets dressed, stealing glances at you as she does.
+
+  "(twirl:'Thanks for tonight. That was... special.','Call me again sometime, okay?','I had an amazing time.','We should definitely do this again.')" she says, giving you a soft kiss goodbye.
+
+  <div class='options'>
+    (link:"Go to sleep")[
+      (display:"advance time")
+    ]
+  </div>
+}
+
+:: invite girl stays ff
+{
+  (if:$girl contains "img")[
+    (pic:$girl's "img")
+  ]
+
+  (set:$her_name to $girl's "name")
+
+  "(twirl:'Stay the night?','Want to cuddle?')" you ask.
+
+  (set:$roll to (twist:1,10))
+  (if:$roll > 3)[
+    She smiles warmly. "(twirl:'I'd love that.','Yes please.','I was hoping you'd ask.')"
+
+    (nl:2)
+
+    She curls up next to you, and you fall asleep in each other's arms.
+
+    (set:$gain_friendship to (twist:1,3))
+    (if:$relationships contains $girl_to_load)[
+      (set:$npc_select to $girl_to_load)
+      (display:"change relationship")
+    ]
+  ](else:)[
+    She looks apologetic. "(twirl:'I wish I could, but I have to get home.','Maybe next time - I have an early morning.','Rain check on the sleepover?')"
+
+    (nl:2)
+
+    She gives you one last kiss and heads out.
   ]
 
   <div class='options'>
