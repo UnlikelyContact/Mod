@@ -1,7 +1,7 @@
 # meta
 metaVersion: 1
 name: "Invite Girl Over"
-version: "1.3.1"
+version: "1.3.2"
 author: "Mod Author"
 baseGameVersion:
   atLeast: "0.17f"
@@ -55,10 +55,14 @@ baseGameVersion:
 {
   (set:$girlfriends to (a:))
   (for: each _key, ...(datanames:$relationships))[
-    (set:_rel to _key of $relationships)
-    (if:_rel's tags contains "girlfriend")[
-      (if:_rel's gender is "female")[
-        (set:$girlfriends to it + (a:_rel's id))
+    (set:_rel to $relationships's _key)
+    (if:_rel contains "tags")[
+      (if:_rel's "tags" contains "girlfriend")[
+        (if:_rel contains "gender")[
+          (if:_rel's "gender" is "female")[
+            (set:$girlfriends to it + (a:_rel's "id"))
+          ]
+        ]
       ]
     ]
   ]
@@ -84,7 +88,7 @@ baseGameVersion:
 {
   (set:$relationships's (text:$girl's "id") to (dm:
     "id",$girl's "id",
-    "name",$girl's name,
+    "name",$girl's "name",
     "gender","female",
     "respect",0,
     "dom",0,
@@ -110,13 +114,13 @@ baseGameVersion:
 :: refresh possible activities girlfriends
 {
   (display:"npc find girlfriends")
-  (activities:(length of $girlfriends > 0),"Invite girl over","evening")
+  (activities:((length: $girlfriends) > 0),"Invite girl over","evening")
 }
 
 :: refresh possible activities relationships [override]
 {
   (set:$fuckbuddies to (findfuckbuddies:))
-  (activities:(length of $fuckbuddies > 0),"Invite guy over","evening")
+  (activities:((length: $fuckbuddies) > 0),"Invite guy over","evening")
   (display:"refresh possible activities girlfriends")
 }
 
@@ -132,7 +136,7 @@ baseGameVersion:
     (set:$option to "you called her")
     (set:$girlfriends to (a:))
     (display:"npc find girlfriends")
-    (if:length of $girlfriends is 0)[
+    (if:(length: $girlfriends) is 0)[
       *You don't have any girlfriends to invite over.*
     ](else:)[
       (for: each _girlfriend, ...$girlfriends)[
@@ -209,7 +213,7 @@ baseGameVersion:
 
 :: invite girl over greet
 {
-  (set:$stepdad_name to $stepdad's name)
+  (set:$stepdad_name to $stepdad's "name")
   (set:$stop to (twirl:"alexia first","alexia second","stepdad first","stepdad second"))
 
   You go downstairs to wait. After a few minutes, the doorbell rings.
@@ -843,7 +847,7 @@ baseGameVersion:
       (unless:$events contains "pickup lesbian")[
         (link:"Use a pickup line")[(go-to:"bar girl pickup line lesbian")]
       ]
-      (unless:$events's last is "buy girl drink lesbian" or $events's 2ndlast is "buy girl drink lesbian")[
+      (unless:$events's last is "buy girl drink lesbian" or ((length: $events) >= 2 and $events's ((length: $events) - 1) is "buy girl drink lesbian"))[
         (link:"Buy her a drink")[(go-to:"bar girl buy drink lesbian")]
       ]
       (unless:$events contains "ask number lesbian" or $npc's "events" contains "got number")[
@@ -1014,7 +1018,7 @@ baseGameVersion:
     (set:$npc's "events" to it + (a:"got number"))
     (set:$relationships's (text:$bar_girl's "id") to (dm:
       "id",$bar_girl's "id",
-      "name",$bar_girl's name,
+      "name",$bar_girl's "name",
       "gender","female",
       "respect",0,
       "dom",0,
@@ -1156,10 +1160,10 @@ baseGameVersion:
     "(twirl:'I've been thinking about this since we started talking.','You're beautiful.','I want you so badly.','This feels right.')" she whispers.
   ]
 
-  (if:$relationships contains $girl_to_load is false)[
+  (unless:$relationships contains $girl_to_load)[
     (set:$relationships's (text:$girl's "id") to (dm:
       "id",$girl's "id",
-      "name",$girl's name,
+      "name",$girl's "name",
       "gender","female",
       "respect",0,
       "dom",0,
