@@ -1,7 +1,7 @@
 # meta
 metaVersion: 1
 name: "Invite Girl Over"
-version: "1.3.0"
+version: "1.3.1"
 author: "Mod Author"
 baseGameVersion:
   atLeast: "0.17f"
@@ -75,8 +75,8 @@ baseGameVersion:
   ]
 
   <div class='options'>
-    (link:"Give her your number")[(cs:"npc request girlfriend accept")]
-    (link:(twirl:"Refuse","Turn her down","No","Don't"))[(cs:"npc request girlfriend reject")]
+    (link:"Give her your number")[(go-to:"npc request girlfriend accept")]
+    (link:(twirl:"Refuse","Turn her down","No","Don't"))[(go-to:"npc request girlfriend reject")]
   </div>
 }
 
@@ -147,12 +147,12 @@ baseGameVersion:
             (if:$girl contains "img")[
               (link:(pic:$girl's "img","squared","noborder") + $girl's "name")[
                 (set:$girl_to_load to _girlfriend)
-                (cs:"invite girl load")
+                (go-to:"invite girl load")
               ]
             ](else:)[
               (link:$girl's "name")[
                 (set:$girl_to_load to _girlfriend)
-                (cs:"invite girl load")
+                (go-to:"invite girl load")
               ]
             ]
           </div>
@@ -193,7 +193,7 @@ baseGameVersion:
     "(twirl:"Sure, I'll be right over!","Sounds good, see you soon!","I'd love to! On my way.","Yeah, I'll come over.","Okay, give me a few minutes.")" she says.
 
     <div class='options'>
-      (link:"Wait for her")[(cs:"invite girl over greet")]
+      (link:"Wait for her")[(go-to:"invite girl over greet")]
     </div>
   ](else:)[
     (nl:2)
@@ -233,7 +233,7 @@ baseGameVersion:
   ($play:"sound","up stairs",1000)
 
   <div class='options'>
-    (link:"Bring her upstairs")[(cs:"invite girl sex room")]
+    (link:"Bring her upstairs")[(go-to:"invite girl sex room")]
   </div>
 }
 
@@ -276,8 +276,8 @@ baseGameVersion:
   ]
 
   <div class='options'>
-    (link:"Kiss her")[(cs:"invite girl sex start")]
-    (link:"Just talk")[(cs:"invite girl just talk")]
+    (link:"Kiss her")[(go-to:"invite girl sex start")]
+    (link:"Just talk")[(go-to:"invite girl just talk")]
   </div>
 }
 
@@ -339,15 +339,15 @@ baseGameVersion:
     <div class='options'>
       (if:$girl contains "sex positions")[
         (set:$npc to $girl)
-        (link:"Continue...")[(cs:"girl fuck")]
+        (link:"Continue...")[(go-to:"girl fuck")]
       ](else:)[
-        (link:"Continue...")[(cs:"invite girl sex scene")]
+        (link:"Continue...")[(go-to:"invite girl sex scene")]
       ]
     </div>
   ](else:)[
     (set:$stats's "sex as girl" to it + 1)
     <div class='options'>
-      (link:"Continue...")[(cs:"invite girl ff sex scene")]
+      (link:"Continue...")[(go-to:"invite girl ff sex scene")]
     </div>
   ]
 }
@@ -437,8 +437,8 @@ baseGameVersion:
   ]
 
   <div class='options'>
-    (link:"She leaves")[(cs:"invite girl leaves")]
-    (link:"Ask her to stay the night")[(cs:"invite girl stays")]
+    (link:"She leaves")[(go-to:"invite girl leaves")]
+    (link:"Ask her to stay the night")[(go-to:"invite girl stays")]
   </div>
 }
 
@@ -547,8 +547,8 @@ baseGameVersion:
   }]<text|
 
   <div class='options'>
-    (link:"Let her take the lead")[(cs:"invite girl ff passive")]
-    (link:"Take control")[(cs:"invite girl ff active")]
+    (link:"Let her take the lead")[(go-to:"invite girl ff passive")]
+    (link:"Take control")[(go-to:"invite girl ff active")]
   </div>
 }
 
@@ -603,8 +603,8 @@ baseGameVersion:
   ($gain_arousal:(twist:3,6))
 
   <div class='options'>
-    (link:"Keep going...")[(cs:"invite girl ff climax")]
-    (link:"Switch - your turn")[(cs:"invite girl ff active")]
+    (link:"Keep going...")[(go-to:"invite girl ff climax")]
+    (link:"Switch - your turn")[(go-to:"invite girl ff active")]
   </div>
 }
 
@@ -659,8 +659,8 @@ baseGameVersion:
   }]<text|
 
   <div class='options'>
-    (link:"Make her cum")[(cs:"invite girl ff climax")]
-    (link:"69 together")[(cs:"invite girl ff 69")]
+    (link:"Make her cum")[(go-to:"invite girl ff climax")]
+    (link:"69 together")[(go-to:"invite girl ff 69")]
   </div>
 }
 
@@ -700,7 +700,7 @@ baseGameVersion:
   ($gain_arousal:(twist:4,8))
 
   <div class='options'>
-    (link:"Cum together")[(cs:"invite girl ff climax")]
+    (link:"Cum together")[(go-to:"invite girl ff climax")]
   </div>
 }
 
@@ -757,8 +757,8 @@ baseGameVersion:
   ]
 
   <div class='options'>
-    (link:"She leaves")[(cs:"invite girl leaves ff")]
-    (link:"Ask her to stay the night")[(cs:"invite girl stays ff")]
+    (link:"She leaves")[(go-to:"invite girl leaves ff")]
+    (link:"Ask her to stay the night")[(go-to:"invite girl stays ff")]
   </div>
 }
 
@@ -834,29 +834,29 @@ baseGameVersion:
   <div class='options'>
     (if:$boredom <= ($initial_boredom + 5) and $uninterested is "false")[
       (unless:$npc's "events" contains "name" or $npc's "events" contains "introduce female")[
-        (link:(twirl:"Introduce yourself","Ask for her name"))[(cs:"girl introduce yourself")]
+        (link:(twirl:"Introduce yourself","Ask for her name"))[(go-to:"girl introduce yourself")]
       ](else:)[
         (unless:(count:$events,"chat") > 2)[
-          (link:"Chat")[(cs:"bar girl chat female")]
+          (link:"Chat")[(go-to:"bar girl chat female")]
         ]
       ]
       (unless:$events contains "pickup lesbian")[
-        (link:"Use a pickup line")[(cs:"bar girl pickup line lesbian")]
+        (link:"Use a pickup line")[(go-to:"bar girl pickup line lesbian")]
       ]
       (unless:$events's last is "buy girl drink lesbian" or $events's 2ndlast is "buy girl drink lesbian")[
-        (link:"Buy her a drink")[(cs:"bar girl buy drink lesbian")]
+        (link:"Buy her a drink")[(go-to:"bar girl buy drink lesbian")]
       ]
       (unless:$events contains "ask number lesbian" or $npc's "events" contains "got number")[
-        (link:"Ask for her number")[(cs:"bar girl ask number lesbian")]
+        (link:"Ask for her number")[(go-to:"bar girl ask number lesbian")]
       ]
       (if:$bar_girl_attraction >= 5)[
         (unless:$events contains "ask hookup lesbian")[
-          (link:"Ask if she wants to get out of here")[(cs:"bar girl ask hookup lesbian")]
+          (link:"Ask if she wants to get out of here")[(go-to:"bar girl ask hookup lesbian")]
         ]
       ]
-      (link:"Leave")[(display:"save npc")(cs:"bar chat patrons")]
+      (link:"Leave")[(display:"save npc")(go-to:"bar chat patrons")]
     ](else:)[
-      (link:"Leave")[(display:"save npc")(set:$npcs_present to $npcs_present - (a:$npc's "id"))(cs:"bar chat patrons")]
+      (link:"Leave")[(display:"save npc")(set:$npcs_present to $npcs_present - (a:$npc's "id"))(go-to:"bar chat patrons")]
     ]
   </div>
 }
@@ -926,7 +926,7 @@ baseGameVersion:
   ]
 
   <div class='options'>
-    (link:"Back")[(cs:"bar chat girl options female")]
+    (link:"Back")[(go-to:"bar chat girl options female")]
   </div>
 }
 
@@ -972,7 +972,7 @@ baseGameVersion:
   ]
 
   <div class='options'>
-    (link:"Back")[(cs:"bar chat girl options female")]
+    (link:"Back")[(go-to:"bar chat girl options female")]
   </div>
 }
 
@@ -1033,7 +1033,7 @@ baseGameVersion:
   ]
 
   <div class='options'>
-    (link:"Back")[(cs:"bar chat girl options female")]
+    (link:"Back")[(go-to:"bar chat girl options female")]
   </div>
 }
 
@@ -1079,7 +1079,7 @@ baseGameVersion:
     ]
 
     <div class='options'>
-      (link:"Leave together")[(cs:"bar lesbian sex exit")]
+      (link:"Leave together")[(go-to:"bar lesbian sex exit")]
     </div>
   ](else:)[
     $bar_girl_name shakes her head.
@@ -1095,7 +1095,7 @@ baseGameVersion:
     (display:"change relationship")
 
     <div class='options'>
-      (link:"Back")[(cs:"bar chat girl options female")]
+      (link:"Back")[(go-to:"bar chat girl options female")]
     </div>
   ]
 }
@@ -1121,7 +1121,7 @@ baseGameVersion:
   )
 
   <div class='options'>
-    (link:"Continue...")[(cs:"bar lesbian sex scene")]
+    (link:"Continue...")[(go-to:"bar lesbian sex scene")]
   </div>
 }
 
@@ -1171,6 +1171,6 @@ baseGameVersion:
   ]
 
   <div class='options'>
-    (link:"Continue...")[(cs:"invite girl ff sex scene")]
+    (link:"Continue...")[(go-to:"invite girl ff sex scene")]
   </div>
 }
