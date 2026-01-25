@@ -6,6 +6,7 @@ A mod for X-Change Life that allows players to invite girlfriends over in the ev
 
 ### For Male Players
 - Adds "Invite girl over" as an evening activity
+- Bar girls automatically become girlfriends when you get their number
 - Full sex scene integration with bar girls (uses game's media assets)
 - Trait-based dialogue (slut, bimbo, religious, assertive, etc.)
 - Option for her to stay the night
@@ -56,9 +57,17 @@ The "Invite girl over" option appears in evening activities when:
 - Requires X-Change Life version 0.17f or later
 - Overrides the `refresh possible activities relationships` passage
 - Overrides the `bar chat girl options female` passage
+- Hooks into `[girl_number]` passage tag (non-override, adds girlfriend tag)
 - Compatible with other mods that add bar girls (uses dynamic detection)
 
 ## Changelog
+
+### v1.3.0
+- Fixed attraction check error (was checking NPC directly instead of relationships)
+- Added `[girl_number]` passage tag hook for male players
+- Bar girls now automatically become girlfriends when males get their number
+- Improved lesbian bar options to match game patterns (boredom checks, event tracking)
+- Fixed duplicate option issues in lesbian bar pickup
 
 ### v1.2.0
 - Added lesbian bar pickup for female players

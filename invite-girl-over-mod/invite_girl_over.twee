@@ -1,7 +1,7 @@
 # meta
 metaVersion: 1
 name: "Invite Girl Over"
-version: "1.2.0"
+version: "1.3.0"
 author: "Mod Author"
 baseGameVersion:
   atLeast: "0.17f"
@@ -10,6 +10,45 @@ baseGameVersion:
 :: mod invite girl over initialize
 {
   (if:$girlfriends is 0)[(set:$girlfriends to (a:))]
+}
+
+:: add bar girl as girlfriend [girl_number]
+{
+  (if:$npc is not 0)[
+    (set:$bar_girl_id to (text:$npc's "id"))
+    (if:$relationships contains $bar_girl_id)[
+      (set:$rel to $relationships's $bar_girl_id)
+      (if:$rel contains "tags")[
+        (unless:$rel's "tags" contains "girlfriend")[
+          (set:$rel's "tags" to it + (a:"girlfriend"))
+          (set:$relationships's $bar_girl_id to $rel)
+        ]
+      ](else:)[
+        (set:$relationships's $bar_girl_id to (dm:
+          "id",$npc's "id",
+          "name",$npc's "name",
+          "gender","female",
+          "respect",0,
+          "dom",0,
+          "friendship",(twist:1,4),
+          "attraction",(twist:3,6),
+          "tags",(a:"girlfriend")
+        ))
+      ]
+    ](else:)[
+      (set:$relationships's $bar_girl_id to (dm:
+        "id",$npc's "id",
+        "name",$npc's "name",
+        "gender","female",
+        "respect",0,
+        "dom",0,
+        "friendship",(twist:1,4),
+        "attraction",(twist:3,6),
+        "tags",(a:"girlfriend")
+      ))
+    ]
+    (display:"npc find girlfriends")
+  ]
 }
 
 :: npc find girlfriends
@@ -784,21 +823,41 @@ baseGameVersion:
 {
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
+  (set:$bar_girl_id to (text:$bar_girl's "id"))
+  (set:$bar_girl_attraction to 0)
+  (if:$relationships contains $bar_girl_id)[
+    (if:($relationships's $bar_girl_id) contains "attraction")[
+      (set:$bar_girl_attraction to ($relationships's $bar_girl_id)'s "attraction")
+    ]
+  ]
 
   <div class='options'>
-    (if:$relationships contains (text:$bar_girl's "id"))[
-      (link:"Introduce yourself")[(cs:"bar girl intro")]
+    (if:$boredom <= ($initial_boredom + 5) and $uninterested is "false")[
+      (unless:$npc's "events" contains "name" or $npc's "events" contains "introduce female")[
+        (link:(twirl:"Introduce yourself","Ask for her name"))[(cs:"girl introduce yourself")]
+      ](else:)[
+        (unless:(count:$events,"chat") > 2)[
+          (link:"Chat")[(cs:"bar girl chat female")]
+        ]
+      ]
+      (unless:$events contains "pickup lesbian")[
+        (link:"Use a pickup line")[(cs:"bar girl pickup line lesbian")]
+      ]
+      (unless:$events's last is "buy girl drink lesbian" or $events's 2ndlast is "buy girl drink lesbian")[
+        (link:"Buy her a drink")[(cs:"bar girl buy drink lesbian")]
+      ]
+      (unless:$events contains "ask number lesbian" or $npc's "events" contains "got number")[
+        (link:"Ask for her number")[(cs:"bar girl ask number lesbian")]
+      ]
+      (if:$bar_girl_attraction >= 5)[
+        (unless:$events contains "ask hookup lesbian")[
+          (link:"Ask if she wants to get out of here")[(cs:"bar girl ask hookup lesbian")]
+        ]
+      ]
+      (link:"Leave")[(display:"save npc")(cs:"bar chat patrons")]
     ](else:)[
-      (link:"Introduce yourself")[(cs:"bar girl intro")]
+      (link:"Leave")[(display:"save npc")(set:$npcs_present to $npcs_present - (a:$npc's "id"))(cs:"bar chat patrons")]
     ]
-    (link:"Chat")[(cs:"bar chat girl")]
-    (link:"Use a pickup line")[(cs:"bar girl pickup line lesbian")]
-    (link:"Buy her a drink")[(cs:"bar girl buy drink lesbian")]
-    (link:"Ask for her number")[(cs:"bar girl ask number lesbian")]
-    (if:$bar_girl's "attraction" >= 5)[
-      (link:"Ask if she wants to get out of here")[(cs:"bar girl ask hookup lesbian")]
-    ]
-    (link:"Leave her alone")[(cs:"bar chat")]
   </div>
 }
 
@@ -806,6 +865,7 @@ baseGameVersion:
 {
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
+  (set:$events to $events + (a:"pickup lesbian"))
 
   (if:$bar_girl contains "img")[
     (pic:$bar_girl's "img")
@@ -874,6 +934,7 @@ baseGameVersion:
 {
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
+  (set:$events to $events + (a:"buy girl drink lesbian"))
 
   (if:$bar_girl contains "img")[
     (pic:$bar_girl's "img")
@@ -919,6 +980,7 @@ baseGameVersion:
 {
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
+  (set:$events to $events + (a:"ask number lesbian"))
 
   (if:$bar_girl contains "img")[
     (pic:$bar_girl's "img")
@@ -949,6 +1011,7 @@ baseGameVersion:
 
     You exchange numbers.
 
+    (set:$npc's "events" to it + (a:"got number"))
     (set:$relationships's (text:$bar_girl's "id") to (dm:
       "id",$bar_girl's "id",
       "name",$bar_girl's name,
@@ -959,10 +1022,10 @@ baseGameVersion:
       "attraction",(twist:3,6),
       "tags",(a:"girlfriend")
     ))
+    (display:"save npc")
+    (display:"npc find girlfriends")
 
     <div class='options'><mark>You now have $bar_girl_name's number.</mark></div>
-
-    (display:"npc find girlfriends")
   ](else:)[
     $bar_girl_name looks hesitant.
 
@@ -978,6 +1041,7 @@ baseGameVersion:
 {
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
+  (set:$events to $events + (a:"ask hookup lesbian"))
 
   (if:$bar_girl contains "img")[
     (pic:$bar_girl's "img")
