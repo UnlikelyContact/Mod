@@ -1,7 +1,7 @@
 # meta
 metaVersion: 1
 name: "Invite Girl Over"
-version: "1.3.3"
+version: "1.3.4"
 author: "Mod Author"
 baseGameVersion:
   atLeast: "0.17f"
@@ -837,6 +837,7 @@ baseGameVersion:
 
 :: bar chat girl options female [override]
 {
+  (set:_npc to $npc)
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$bar_girl_id to (text:$bar_girl's "id"))
@@ -850,24 +851,24 @@ baseGameVersion:
   <div class='options'>
     (if:$boredom <= ($initial_boredom + 5) and $uninterested is "false")[
       (unless:$npc's "events" contains "name" or $npc's "events" contains "introduce female")[
-        (link:(twirl:"Introduce yourself","Ask for her name"))[(go-to:"girl introduce yourself")]
+        (link:(twirl:"Introduce yourself","Ask for her name"))[(set:_npc to $npc)(go-to:"girl introduce yourself")]
       ](else:)[
         (unless:(count:$events,"chat") > 2)[
-          (link:"Chat")[(go-to:"bar girl chat female")]
+          (link:"Chat")[(set:_npc to $npc)(go-to:"bar girl chat")]
         ]
       ]
       (unless:$events contains "pickup lesbian")[
-        (link:"Use a pickup line")[(go-to:"bar girl pickup line lesbian")]
+        (link:"Use a pickup line")[(set:_npc to $npc)(go-to:"bar girl pickup line lesbian")]
       ]
       (unless:$events's last is "buy girl drink lesbian" or ((length: $events) >= 2 and $events's ((length: $events) - 1) is "buy girl drink lesbian"))[
-        (link:"Buy her a drink")[(go-to:"bar girl buy drink lesbian")]
+        (link:"Buy her a drink")[(set:_npc to $npc)(go-to:"bar girl buy drink lesbian")]
       ]
       (unless:$events contains "ask number lesbian" or $npc's "events" contains "got number")[
-        (link:"Ask for her number")[(go-to:"bar girl ask number lesbian")]
+        (link:"Ask for her number")[(set:_npc to $npc)(go-to:"bar girl ask number lesbian")]
       ]
       (if:$bar_girl_attraction >= 5)[
         (unless:$events contains "ask hookup lesbian")[
-          (link:"Ask if she wants to get out of here")[(go-to:"bar girl ask hookup lesbian")]
+          (link:"Ask if she wants to get out of here")[(set:_npc to $npc)(go-to:"bar girl ask hookup lesbian")]
         ]
       ]
       (link:"Leave")[(display:"save npc")(go-to:"bar chat patrons")]
@@ -883,67 +884,63 @@ baseGameVersion:
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$events to $events + (a:"pickup lesbian"))
 
-  (if:$bar_girl contains "img")[
-    (pic:$bar_girl's "img")
-  ]
+  (display:"bar girl screen")
+  (replace:?right_pre_options)[
+    You lean in closer to $bar_girl_name with a flirty smile.
 
-  You lean in closer to $bar_girl_name with a flirty smile.
+    (set:$line to (twist:1,8))
+    (if:$line is 1)[
+      "(twirl:'I don't usually do this, but I had to come talk to you. You're gorgeous.','I couldn't help but notice you from across the bar. You're stunning.')"
+    ](else-if:$line is 2)[
+      "(twirl:'I love your style. You have great taste.','That outfit looks amazing on you.')"
+    ](else-if:$line is 3)[
+      "(twirl:'Can I buy you a drink? I promise I'm more interesting than I look.','You look like you could use some company.')"
+    ](else-if:$line is 4)[
+      "(twirl:'I noticed you noticing me, so I thought I'd come say hi.','I felt like we had a moment from across the bar.')"
+    ](else-if:$line is 5)[
+      "(twirl:'Sorry if this is forward, but you have the most beautiful smile.','I just had to tell you - your smile lit up the whole room.')"
+    ](else-if:$line is 6)[
+      "(twirl:'You look like someone I'd like to get to know better.','There's something about you I find really intriguing.')"
+    ](else-if:$line is 7)[
+      "(twirl:'Life's too short not to talk to beautiful women, don't you think?','I figured I'd regret it if I didn't come say hi.')"
+    ](else:)[
+      "(twirl:'I had to come meet the most attractive person in this bar.','Are you always this captivating, or is it just tonight?')"
+    ]
 
-  (set:$line to (twist:1,8))
-  (if:$line is 1)[
-    "(twirl:'I don't usually do this, but I had to come talk to you. You're gorgeous.','I couldn't help but notice you from across the bar. You're stunning.')"
-  ](else-if:$line is 2)[
-    "(twirl:'I love your style. You have great taste.','That outfit looks amazing on you.')"
-  ](else-if:$line is 3)[
-    "(twirl:'Can I buy you a drink? I promise I'm more interesting than I look.','You look like you could use some company.')"
-  ](else-if:$line is 4)[
-    "(twirl:'I noticed you noticing me, so I thought I'd come say hi.','I felt like we had a moment from across the bar.')"
-  ](else-if:$line is 5)[
-    "(twirl:'Sorry if this is forward, but you have the most beautiful smile.','I just had to tell you - your smile lit up the whole room.')"
-  ](else-if:$line is 6)[
-    "(twirl:'You look like someone I'd like to get to know better.','There's something about you I find really intriguing.')"
-  ](else-if:$line is 7)[
-    "(twirl:'Life's too short not to talk to beautiful women, don't you think?','I figured I'd regret it if I didn't come say hi.')"
-  ](else:)[
-    "(twirl:'I had to come meet the most attractive person in this bar.','Are you always this captivating, or is it just tonight?')"
-  ]
+    (nl:2)
 
-  (nl:2)
+    (set:$roll to (twist:1,10))
+    (if:$roll > 4)[
+      $bar_girl_name blushes and smiles.
 
-  (set:$roll to (twist:1,10))
-  (if:$roll > 4)[
-    $bar_girl_name blushes and smiles.
-
-    (if:$bar_girl contains "traits")[
-      (if:$bar_girl's "traits" contains "slut")[
-        "(twirl:'Mmm, I like a woman who knows what she wants.','Ooh, confident. I like that.','Well aren't you charming?','Straight to the point. I appreciate that.')" she purrs.
-      ](else-if:$bar_girl's "traits" contains "bimbo")[
-        "(twirl:'Hehe, that's like, so sweet!','Omg, you're so nice!','Aww, thank you!','Hehe, you're making me blush!')" she giggles.
-      ](else-if:$bar_girl's "traits" contains "religious")[
-        "(twirl:'Oh my... that's very flattering.','I... I don't usually... thank you.','That's sweet of you to say.','You're making me blush.')" she says, looking flustered.
+      (if:$bar_girl contains "traits")[
+        (if:$bar_girl's "traits" contains "slut")[
+          "(twirl:'Mmm, I like a woman who knows what she wants.','Ooh, confident. I like that.','Well aren't you charming?','Straight to the point. I appreciate that.')" she purrs.
+        ](else-if:$bar_girl's "traits" contains "bimbo")[
+          "(twirl:'Hehe, that's like, so sweet!','Omg, you're so nice!','Aww, thank you!','Hehe, you're making me blush!')" she giggles.
+        ](else-if:$bar_girl's "traits" contains "religious")[
+          "(twirl:'Oh my... that's very flattering.','I... I don't usually... thank you.','That's sweet of you to say.','You're making me blush.')" she says, looking flustered.
+        ](else:)[
+          "(twirl:'That's really sweet of you.','Thank you, that's flattering.','Aren't you charming?','I'm flattered.')" she replies with a smile.
+        ]
       ](else:)[
         "(twirl:'That's really sweet of you.','Thank you, that's flattering.','Aren't you charming?','I'm flattered.')" she replies with a smile.
       ]
+
+      (set:$gain_attraction to (twist:1,3))
+      (set:$npc_select to (text:$bar_girl's "id"))
+      (display:"change relationship")
     ](else:)[
-      "(twirl:'That's really sweet of you.','Thank you, that's flattering.','Aren't you charming?','I'm flattered.')" she replies with a smile.
+      $bar_girl_name looks a bit uncomfortable.
+
+      "(twirl:'Oh, um... thanks, I guess.','That's... flattering, but I'm not really interested.','Sorry, I'm not really into... that.','I appreciate it, but no thanks.')"
+
+      (set:$gain_attraction to (twist:-2,-1))
+      (set:$npc_select to (text:$bar_girl's "id"))
+      (display:"change relationship")
     ]
-
-    (set:$gain_attraction to (twist:1,3))
-    (set:$npc_select to (text:$bar_girl's "id"))
-    (display:"change relationship")
-  ](else:)[
-    $bar_girl_name looks a bit uncomfortable.
-
-    "(twirl:'Oh, um... thanks, I guess.','That's... flattering, but I'm not really interested.','Sorry, I'm not really into... that.','I appreciate it, but no thanks.')"
-
-    (set:$gain_attraction to (twist:-2,-1))
-    (set:$npc_select to (text:$bar_girl's "id"))
-    (display:"change relationship")
   ]
-
-  <div class='options'>
-    (link:"Back")[(go-to:"bar chat girl options female")]
-  </div>
+  (display:"bar chat girl options female")
 }
 
 :: bar girl buy drink lesbian
@@ -952,44 +949,40 @@ baseGameVersion:
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$events to $events + (a:"buy girl drink lesbian"))
 
-  (if:$bar_girl contains "img")[
-    (pic:$bar_girl's "img")
-  ]
+  (display:"bar girl screen")
+  (replace:?right_pre_options)[
+    You signal the bartender and order a drink for $bar_girl_name.
 
-  You signal the bartender and order a drink for $bar_girl_name.
+    (set:$money_change to -10)
+    (display:"money change")
 
-  (set:$money_change to -10)
-  (display:"money change")
+    (nl:2)
 
-  (nl:2)
+    "(twirl:'For the lovely lady,','This one's from me,','I thought you might like another drink,')" you say as the drink arrives.
 
-  "(twirl:'For the lovely lady,','This one's from me,','I thought you might like another drink,')" you say as the drink arrives.
+    (nl:2)
 
-  (nl:2)
+    (set:$roll to (twist:1,10))
+    (if:$roll > 3)[
+      $bar_girl_name accepts the drink with a smile.
 
-  (set:$roll to (twist:1,10))
-  (if:$roll > 3)[
-    $bar_girl_name accepts the drink with a smile.
+      (if:$bar_girl contains "traits" and $bar_girl's "traits" contains "slut")[
+        "(twirl:'A woman buying me drinks? I could get used to this.','Mmm, thank you. How thoughtful.','You know how to treat a girl.')" she says flirtatiously.
+      ](else:)[
+        "(twirl:'Thank you, that's so sweet!','How thoughtful of you!','Aww, you didn't have to do that.')" she says warmly.
+      ]
 
-    (if:$bar_girl contains "traits" and $bar_girl's "traits" contains "slut")[
-      "(twirl:'A woman buying me drinks? I could get used to this.','Mmm, thank you. How thoughtful.','You know how to treat a girl.')" she says flirtatiously.
+      (set:$gain_attraction to (twist:1,2))
+      (set:$gain_friendship to (twist:1,2))
+      (set:$npc_select to (text:$bar_girl's "id"))
+      (display:"change relationship")
     ](else:)[
-      "(twirl:'Thank you, that's so sweet!','How thoughtful of you!','Aww, you didn't have to do that.')" she says warmly.
+      $bar_girl_name politely declines.
+
+      "(twirl:'Oh, that's sweet, but I'm okay.','Thanks, but I should probably slow down.','I appreciate it, but no thanks.')"
     ]
-
-    (set:$gain_attraction to (twist:1,2))
-    (set:$gain_friendship to (twist:1,2))
-    (set:$npc_select to (text:$bar_girl's "id"))
-    (display:"change relationship")
-  ](else:)[
-    $bar_girl_name politely declines.
-
-    "(twirl:'Oh, that's sweet, but I'm okay.','Thanks, but I should probably slow down.','I appreciate it, but no thanks.')"
   ]
-
-  <div class='options'>
-    (link:"Back")[(go-to:"bar chat girl options female")]
-  </div>
+  (display:"bar chat girl options female")
 }
 
 :: bar girl ask number lesbian
@@ -998,59 +991,55 @@ baseGameVersion:
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$events to $events + (a:"ask number lesbian"))
 
-  (if:$bar_girl contains "img")[
-    (pic:$bar_girl's "img")
-  ]
-
-  "(twirl:'I've really enjoyed talking to you. Could I get your number?','I'd love to see you again sometime. Want to exchange numbers?','I feel like we have a connection. Can I call you sometime?')" you ask.
-
-  (nl:2)
-
-  (set:$attraction to 0)
-  (if:$relationships contains (text:$bar_girl's "id"))[
-    (set:$attraction to ($relationships's (text:$bar_girl's "id"))'s "attraction")
-  ]
-
-  (set:$roll to (twist:1,10))
-  (set:$roll to $roll + ($attraction / 2))
-
-  (if:$roll > 5)[
-    $bar_girl_name smiles and pulls out her phone.
-
-    (if:$bar_girl contains "traits" and $bar_girl's "traits" contains "slut")[
-      "(twirl:'I thought you'd never ask.','Definitely. I have a feeling we'll have fun together.','Of course. Call me anytime.')" she says with a wink.
-    ](else:)[
-      "(twirl:'Sure, I'd like that.','Yeah, I've enjoyed talking to you too.','Okay, here's my number.')" she says.
-    ]
+  (display:"bar girl screen")
+  (replace:?right_pre_options)[
+    "(twirl:'I've really enjoyed talking to you. Could I get your number?','I'd love to see you again sometime. Want to exchange numbers?','I feel like we have a connection. Can I call you sometime?')" you ask.
 
     (nl:2)
 
-    You exchange numbers.
+    (set:$attraction to 0)
+    (if:$relationships contains (text:$bar_girl's "id"))[
+      (set:$attraction to ($relationships's (text:$bar_girl's "id"))'s "attraction")
+    ]
 
-    (set:$npc's "events" to it + (a:"got number"))
-    (set:$relationships's (text:$bar_girl's "id") to (dm:
-      "id",$bar_girl's "id",
-      "name",$bar_girl's "name",
-      "gender","female",
-      "respect",0,
-      "dom",0,
-      "friendship",(twist:1,4),
-      "attraction",(twist:3,6),
-      "tags",(a:"girlfriend")
-    ))
-    (display:"save npc")
-    (display:"npc find girlfriends")
+    (set:$roll to (twist:1,10))
+    (set:$roll to $roll + ($attraction / 2))
 
-    <div class='options'><mark>You now have $bar_girl_name's number.</mark></div>
-  ](else:)[
-    $bar_girl_name looks hesitant.
+    (if:$roll > 5)[
+      $bar_girl_name smiles and pulls out her phone.
 
-    "(twirl:'I'm sorry, but I don't think so.','I'm flattered, but I'm not looking for anything right now.','Thanks, but I don't think we're compatible.')"
+      (if:$bar_girl contains "traits" and $bar_girl's "traits" contains "slut")[
+        "(twirl:'I thought you'd never ask.','Definitely. I have a feeling we'll have fun together.','Of course. Call me anytime.')" she says with a wink.
+      ](else:)[
+        "(twirl:'Sure, I'd like that.','Yeah, I've enjoyed talking to you too.','Okay, here's my number.')" she says.
+      ]
+
+      (nl:2)
+
+      You exchange numbers.
+
+      (set:$npc's "events" to it + (a:"got number"))
+      (set:$relationships's (text:$bar_girl's "id") to (dm:
+        "id",$bar_girl's "id",
+        "name",$bar_girl's "name",
+        "gender","female",
+        "respect",0,
+        "dom",0,
+        "friendship",(twist:1,4),
+        "attraction",(twist:3,6),
+        "tags",(a:"girlfriend")
+      ))
+      (display:"save npc")
+      (display:"npc find girlfriends")
+
+      <mark>You now have $bar_girl_name's number.</mark>
+    ](else:)[
+      $bar_girl_name looks hesitant.
+
+      "(twirl:'I'm sorry, but I don't think so.','I'm flattered, but I'm not looking for anything right now.','Thanks, but I don't think we're compatible.')"
+    ]
   ]
-
-  <div class='options'>
-    (link:"Back")[(go-to:"bar chat girl options female")]
-  </div>
+  (display:"bar chat girl options female")
 }
 
 :: bar girl ask hookup lesbian
@@ -1059,16 +1048,6 @@ baseGameVersion:
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$events to $events + (a:"ask hookup lesbian"))
 
-  (if:$bar_girl contains "img")[
-    (pic:$bar_girl's "img")
-  ]
-
-  You lean in close to $bar_girl_name.
-
-  "(twirl:'Want to get out of here?','My place isn't far... interested?','I know somewhere more private we could go.','This bar is nice, but I can think of something more fun we could do.')" you suggest with a meaningful look.
-
-  (nl:2)
-
   (set:$attraction to 0)
   (if:$relationships contains (text:$bar_girl's "id"))[
     (set:$attraction to ($relationships's (text:$bar_girl's "id"))'s "attraction")
@@ -1077,42 +1056,50 @@ baseGameVersion:
   (set:$roll to (twist:1,10))
   (set:$roll to $roll + ($attraction / 2))
 
-  (if:$roll > 5)[
-    $bar_girl_name's eyes light up with interest.
+  (display:"bar girl screen")
+  (replace:?right_pre_options)[
+    You lean in close to $bar_girl_name.
 
-    (if:$bar_girl contains "traits")[
-      (if:$bar_girl's "traits" contains "slut")[
-        "(twirl:'I thought you'd never ask.','Fuck yes, let's go.','Lead the way, gorgeous.','Finally. I've been waiting for you to ask.')" she grins.
-      ](else-if:$bar_girl's "traits" contains "bimbo")[
-        "(twirl:'Hehe, okay!','Omg, yes!','That sounds fun!','Like, sure!')" she giggles excitedly.
-      ](else-if:$bar_girl's "traits" contains "religious")[
-        "(twirl:'I... I shouldn't... but yes.','This is crazy, but... okay.','God forgive me, but yes.','I can't believe I'm doing this...')" she says nervously.
+    "(twirl:'Want to get out of here?','My place isn't far... interested?','I know somewhere more private we could go.','This bar is nice, but I can think of something more fun we could do.')" you suggest with a meaningful look.
+
+    (nl:2)
+
+    (if:$roll > 5)[
+      $bar_girl_name's eyes light up with interest.
+
+      (if:$bar_girl contains "traits")[
+        (if:$bar_girl's "traits" contains "slut")[
+          "(twirl:'I thought you'd never ask.','Fuck yes, let's go.','Lead the way, gorgeous.','Finally. I've been waiting for you to ask.')" she grins.
+        ](else-if:$bar_girl's "traits" contains "bimbo")[
+          "(twirl:'Hehe, okay!','Omg, yes!','That sounds fun!','Like, sure!')" she giggles excitedly.
+        ](else-if:$bar_girl's "traits" contains "religious")[
+          "(twirl:'I... I shouldn't... but yes.','This is crazy, but... okay.','God forgive me, but yes.','I can't believe I'm doing this...')" she says nervously.
+        ](else:)[
+          "(twirl:'Yeah, I'd like that.','Let's do it.','Sure, why not?','Sounds good to me.')" she agrees.
+        ]
       ](else:)[
         "(twirl:'Yeah, I'd like that.','Let's do it.','Sure, why not?','Sounds good to me.')" she agrees.
       ]
     ](else:)[
-      "(twirl:'Yeah, I'd like that.','Let's do it.','Sure, why not?','Sounds good to me.')" she agrees.
-    ]
+      $bar_girl_name shakes her head.
 
-    <div class='options'>
+      (if:$bar_girl contains "traits" and $bar_girl's "traits" contains "religious")[
+        "(twirl:'No, I couldn't... that would be wrong.','I'm sorry, but I'm not that kind of girl.','I appreciate the offer, but no.')"
+      ](else:)[
+        "(twirl:'Sorry, but I'm not interested.','Thanks, but no.','I don't think so.','Maybe another time.')"
+      ]
+
+      (set:$gain_attraction to (twist:-2,-1))
+      (set:$npc_select to (text:$bar_girl's "id"))
+      (display:"change relationship")
+    ]
+  ]
+  (if:$roll > 5)[
+    (replace:?right_post_options)[
       (link:"Leave together")[(go-to:"bar lesbian sex exit")]
-    </div>
-  ](else:)[
-    $bar_girl_name shakes her head.
-
-    (if:$bar_girl contains "traits" and $bar_girl's "traits" contains "religious")[
-      "(twirl:'No, I couldn't... that would be wrong.','I'm sorry, but I'm not that kind of girl.','I appreciate the offer, but no.')"
-    ](else:)[
-      "(twirl:'Sorry, but I'm not interested.','Thanks, but no.','I don't think so.','Maybe another time.')"
     ]
-
-    (set:$gain_attraction to (twist:-2,-1))
-    (set:$npc_select to (text:$bar_girl's "id"))
-    (display:"change relationship")
-
-    <div class='options'>
-      (link:"Back")[(go-to:"bar chat girl options female")]
-    </div>
+  ](else:)[
+    (display:"bar chat girl options female")
   ]
 }
 
