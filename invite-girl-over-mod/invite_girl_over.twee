@@ -1,7 +1,7 @@
 # meta
 metaVersion: 1
 name: "Invite Girl Over"
-version: "1.3.1"
+version: "1.4.0"
 author: "Mod Author"
 baseGameVersion:
   atLeast: "0.17f"
@@ -831,10 +831,14 @@ baseGameVersion:
     ]
   ]
 
+  (set:_skip_drink to false)
+  (if:(length:$events) >= 1)[(if:$events's last is "buy girl drink lesbian")[(set:_skip_drink to true)]]
+  (if:(length:$events) >= 2)[(if:$events's 2ndlast is "buy girl drink lesbian")[(set:_skip_drink to true)]]
+
   <div class='options'>
     (if:$boredom <= ($initial_boredom + 5) and $uninterested is "false")[
       (unless:$npc's "events" contains "name" or $npc's "events" contains "introduce female")[
-        (link:(twirl:"Introduce yourself","Ask for her name"))[(go-to:"girl introduce yourself")]
+        (link:(twirl:"Introduce yourself","Ask for her name"))[(go-to:"girl introduce yourself lesbian")]
       ](else:)[
         (unless:(count:$events,"chat") > 2)[
           (link:"Chat")[(go-to:"bar girl chat female")]
@@ -843,7 +847,7 @@ baseGameVersion:
       (unless:$events contains "pickup lesbian")[
         (link:"Use a pickup line")[(go-to:"bar girl pickup line lesbian")]
       ]
-      (unless:$events's last is "buy girl drink lesbian" or $events's 2ndlast is "buy girl drink lesbian")[
+      (unless:_skip_drink)[
         (link:"Buy her a drink")[(go-to:"bar girl buy drink lesbian")]
       ]
       (unless:$events contains "ask number lesbian" or $npc's "events" contains "got number")[
@@ -858,6 +862,118 @@ baseGameVersion:
     ](else:)[
       (link:"Leave")[(display:"save npc")(set:$npcs_present to $npcs_present - (a:$npc's "id"))(go-to:"bar chat patrons")]
     ]
+  </div>
+}
+
+:: girl introduce yourself lesbian
+{
+  (set:$bar_girl to $npc)
+  (set:$bar_girl_name to $bar_girl's "name")
+  (set:$npc's "events" to it + (a:"introduce female"))
+
+  (if:$bar_girl contains "img")[
+    (pic:$bar_girl's "img")
+  ]
+
+  (set:$intro to (twist:1,4))
+  (if:$intro is 1)[
+    You smile and introduce yourself. "Hi, I'm $playername. I noticed you and thought I'd say hello."
+  ](else-if:$intro is 2)[
+    You approach her with a friendly wave. "Hey there, I'm $playername. Mind if I join you?"
+  ](else-if:$intro is 3)[
+    "I don't think we've met. I'm $playername," you say with a warm smile.
+  ](else:)[
+    You catch her eye and walk over. "Hi, I'm $playername. What's your name?"
+  ]
+
+  (nl:2)
+
+  (set:$roll to (twist:1,10))
+  (if:$roll > 3)[
+    She smiles back at you.
+
+    (if:$bar_girl contains "traits")[
+      (if:$bar_girl's "traits" contains "slut")[
+        "(twirl:'Well hello there, gorgeous. I'm $bar_girl_name.','Mmm, hi. I'm $bar_girl_name. Aren't you cute?','$bar_girl_name. Charmed, I'm sure.')" she purrs.
+      ](else-if:$bar_girl's "traits" contains "bimbo")[
+        "(twirl:'Hiii! I'm $bar_girl_name!','Omg hi! I'm $bar_girl_name, nice to meet you!','Oh hey! I'm $bar_girl_name!')" she says brightly.
+      ](else-if:$bar_girl's "traits" contains "religious")[
+        "(twirl:'Oh, hello. I'm $bar_girl_name. Nice to meet you.','Hi there. $bar_girl_name. It's nice to meet a friendly face.','I'm $bar_girl_name. Pleased to meet you.')" she says politely.
+      ](else:)[
+        "(twirl:'Nice to meet you. I'm $bar_girl_name.','Hey, I'm $bar_girl_name. Good to meet you.','$bar_girl_name. Nice of you to come say hi.')" she replies.
+      ]
+    ](else:)[
+      "(twirl:'Nice to meet you. I'm $bar_girl_name.','Hey, I'm $bar_girl_name. Good to meet you.','$bar_girl_name. Nice of you to come say hi.')" she replies.
+    ]
+
+    (set:$gain_attraction to (twist:0,1))
+    (set:$gain_friendship to (twist:1,2))
+    (set:$npc_select to (text:$bar_girl's "id"))
+    (display:"change relationship")
+  ](else:)[
+    She gives you a brief nod.
+
+    "(twirl:'Oh, hi. I'm $bar_girl_name.','$bar_girl_name. Hi.','Yeah, I'm $bar_girl_name.')" she says, not seeming too interested.
+  ]
+
+  <div class='options'>
+    (link:"Back")[(go-to:"bar chat girl options female")]
+  </div>
+}
+
+:: bar girl chat female
+{
+  (set:$bar_girl to $npc)
+  (set:$bar_girl_name to $bar_girl's "name")
+  (set:$events to $events + (a:"chat"))
+
+  (if:$bar_girl contains "img")[
+    (pic:$bar_girl's "img")
+  ]
+
+  (set:$topic to (twist:1,6))
+  (if:$topic is 1)[
+    You and $bar_girl_name chat about your favorite places in the city.
+
+    "(twirl:'I love that little cafe on 5th street.','Have you been to the new gallery downtown?','There's this amazing park I go to on weekends.')" she says.
+  ](else-if:$topic is 2)[
+    You ask $bar_girl_name what she does for fun.
+
+    "(twirl:'I'm really into hiking lately.','I've been binge-watching this show, it's so good.','I love trying new restaurants.')" she says.
+  ](else-if:$topic is 3)[
+    The conversation turns to music.
+
+    "(twirl:'I've been listening to a lot of indie stuff lately.','I'm kind of obsessed with this new album.','Have you been to any good concerts recently?')" she asks.
+  ](else-if:$topic is 4)[
+    You talk about your week and share some laughs.
+
+    "(twirl:'Oh my god, that's hilarious.','No way, the same thing happened to me!','You always have the best stories.')" she laughs.
+  ](else-if:$topic is 5)[
+    $bar_girl_name tells you about her day.
+
+    "(twirl:'Work was crazy today, but this is nice.','I almost didn't come out tonight, but I'm glad I did.','I needed this. Just a good conversation.')" she says.
+  ](else:)[
+    You and $bar_girl_name debate about the best drinks.
+
+    "(twirl:'You have to try their signature cocktail.','I'm a wine girl, personally.','Nothing beats a classic margarita.')" she insists.
+  ]
+
+  (nl:2)
+
+  (set:$roll to (twist:1,10))
+  (if:$roll > 4)[
+    The conversation flows easily and you can tell she's enjoying your company.
+
+    (set:$gain_friendship to (twist:1,2))
+    (set:$gain_attraction to (twist:0,1))
+    (set:$npc_select to (text:$bar_girl's "id"))
+    (display:"change relationship")
+  ](else:)[
+    The conversation is pleasant enough, though there are a few awkward silences.
+  ]
+
+  <div class='options'>
+    (link:"Back")[(go-to:"bar chat girl options female")]
   </div>
 }
 
