@@ -1,7 +1,7 @@
 # meta
 metaVersion: 1
 name: "Invite Girl Over"
-version: "1.3.1"
+version: "1.3.2"
 author: "Mod Author"
 baseGameVersion:
   atLeast: "0.17f"
@@ -834,7 +834,7 @@ baseGameVersion:
   <div class='options'>
     (if:$boredom <= ($initial_boredom + 5) and $uninterested is "false")[
       (unless:$npc's "events" contains "name" or $npc's "events" contains "introduce female")[
-        (link:(twirl:"Introduce yourself","Ask for her name"))[(go-to:"girl introduce yourself")]
+        (link:(twirl:"Introduce yourself","Ask for her name"))[(go-to:"bar girl introduce female")]
       ](else:)[
         (unless:(count:$events,"chat") > 2)[
           (link:"Chat")[(go-to:"bar girl chat female")]
@@ -858,6 +858,109 @@ baseGameVersion:
     ](else:)[
       (link:"Leave")[(display:"save npc")(set:$npcs_present to $npcs_present - (a:$npc's "id"))(go-to:"bar chat patrons")]
     ]
+  </div>
+}
+
+:: bar girl introduce female
+{
+  (set:$bar_girl to $npc)
+  (set:$bar_girl_name to $bar_girl's "name")
+
+  (if:$bar_girl contains "img")[
+    (pic:$bar_girl's "img")
+  ]
+
+  "(twirl:'Hi! I don't think we've met.','Hey there, mind if I introduce myself?','Hi, I'm new around here.','Hey, I just wanted to say hi.')" you say with a friendly smile.
+
+  (nl:2)
+
+  (set:$roll to (twist:1,10))
+  (if:$roll > 3)[
+    She smiles warmly.
+
+    "(twirl:'I'm $bar_girl_name! Nice to meet you.','Hey! I'm $bar_girl_name.','$bar_girl_name. Nice to meet you!','I'm $bar_girl_name, good to meet you!')"
+
+    (set:$gain_friendship to (twist:1,2))
+    (set:$npc_select to (text:$bar_girl's "id"))
+    (display:"change relationship")
+  ](else:)[
+    She gives a polite nod.
+
+    "(twirl:'$bar_girl_name.','I'm $bar_girl_name. Hi.','$bar_girl_name. Nice to meet you.')" she says, not seeming overly interested.
+  ]
+
+  (set:$npc's "events" to it + (a:"introduce female"))
+  (display:"save npc")
+
+  <div class='options'>
+    (link:"Back")[(go-to:"bar chat girl options female")]
+  </div>
+}
+
+:: bar girl chat female
+{
+  (set:$bar_girl to $npc)
+  (set:$bar_girl_name to $bar_girl's "name")
+  (set:$events to $events + (a:"chat"))
+
+  (if:$bar_girl contains "img")[
+    (pic:$bar_girl's "img")
+  ]
+
+  (set:$topic to (twist:1,6))
+  (if:$topic is 1)[
+    You chat with $bar_girl_name about her hobbies.
+
+    (nl:2)
+
+    "(twirl:'I've been really into hiking lately.','I love reading in my spare time.','I've been binge-watching this new show.','I've been trying to learn to cook.')" she says.
+  ](else-if:$topic is 2)[
+    You and $bar_girl_name talk about music.
+
+    (nl:2)
+
+    "(twirl:'I've been listening to a lot of indie lately.','I'm more of a pop girl, honestly.','I love anything with a good beat.','I've been obsessed with this new artist.')" she says.
+  ](else-if:$topic is 3)[
+    You ask $bar_girl_name about her work.
+
+    (nl:2)
+
+    "(twirl:'It's been busy, but I like staying active.','Work's been stressful lately, honestly.','I love what I do, it keeps me going.','Let's not talk about work - I'm here to relax!')" she laughs.
+  ](else-if:$topic is 4)[
+    You and $bar_girl_name chat about the bar.
+
+    (nl:2)
+
+    "(twirl:'I love this place, the vibe is great.','I come here pretty often actually.','The drinks here are really good.','Have you tried their cocktails? They're amazing.')" she says.
+  ](else-if:$topic is 5)[
+    You and $bar_girl_name talk about travel.
+
+    (nl:2)
+
+    "(twirl:'I've always wanted to visit Japan.','I went to Europe last year, it was amazing.','I love road trips more than flying.','Anywhere warm with a beach works for me.')" she says.
+  ](else:)[
+    You make small talk with $bar_girl_name.
+
+    (nl:2)
+
+    "(twirl:'This is nice, just hanging out and talking.','I'm glad you came over to chat.','You're easy to talk to.','It's refreshing to have a real conversation.')" she says.
+  ]
+
+  (nl:2)
+
+  (set:$roll to (twist:1,10))
+  (if:$roll > 4)[
+    The conversation flows easily between you two.
+
+    (set:$gain_friendship to (twist:1,2))
+    (set:$npc_select to (text:$bar_girl's "id"))
+    (display:"change relationship")
+  ](else:)[
+    The conversation is pleasant but doesn't really go anywhere special.
+  ]
+
+  <div class='options'>
+    (link:"Back")[(go-to:"bar chat girl options female")]
   </div>
 }
 
