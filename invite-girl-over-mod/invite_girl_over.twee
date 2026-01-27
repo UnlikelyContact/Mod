@@ -877,13 +877,13 @@ baseGameVersion:
 
   (set:$intro to (twist:1,4))
   (if:$intro is 1)[
-    You smile and introduce yourself. "Hi, I'm (print:$character's "Female name"). I noticed you and thought I'd say hello."
+    You smile and introduce yourself. "Hi, I'm (print:$character's "female name"). I noticed you and thought I'd say hello."
   ](else:)[(if:$intro is 2)[
-    You approach her with a friendly wave. "Hey there, I'm (print:$character's "Female name"). Mind if I join you?"
+    You approach her with a friendly wave. "Hey there, I'm (print:$character's "female name"). Mind if I join you?"
   ](else:)[(if:$intro is 3)[
-    "I don't think we've met. I'm (print:$character's "Female name")," you say with a warm smile.
+    "I don't think we've met. I'm (print:$character's "female name")," you say with a warm smile.
   ](else:)[
-    You catch her eye and walk over. "Hi, I'm (print:$character's "Female name"). What's your name?"
+    You catch her eye and walk over. "Hi, I'm (print:$character's "female name"). What's your name?"
   ]]]]
 
   (nl:2)
