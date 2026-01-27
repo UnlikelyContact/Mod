@@ -13,10 +13,11 @@ A mod for X-Change Life that allows players to invite girlfriends over in the ev
 
 ### For Female Players (Lesbian Content)
 - Same "Invite girl over" activity when playing as female
-- Dedicated female-female sex scenes with video/image media
-- Multiple position options (passive, active, 69)
+- Full interactive sex scene system with dual pleasure meters
+- Stage-based progression with quicktime skill checks and orgasm control
+- Multiple position options (passive, active, 69) with different pleasure dynamics
 - Uses existing ff media from the game (Jia/Callie workout scenes)
-- Trait-based dialogue for lesbian encounters
+- NPC multiple orgasm tracking and trait-based dialogue throughout
 
 ### Lesbian Bar Pickup
 - Override for `bar chat girl options female` passage
@@ -61,6 +62,20 @@ The "Invite girl over" option appears in evening activities when:
 - Compatible with other mods that add bar girls (uses dynamic detection)
 
 ## Changelog
+
+### v1.6.0
+- Complete rewrite of lesbian sex scenes with full interactive mini-game system
+- Added dual pleasure meters (player + NPC) using game's `(insert_meters:)` system
+- Stage-based progression (0=kissing → 1=foreplay → 2=oral/undress → 3=positions)
+- Position selection: passive (player pleasure focus), active (NPC pleasure focus), 69 (balanced)
+- Quicktime skill check mini-game for oral "extra effort" using game's `quicktime initialize`
+- Orgasm control edge mechanic using game's `dont cum initialize` with scaling difficulty
+- NPC multiple orgasm tracking with diminishing recovery between orgasms
+- Trait-based dialogue throughout all sex passages (slut, bimbo, religious, default)
+- Kissing and foreplay actions with diminishing returns to encourage stage progression
+- Position switching during sex with different pleasure/stamina tradeoffs
+- Player climax passage with awareness of NPC orgasm count (bonus attraction for multiple)
+- Simultaneous orgasm detection when NPC was close during player climax
 
 ### v1.5.0
 - Expanded `bar girl chat female` from simple random topics to a two-branch hub (Girl talk + Mutual interests)
