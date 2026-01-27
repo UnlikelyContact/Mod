@@ -1,7 +1,7 @@
 # meta
 metaVersion: 1
 name: "Invite Girl Over"
-version: "1.4.0"
+version: "1.5.0"
 author: "Mod Author"
 baseGameVersion:
   atLeast: "0.17f"
@@ -931,38 +931,270 @@ baseGameVersion:
     (pic:$bar_girl's "img")
   ]
 
-  (set:$topic to (twist:1,6))
-  (if:$topic is 1)[
-    You and $bar_girl_name chat about your favorite places in the city.
+  What do you want to talk about?
 
-    "(twirl:'I love that little cafe on 5th street.','Have you been to the new gallery downtown?','There's this amazing park I go to on weekends.')" she says.
-  ](else-if:$topic is 2)[
-    You ask $bar_girl_name what she does for fun.
+  <div class='options'>
+    (link:"Girl talk")[(cs:"bar girl chat girl talk lesbian")]
+    (link:"Mutual interests")[(cs:"bar girl chat interests lesbian")]
+  </div>
+}
 
-    "(twirl:'I'm really into hiking lately.','I've been binge-watching this show, it's so good.','I love trying new restaurants.')" she says.
-  ](else-if:$topic is 3)[
-    The conversation turns to music.
+:: bar girl chat girl talk lesbian
+{
+  (set:$bar_girl to $npc)
+  (set:$bar_girl_name to $bar_girl's "name")
 
-    "(twirl:'I've been listening to a lot of indie stuff lately.','I'm kind of obsessed with this new album.','Have you been to any good concerts recently?')" she asks.
-  ](else-if:$topic is 4)[
-    You talk about your week and share some laughs.
+  (set:$topics to ($bar_girl's "traits" + (a:"drink type","dating women")))
+  (set:$topic to 1st of (twisted:...$topics))
 
-    "(twirl:'Oh my god, that's hilarious.','No way, the same thing happened to me!','You always have the best stories.')" she laughs.
-  ](else-if:$topic is 5)[
-    $bar_girl_name tells you about her day.
+  (if:$bar_girl contains "img")[
+    (pic:$bar_girl's "img")
+  ]
 
-    "(twirl:'Work was crazy today, but this is nice.','I almost didn't come out tonight, but I'm glad I did.','I needed this. Just a good conversation.')" she says.
+  (if:$topic is "slut")[
+    (if:(twist:1,2) is 1)[
+      (twirl:
+        "$bar_girl_name tells you about her wild dating life. She's been with quite a few people.",
+        "She mentions she's pretty experienced when it comes to hookups.",
+        "She leans in and tells you about her recent flings."
+      )
+    ](else:)[
+      "(twirl:
+        'I've been with a lot of people, men and women. No shame in that. I know what I like and I go for it.',
+        'Honestly, I love hooking up. Life is short, you know? I just enjoy the thrill of a new connection.',
+        'Some people call me a slut. I call myself liberated. I enjoy sex and I make no apologies for it.',
+        'I have a pretty high body count, and I am proud of every single one. Nothing wrong with enjoying yourself.'
+      )"
+    ]
+  ](else-if:$topic is "bimbo")[
+    (if:(twist:1,2) is 1)[
+      (twirl:
+        "A few minutes of conversation tells you she's not the sharpest tool in the shed.",
+        "She's a bit airheaded, but her enthusiasm is endearing.",
+        "She seems sweet but not exactly a deep thinker."
+      )
+    ](else:)[
+      "(twirl:
+        'Omg, I just love coming to bars. The lights are so pretty! And the drinks are so yummy!',
+        'Do you ever just like, think about how weird it is that we exist? Like, we're just here? Haha, sorry, that was random.',
+        'I read this thing on social media about how dolphins are like, super smart. Isn't that crazy? I wish I was a dolphin sometimes.',
+        'I tried to cook pasta the other day and I forgot to add water first. Hehe, oops!'
+      )"
+    ]
+  ](else-if:$topic is "nerdy")[
+    (if:(twist:1,2) is 1)[
+      (twirl:
+        "She honestly seems pretty nerdy.",
+        "She seems really into tech and computers.",
+        "She's kind of a nerd, but in an endearing way."
+      )
+    ](else:)[
+      "(twirl:
+        'Don't judge me, but I'm kind of a nerd. I built my own gaming PC last year.',
+        'I've been binge-watching this sci-fi series. The worldbuilding is incredible.',
+        'I'm a total gamer girl. I know that term gets thrown around a lot, but I genuinely spend most of my free time gaming.',
+        'You know, I love science fiction. I could talk about it for hours.'
+      )"
+    ]
+  ](else-if:$topic is "sporty")[
+    (if:(twist:1,2) is 1)[
+      (twirl:
+        "She seems really into fitness and staying in shape.",
+        "Seems like she practically lives at the gym.",
+        "She's clearly passionate about sports and exercise."
+      )
+    ](else:)[
+      "(twirl:
+        'I practically live at the gym. There is nothing like a good workout to clear your head.',
+        'I love staying in shape. I do yoga, running, weights... you name it.',
+        'A body like mine takes work, haha. I hit the gym at least four times a week.',
+        'I have so much energy, I need to work out or I go crazy. Plus, exercise boosts your libido like crazy.'
+      )"
+    ]
+  ](else-if:$topic is "religious")[
+    (if:(twist:1,2) is 1)[
+      (twirl:
+        "She mentions her faith cautiously, glancing around the bar.",
+        "She seems a little conflicted about being here.",
+        "She mentions she's religious and seems thoughtful about it."
+      )
+    ](else:)[
+      "(twirl:
+        'I know it might seem weird for a religious girl to be at a bar, but... I'm trying to figure things out.',
+        'My faith is really important to me. But I also believe God wants me to be happy, you know?',
+        'I grew up in a strict religious household. It's... complicated. I'm still working through a lot of things.',
+        'I pray every day. Sometimes I pray for guidance about... well, about feelings I have that my church says are wrong.'
+      )"
+    ]
+  ](else-if:$topic is "feminine")[
+    (if:(twist:1,2) is 1)[
+      "(twirl:
+        'I am such a girly girl. I love everything about beauty and fashion.',
+        'What do you think of my nails? I just got them done!',
+        'I spend way too much time watching makeup tutorials, haha.',
+        'I am obsessed with skincare. My routine has like twelve steps.'
+      )"
+    ](else:)[
+      (twirl:
+        "She starts talking about the makeup tutorials she watches.",
+        "She shows you her manicured nails and asks if they look cute.",
+        "She strikes you as extremely feminine and well put-together.",
+        "You somehow get her talking about skincare routines."
+      )
+    ]
+  ](else-if:$topic is "likes assertive")[
+    (if:(twist:1,2) is 1)[
+      "(twirl:
+        'I guess I am old-fashioned. I like when someone takes charge, you know?',
+        'I like someone who knows what they want and goes for it. Confidence is so attractive.',
+        'Call me traditional, but I like being swept off my feet. I want someone who takes the lead.',
+        'I think there is something really attractive about a person who is decisive and assertive.'
+      )"
+    ](else:)[
+      (twirl:
+        "She tells you she likes when someone takes charge in a relationship.",
+        "She seems to appreciate assertiveness and confidence.",
+        "She mentions she prefers when her partner takes the lead.",
+        "She says she finds confidence and decisiveness really attractive."
+      )
+    ]
+  ](else-if:$topic is "feminist")[
+    (if:(twist:1,2) is 1)[
+      (twirl:
+        "She spends a while talking about women's issues.",
+        "She's clearly a passionate feminist.",
+        "She's very vocal about her feminist beliefs."
+      )
+    ](else:)[
+      "(twirl:
+        'I care a lot about women's rights. It is so important that we support each other.',
+        'Being a feminist just means believing in equality. I do not understand why some people have a problem with that.',
+        'It bothers me that X-Change allows guys to call themselves women when they have not had to grow up experiencing what it is actually like.',
+        'Women supporting women. That is what it is all about.'
+      )"
+    ]
+  ](else-if:$topic is "dating women")[
+    (if:$bar_girl contains "traits")[
+      (if:$bar_girl's "traits" contains "slut")[
+        "(twirl:
+          'I have been with plenty of women. Honestly, women are way better in bed than most guys.',
+          'Girls just know what other girls want, you know? No awkward fumbling around.',
+          'I love being with women. The energy is just completely different from being with a guy.',
+          'Women are amazing lovers. They pay attention to the details. They know exactly where to touch.'
+        )"
+      ](else-if:$bar_girl's "traits" contains "religious")[
+        "(twirl:
+          'I have never really... been with a woman before. I have thought about it though. A lot.',
+          'Is it weird that I find women attractive? My church says it is wrong, but it does not feel wrong.',
+          'I have been questioning things lately. Like, what if everything I was taught about who I should love was wrong?',
+          'I think about what it would be like to be with a woman sometimes. It scares me a little, but also excites me.'
+        )"
+      ](else-if:$bar_girl's "traits" contains "bimbo")[
+        "(twirl:
+          'I have kissed a girl before at a party! It was like, so fun! Hehe.',
+          'Girls are so pretty, right? Like, sometimes I just stare at women and think wow.',
+          'I am like, totally open to being with a girl. I think everyone should try it!',
+          'Omg, I love girl-on-girl stuff. It is like, the best.'
+        )"
+      ](else:)[
+        "(twirl:
+          'I have been with a couple of women before. It is a different kind of intimacy, you know?',
+          'I think I have always been a little bi-curious. It took me a while to act on it though.',
+          'There is something special about being with another woman. The connection is on a different level.',
+          'I do not really label myself. I just go where my heart takes me. And sometimes that is toward women.'
+        )"
+      ]
+    ](else:)[
+      "(twirl:
+        'I have been with a couple of women before. It is a different kind of intimacy, you know?',
+        'I think I have always been a little bi-curious. It took me a while to act on it though.',
+        'There is something special about being with another woman. The connection is on a different level.',
+        'I do not really label myself. I just go where my heart takes me. And sometimes that is toward women.'
+      )"
+    ]
+  ](else-if:$topic is "drink type")[
+    (if:$bar_girl contains "likes")[
+      (if:$bar_girl's "likes" contains "tequila")[
+        (twirl:
+          "You find out she is a big fan of tequila.",
+          "Apparently she loves tequila shots."
+        )
+      ](else-if:$bar_girl's "likes" contains "beer")[
+        (if:(twist:1,2) is 1)[
+          (twirl:
+            "She likes beer, apparently.",
+            "She really likes beer.",
+            "Apparently she really likes a nice, tall glass of beer."
+          )
+        ](else:)[
+          "(twirl:
+            'I love the taste of beer. My dad got me into microbrews and I have been hooked ever since.',
+            'Beer was an acquired taste for me, but now I genuinely love it. Nothing beats a cold one after a long day.',
+            'I am definitely a beer girl. I know it is not exactly glamorous, but I do not care.'
+          )"
+        ]
+      ](else-if:$bar_girl's "likes" contains "wine")[
+        "(twirl:
+          'What is my favorite wine? All wine! Hahahaha.',
+          'I am a total wine girl. Give me a good red and I am happy.',
+          'For wines, I am very partial to Malbecs. I like most drier reds, and the occasional prosecco.',
+          'I love sweet, bubbly wines. Moscato is my guilty pleasure.'
+        )"
+      ](else-if:$bar_girl's "likes" contains "whisky")[
+        (if:(twist:1,2) is 1)[
+          (twirl:
+            "She's a fan of whisky, apparently.",
+            "She says she is a big whisky drinker.",
+            "Apparently she really likes drinking whisky."
+          )
+        ](else:)[
+          "(twirl:
+            'Whiskey girl here. I know it surprises people but I love a good bourbon.',
+            'I will take whatever brand of whisky people offer me. At the very least it goes down smooth.',
+            'There is something classy about a woman who drinks whisky, do you not think?'
+          )"
+        ]
+      ](else-if:$bar_girl's "likes" contains "fruity cocktail")[
+        (if:(twist:1,2) is 1)[
+          (twirl:
+            "She likes fruity, girly drinks.",
+            "Apparently she likes sweet drinks that do not taste like alcohol.",
+            "She says she likes sweet, fruity drinks."
+          )
+        ](else:)[
+          "(twirl:
+            'I love anything sweet. Orange juice and whipped cream vodka? So good. So sneaky.',
+            'I love sweet drinks. Give me a mojito or pina colada and I am in heaven.',
+            'My favorite drinks? Sweet as can be. Mojito for the win.'
+          )"
+        ]
+      ](else:)[
+        (twirl:
+          "You chat about your favorite drinks.",
+          "She tells you about what she likes to order.",
+          "You bond over your drink preferences."
+        )
+      ]
+    ](else:)[
+      (twirl:
+        "You chat about your favorite drinks.",
+        "She tells you about what she likes to order.",
+        "You bond over your drink preferences."
+      )
+    ]
   ](else:)[
-    You and $bar_girl_name debate about the best drinks.
-
-    "(twirl:'You have to try their signature cocktail.','I'm a wine girl, personally.','Nothing beats a classic margarita.')" she insists.
+    (twirl:
+      "You chat about random topics and get to know each other a bit better.",
+      "The conversation meanders pleasantly from topic to topic.",
+      "You share stories and laughs about your lives."
+    )
   ]
 
   (nl:2)
 
   (set:$roll to (twist:1,10))
   (if:$roll > 4)[
-    The conversation flows easily and you can tell she's enjoying your company.
+    The conversation flows easily and you can tell she is enjoying your company.
 
     (set:$gain_friendship to (twist:1,2))
     (set:$gain_attraction to (twist:0,1))
@@ -974,6 +1206,333 @@ baseGameVersion:
 
   <div class='options'>
     (link:"Back")[(cs:"bar chat girl options female")]
+  </div>
+}
+
+:: bar girl chat interests lesbian
+{
+  (set:$bar_girl to $npc)
+  (set:$bar_girl_name to $bar_girl's "name")
+
+  (if:$bar_girl contains "img")[
+    (pic:$bar_girl's "img")
+  ]
+
+  (set:$topics to (a:"feminism","xchange"))
+  (if:(money:) > 1000)[
+    (if:$bar_girl's "traits" contains "rich")[
+      (set:$topics to $topics + (a:"rich mutual"))
+    ]
+  ]
+  (if:(get_fitness:) > 6)[
+    (if:$bar_girl's "traits" contains "sporty")[
+      (set:$topics to $topics + (a:"sporty mutual"))
+    ]
+  ]
+  (if:(get_intellect:) > 6)[
+    (if:$bar_girl's "traits" contains "nerdy")[
+      (set:$topics to $topics + (a:"nerdy mutual"))
+    ]
+  ]
+  (if:$stats's "sex as girl" > 4)[
+    (if:$bar_girl's "traits" contains "slut")[
+      (set:$topics to $topics + (a:"slut mutual"))
+    ]
+  ]
+  (if:$bar_girl's "traits" contains "nerdy" or $bar_girl's "traits" contains "sporty")[
+    (set:$topics to $topics + (a:"video games"))
+  ]
+
+  (unless:(dmnames:$bar_girl) contains "topics")[(set:$bar_girl's "topics" to (a:))]
+  (set:$topics to $topics - $bar_girl's "topics")
+
+  (if:length of $topics is 0)[
+    (set:$topic to "nothing")
+  ](else:)[
+    (set:$topic to 1st of (twisted:...$topics))
+  ]
+  (set:$bar_girl's "topics" to it + (a:$topic))
+
+  (if:$topic is "nothing")[
+    (twirl:
+      "Your conversation wanders - you don't have much to talk about.",
+      "You don't find anything interesting to talk about.",
+      "There's an awkward silence.",
+      "*Awkward silence.*"
+    )
+
+    <div class='options'>
+      (link:"Back")[(cs:"bar chat girl options female")]
+    </div>
+  ](else-if:$topic is "rich mutual")[
+    (twirl:
+      "Turns out you both appreciate the finer things in life.",
+      "You discuss expensive jewelry and designer brands.",
+      "You bond over your shared love of luxury."
+    )
+
+    (set:$gain_friendship to 2)
+    (set:$gain_attraction to (twist:0,1))
+    (set:$npc_select to (text:$bar_girl's "id"))
+    (display:"change relationship")
+
+    <div class='options'>
+      (link:"Back")[(cs:"bar chat girl options female")]
+    </div>
+  ](else-if:$topic is "sporty mutual")[
+    (twirl:
+      "You bond over fitness and sports.",
+      "You discuss both of your workout routines - she seems impressed.",
+      "She says you should totally go to yoga together sometime."
+    )
+
+    (set:$gain_friendship to (twist:1,2))
+    (set:$gain_attraction to (twist:0,1))
+    (set:$npc_select to (text:$bar_girl's "id"))
+    (display:"change relationship")
+
+    <div class='options'>
+      (link:"Back")[(cs:"bar chat girl options female")]
+    </div>
+  ](else-if:$topic is "nerdy mutual")[
+    (twirl:
+      "You have quite a few favorite TV shows in common.",
+      "You two geek out talking about Star Wars. Turns out she's a big fan!",
+      "It turns out you have a lot of shared, admittedly nerdy, interests."
+    )
+
+    (set:$gain_friendship to 1)
+    (set:$gain_attraction to 1)
+    (set:$npc_select to (text:$bar_girl's "id"))
+    (display:"change relationship")
+
+    <div class='options'>
+      (link:"Back")[(cs:"bar chat girl options female")]
+    </div>
+  ](else-if:$topic is "slut mutual")[
+    (twirl:
+      "You compare notes on your dating histories. She seems impressed by your experience.",
+      "You bond over your shared... adventurousness.",
+      "Neither of you are shy about your sexual histories, and you bond over that openness."
+    )
+
+    (set:$gain_friendship to (twist:1,2))
+    (set:$gain_attraction to (twist:1,2))
+    (set:$npc_select to (text:$bar_girl's "id"))
+    (display:"change relationship")
+
+    <div class='options'>
+      (link:"Back")[(cs:"bar chat girl options female")]
+    </div>
+  ](else-if:$topic is "video games")[
+    "(twirl:
+      'Are you the kind of girl who plays a lot of video games?',
+      'Are you a fan of video games?',
+      'Do you play video games much?'
+    )"
+
+    (if:$bar_girl's "traits" contains "nerdy")[
+      (set:$right_answer to "Yes, I love gaming")
+      (set:$wrong_answer to "Not really my thing")
+      (set:$right_response to (twirl:
+        "Me too!",
+        "Awesome, me too!",
+        "Same!",
+        "Awesome!"
+      ) + " " + (twirl:
+        "I'm a fan of",
+        "I really like",
+        "I've been playing a lot of"
+      ) + " " + (twirl:
+        "Baldur's Gate 3. It's so addictive.",
+        "Stardew Valley. I have like 500 hours.",
+        "Cyberpunk 2077. Have you tried it?",
+        "indie games mostly. There's so many hidden gems out there."
+      ))
+      (set:$wrong_response to (twirl:
+        "That's a shame, I really like them.",
+        "That's too bad, I play a lot of video games myself.",
+        "Aw, that's too bad. Games are what keep me sane."
+      ))
+      (set:$question_bonus to 3)
+    ](else:)[
+      (set:$right_answer to "Not really my thing")
+      (set:$wrong_answer to "Yes, I love gaming")
+      (set:$right_response to (twirl:
+        "That's relieving to hear.",
+        "Haha, good. I don't really understand the appeal of sitting in front of a screen all day.",
+        "Same. I'd rather be out doing things, you know?"
+      ))
+      (set:$wrong_response to (twirl:
+        "Oh, you're one of those gamer girls, hahaha.",
+        "Oh really? That's... cool, I guess.",
+        "Oh dear..."
+      ))
+      (set:$question_bonus to 2)
+    ]
+    (set:$response to "true")
+    (display:"bar girl chat interests question lesbian")
+  ](else-if:$topic is "xchange")[
+    "(twirl:
+      'Do you think these X-Change pills are good or bad for society?',
+      'What do you think about X-Change pills? Good or bad thing?',
+      'I'm curious, what are your thoughts on X-Change?'
+    )"
+
+    (if:$bar_girl's "traits" contains "religious")[
+      (set:$right_answer to "Bad")
+      (set:$wrong_answer to "Good")
+      (set:$right_response to (twirl:
+        "Yeah, I think they are an affront to God.",
+        "I agree. God put us in our current genders for a reason.",
+        "That's right. It is not for us to change what God created."
+      ))
+      (set:$wrong_response to (twirl:
+        "How can you say that? God gave people their genders for a reason.",
+        "I think these little pills are the tools of the devil, honestly.",
+        "I could not disagree more. It is not natural."
+      ))
+      (set:$question_bonus to 4)
+    ](else-if:$bar_girl's "traits" contains "kind")[
+      (set:$right_answer to "Good")
+      (set:$wrong_answer to "Bad")
+      (set:$right_response to (twirl:
+        "I agree. I am just so happy that X-Change can help people find their true selves.",
+        "Same! It is heartwarming when people find happiness with who they are.",
+        "Right? Everyone deserves to be comfortable in their own body."
+      ))
+      (set:$wrong_response to (twirl:
+        "Really? You don't want people to be able to be their true selves?",
+        "That makes me sad. People should be free to explore who they are.",
+        "I disagree. I think anything that helps people be happy is a good thing."
+      ))
+      (set:$question_bonus to 3)
+    ](else-if:$bar_girl's "traits" contains "feminist")[
+      (set:$right_answer to "Bad")
+      (set:$wrong_answer to "Good")
+      (set:$right_response to (twirl:
+        "Exactly. I do not like that a guy on X-Change is now indistinguishable from real women.",
+        "Yeah, guys on X-Change claim they are real women while still getting to grow up as privileged males.",
+        "Right. It takes all meaning out of being born a woman."
+      ))
+      (set:$wrong_response to (twirl:
+        "I disagree. I do not like that a guy on X-Change is now totally indistinguishable from real women.",
+        "I think they hurt real women. Guys can just become women whenever they feel like it? That is not right.",
+        "I hate how they sexualize gender identity."
+      ))
+      (set:$question_bonus to 4)
+    ](else:)[
+      (set:$right_answer to "Good")
+      (set:$wrong_answer to "Bad")
+      (set:$right_response to (twirl:
+        "Yeah. Society is becoming much less rigid about sex and gender, and that is a good thing.",
+        "Agreed! People should be free to experiment and be themselves.",
+        "Same. I feel like I am judged a lot less these days."
+      ))
+      (set:$wrong_response to (twirl:
+        "Huh, are you just uptight?",
+        "You don't like it when people have a good time?",
+        "Let people enjoy themselves!"
+      ))
+      (set:$question_bonus to 2)
+    ]
+    (set:$response to "true")
+    (display:"bar girl chat interests question lesbian")
+  ](else-if:$topic is "feminism")[
+    (if:(twist:1,2) is 1)[
+      "(twirl:
+        'Do you believe that guys and girls should be equal?',
+        'Would you call yourself a feminist?',
+        'Do you believe we should all be treated equally, regardless of gender?'
+      )"
+    ](else:)[
+      (twirl:
+        "She asks you whether you believe guys and girls should be equal in all matters.",
+        "She asks you whether you consider yourself a feminist."
+      )
+    ]
+
+    (if:$bar_girl's "traits" contains "feminist")[
+      (set:$right_answer to "Yes")
+      (set:$wrong_answer to "No")
+      (set:$right_response to (twirl:
+        "Exactly! I am so glad you are a feminist too.",
+        "Same! It is great to hear another woman agree.",
+        "Yaaas. So glad to hear you are on the same page.",
+        "I am so relieved you are not one of those traditional types."
+      ))
+      (set:$wrong_response to (twirl:
+        "Seriously? A woman who does not care about her own gender?",
+        "I should have known you were just another sellout.",
+        "Sigh. A woman who does not support other women. What else is new?"
+      ))
+      (set:$question_bonus to 5)
+    ](else:)[
+      (set:$right_answer to "No")
+      (set:$wrong_answer to "Yes")
+      (set:$right_response to (twirl:
+        "I agree. Guys and girls are biologically different, and should be appreciated for their unique qualities.",
+        "Kind of agree. I am pretty old-fashioned I guess.",
+        "Me too. I believe we should not pretend that guys and girls are not different."
+      ))
+      (set:$wrong_response to (twirl:
+        "Honestly, I am different. I think people are happier when they embrace their natural roles.",
+        "I am a lot more old-fashioned I guess.",
+        "Does that mean you would want everything to be exactly the same? That sounds boring."
+      ))
+      (set:$question_bonus to 2)
+    ]
+    (set:$response to "true")
+    (display:"bar girl chat interests question lesbian")
+  ]
+}
+
+:: bar girl chat interests question lesbian
+{
+  <div class='options'>
+    (if:(twist:1,2) is 1)[
+      (link:$right_answer)[
+        "(print:$right_response)"
+
+        (set:$gain_attraction to 1)
+        (set:$gain_friendship to 2)
+        (set:$npc_select to (text:$bar_girl's "id"))
+        (display:"change relationship")
+
+        (cs:"bar chat girl options female")
+      ]
+      (link:$wrong_answer)[
+        "(print:$wrong_response)"
+
+        (set:$gain_attraction to -1)
+        (set:$gain_friendship to -1)
+        (set:$npc_select to (text:$bar_girl's "id"))
+        (display:"change relationship")
+
+        (cs:"bar chat girl options female")
+      ]
+    ](else:)[
+      (link:$wrong_answer)[
+        "(print:$wrong_response)"
+
+        (set:$gain_attraction to -1)
+        (set:$gain_friendship to -1)
+        (set:$npc_select to (text:$bar_girl's "id"))
+        (display:"change relationship")
+
+        (cs:"bar chat girl options female")
+      ]
+      (link:$right_answer)[
+        "(print:$right_response)"
+
+        (set:$gain_attraction to 1)
+        (set:$gain_friendship to 2)
+        (set:$npc_select to (text:$bar_girl's "id"))
+        (display:"change relationship")
+
+        (cs:"bar chat girl options female")
+      ]
+    ]
   </div>
 }
 

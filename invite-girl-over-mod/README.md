@@ -62,6 +62,23 @@ The "Invite girl over" option appears in evening activities when:
 
 ## Changelog
 
+### v1.5.0
+- Expanded `bar girl chat female` from simple random topics to a two-branch hub (Girl talk + Mutual interests)
+- Added `bar girl chat girl talk lesbian` with trait-based topics (slut, bimbo, nerdy, sporty, religious, feminine, likes assertive, feminist, dating women, drink type)
+- Added `bar girl chat interests lesbian` with interactive Q&A system matching the game's interest-matching mechanics (feminism, xchange, rich/sporty/nerdy/slut mutual interests, video games)
+- Added `bar girl chat interests question lesbian` for right/wrong answer handling with relationship effects
+- Chat conversations now properly affect friendship and attraction stats
+- Interest topics track what's been discussed to avoid repeats
+
+### v1.4.0
+- Fixed broken dialogue options for female bar interactions
+
+### v1.3.2
+- Added missing introduce and chat passages for female players
+
+### v1.3.1
+- Replaced custom macros with standard ones
+
 ### v1.3.0
 - Fixed attraction check error (was checking NPC directly instead of relationships)
 - Added `[girl_number]` passage tag hook for male players

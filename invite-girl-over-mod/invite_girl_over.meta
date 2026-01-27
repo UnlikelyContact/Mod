@@ -1,6 +1,6 @@
 metaVersion: 1
 name: "Invite Girl Over"
-version: "1.1.0"
+version: "1.5.0"
 author: "Mod Author"
 baseGameVersion:
   atLeast: "0.17f"
