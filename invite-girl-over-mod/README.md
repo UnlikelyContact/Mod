@@ -69,6 +69,11 @@ The "Invite girl over" option appears in evening activities when:
 - Added `bar girl chat interests question lesbian` for right/wrong answer handling with relationship effects
 - Chat conversations now properly affect friendship and attraction stats
 - Interest topics track what's been discussed to avoid repeats
+- Replaced RNG-based pickup lines with the game's word scramble mini-game
+- Added `lesbian pickup lines` passage with 30+ gender-neutral pickup lines for the word game
+- Added per-round win/lose feedback passages with trait-based dialogue (slut, bimbo, religious, default)
+- Added overall success/failure passages with trait-based reactions and relationship effects
+- Pickup line difficulty scales with charm stat (matching game's male version)
 
 ### v1.4.0
 - Fixed broken dialogue options for female bar interactions

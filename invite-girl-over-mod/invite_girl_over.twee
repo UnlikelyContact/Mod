@@ -1542,67 +1542,210 @@ baseGameVersion:
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$events to $events + (a:"pickup lesbian"))
 
+  (set:$word_game to (dm:
+    "challenge", "",
+    "near victory", "She's warming up to you!",
+    "near defeat", "You're losing her...",
+    "victory", "She's charmed!",
+    "defeat", "That didn't go well...",
+    "points to win", 10,
+    "points", 5,
+    "failure passage", "bar girl pickup line lesbian failure",
+    "victory passage", "bar girl pickup line lesbian success",
+    "backdrop", (cond:$bar_girl contains "img",$bar_girl's "img","scenes/generic/bar/bar.jpg"),
+    "dealer name", "Dealer",
+    "difficulty", 50,
+    "text color", "black",
+    "sentences", (a:),
+    "first lines", (a:),
+    "type", "pick up",
+    "fail passage", "bar girl pickup line lesbian lose",
+    "win passage", "bar girl pickup line lesbian win"
+  ))
+  (set:$type to "lesbian pickup lines")
+  (display:$type)
+  (set:$next to "word game initialize")
+  (display:"change screen")
+  (if:(get_charm:) < 3)[
+    (set:$word_game's "difficulty" to 100)
+  ]
+}
+
+:: lesbian pickup lines
+{=
+(set:_pickup_lines to (a:
+"On a scale of 1 to 10, you're a 9.","I'm the 1 you need.",
+"I thought happiness started with an H...","But mine starts with U.",
+"Can I give you a kiss?","If you don't like it, you can return it.",
+"I'd say God Bless you...","But it looks like he already did.",
+"Hey, tie your shoes!","I don't want you falling for anyone else.",
+"Roses are red, my face is too...","That only happens when I see you.",
+"I should charge you rent...","For all the time you spend in my mind.",
+"Are you a minecraft fence?","Cause I can't get over you.",
+"You know what's on the menu?","ME N U.",
+"Let's play a game.","Winner dates loser.",
+"If your heart was a prison...","I would like to be sentenced for life.",
+"See those gaps between your fingers...","They're for my fingers to slip in.",
+"Did it hurt when you fell from the vending machine?","Cause you look like a snack!",
+"If kisses were snowflakes...","I'd send you a blizzard.",
+"Are you a bank loan?","Because you got my interest.",
+"Your body is 75% water...","And I'm thirsty.",
+"Well, here I am.","What are your other two wishes?",
+"You are hotter...","Than the bottom of my laptop.",
+"Kissing is a language of love...","So how about a conversation?",
+"I'm learning about important dates in history class.","Wanna be one of them?",
+"Are you my self-esteem?","Cause I've been looking for you everywhere.",
+"I'm going to ask you to leave.","You're making the other girls look bad.",
+"If you were a Youtube ad...","I wouldn't skip you.",
+"There are so many types of art...","But you are my favorite.",
+"Are you made of grapes?","Cause you're fine as wine.",
+"Are you the square root of -1?","Cause you can't be real.",
+"I'm not drunk...","I'm just intoxicated by you.",
+"Are you a door?","Because you are adorable.",
+"Apart from being so gorgeous...","What do you do for a living?",
+"Are you a magician?","Because every time I look at you everyone else disappears.",
+"Do you have a map?","Because I just got lost in your eyes.",
+"Are you a parking ticket?","Because you have fine written all over you.",
+"Are you a campfire?","Because you are hot and I want to be near you.",
+"Do you believe in love at first sight?","Or should I walk by again?",
+"Is your name Google?","Because you have everything I've been searching for.",
+"Are you a time traveler?","Because I see you in my future.",
+"Is your name WiFi?","Because I'm feeling a connection.",
+"I must be a snowflake...","Because I've fallen for you.",
+"Are you a camera?","Because every time I look at you I smile.",
+"If beauty were time...","You would be an eternity."))
+
+($word_game_setup:_pickup_lines)
+}
+
+:: bar girl pickup line lesbian win
+{
+  (if:$bar_girl contains "traits")[
+    (if:$bar_girl's "traits" contains "slut")[
+      "(twirl:
+        'Ooh, I like that one!',
+        'Mmm, smooth talker!',
+        'Haha, that's good!',
+        'Keep going, gorgeous!',
+        'I love a confident woman!'
+      )"
+    ](else-if:$bar_girl's "traits" contains "bimbo")[
+      "(twirl:
+        'Hehe, that's so cute!',
+        'Omg, that's adorable!',
+        'Awww, hehe!',
+        'That's like, so sweet!',
+        'Hehe you're funny!'
+      )"
+    ](else-if:$bar_girl's "traits" contains "religious")[
+      "(twirl:
+        'Oh my, that's sweet.',
+        'That's... really nice.',
+        'You're making me blush...',
+        'I shouldn't be smiling this much...',
+        'That was lovely.'
+      )"
+    ](else:)[
+      "(twirl:
+        'That's really sweet!',
+        'Haha, nice one!',
+        'Okay, that was charming.',
+        'You're pretty smooth!',
+        'I'm impressed!'
+      )"
+    ]
+  ](else:)[
+    "(twirl:
+      'That's really sweet!',
+      'Haha, nice one!',
+      'Okay, that was charming.',
+      'You're pretty smooth!',
+      'I'm impressed!'
+    )"
+  ]
+}
+
+:: bar girl pickup line lesbian lose
+{
+  (if:(twist:1,2) is 1)[
+    "(twirl:
+      'That was pretty corny.',
+      'Hmm, not your best.',
+      'Was that supposed to be smooth?',
+      'You can do better than that.',
+      'That was kind of cringe.',
+      'Uhh... okay.',
+      'Really? That's what you're going with?'
+    )"
+  ](else:)[
+    (twirl:
+      "She rolls her eyes.",
+      "She gives you a polite but unimpressed smile.",
+      "She looks away for a moment.",
+      "She shakes her head slightly.",
+      "You can tell she wasn't impressed by that one."
+    )
+  ]
+}
+
+:: bar girl pickup line lesbian success
+{
   (if:$bar_girl contains "img")[
     (pic:$bar_girl's "img")
   ]
 
-  You lean in closer to $bar_girl_name with a flirty smile.
-
-  (set:$line to (twist:1,8))
-  (if:$line is 1)[
-    "(twirl:'I don't usually do this, but I had to come talk to you. You're gorgeous.','I couldn't help but notice you from across the bar. You're stunning.')"
-  ](else-if:$line is 2)[
-    "(twirl:'I love your style. You have great taste.','That outfit looks amazing on you.')"
-  ](else-if:$line is 3)[
-    "(twirl:'Can I buy you a drink? I promise I'm more interesting than I look.','You look like you could use some company.')"
-  ](else-if:$line is 4)[
-    "(twirl:'I noticed you noticing me, so I thought I'd come say hi.','I felt like we had a moment from across the bar.')"
-  ](else-if:$line is 5)[
-    "(twirl:'Sorry if this is forward, but you have the most beautiful smile.','I just had to tell you - your smile lit up the whole room.')"
-  ](else-if:$line is 6)[
-    "(twirl:'You look like someone I'd like to get to know better.','There's something about you I find really intriguing.')"
-  ](else-if:$line is 7)[
-    "(twirl:'Life's too short not to talk to beautiful women, don't you think?','I figured I'd regret it if I didn't come say hi.')"
-  ](else:)[
-    "(twirl:'I had to come meet the most attractive person in this bar.','Are you always this captivating, or is it just tonight?')"
-  ]
+  $bar_girl_name is clearly charmed by your smooth delivery.
 
   (nl:2)
 
-  (set:$roll to (twist:1,10))
-  (if:$roll > 4)[
-    $bar_girl_name blushes and smiles.
-
-    (if:$bar_girl contains "traits")[
-      (if:$bar_girl's "traits" contains "slut")[
-        "(twirl:'Mmm, I like a woman who knows what she wants.','Ooh, confident. I like that.','Well aren't you charming?','Straight to the point. I appreciate that.')" she purrs.
-      ](else-if:$bar_girl's "traits" contains "bimbo")[
-        "(twirl:'Hehe, that's like, so sweet!','Omg, you're so nice!','Aww, thank you!','Hehe, you're making me blush!')" she giggles.
-      ](else-if:$bar_girl's "traits" contains "religious")[
-        "(twirl:'Oh my... that's very flattering.','I... I don't usually... thank you.','That's sweet of you to say.','You're making me blush.')" she says, looking flustered.
-      ](else:)[
-        "(twirl:'That's really sweet of you.','Thank you, that's flattering.','Aren't you charming?','I'm flattered.')" she replies with a smile.
-      ]
+  (if:$bar_girl contains "traits")[
+    (if:$bar_girl's "traits" contains "slut")[
+      "(twirl:'Wow, you really know how to charm a girl. I like that.','Mmm, confident AND witty. I'm into it.','You've definitely got my attention now, gorgeous.','I have a weakness for smooth women.')" she purrs, moving closer to you.
+    ](else-if:$bar_girl's "traits" contains "bimbo")[
+      "(twirl:'Hehe, you're like, SO charming!','Omg, you're amazing at pickup lines!','That was like, really impressive!','You're so smooth, hehe!')" she giggles, touching your arm.
+    ](else-if:$bar_girl's "traits" contains "religious")[
+      "(twirl:'I shouldn't be so charmed by this... but I am.','You have a way with words... it's hard to resist.','That was really sweet. I'm impressed.','I don't usually fall for pickup lines, but...')" she says, blushing deeply.
     ](else:)[
-      "(twirl:'That's really sweet of you.','Thank you, that's flattering.','Aren't you charming?','I'm flattered.')" she replies with a smile.
+      "(twirl:'That was really impressive. You have a way with words.','Okay, you've officially charmed me.','I have to admit, that was pretty smooth.','Well played. I'm definitely interested now.')" she says with a warm smile.
     ]
-
-    (set:$gain_attraction to (twist:1,3))
-    (set:$npc_select to (text:$bar_girl's "id"))
-    (display:"change relationship")
   ](else:)[
-    $bar_girl_name looks a bit uncomfortable.
-
-    "(twirl:'Oh, um... thanks, I guess.','That's... flattering, but I'm not really interested.','Sorry, I'm not really into... that.','I appreciate it, but no thanks.')"
-
-    (set:$gain_attraction to (twist:-2,-1))
-    (set:$npc_select to (text:$bar_girl's "id"))
-    (display:"change relationship")
+    "(twirl:'That was really impressive. You have a way with words.','Okay, you've officially charmed me.','I have to admit, that was pretty smooth.','Well played. I'm definitely interested now.')" she says with a warm smile.
   ]
 
-  <div class='options'>
-    (link:"Back")[(cs:"bar chat girl options female")]
-  </div>
+  (set:$gain_attraction to (twist:2,4))
+  (set:$npc_select to (text:$bar_girl's "id"))
+  (display:"change relationship")
+
+  (display:"bar chat girl options female")
+}
+
+:: bar girl pickup line lesbian failure
+{
+  (if:$bar_girl contains "img")[
+    (pic:$bar_girl's "img")
+  ]
+
+  $bar_girl_name doesn't seem impressed by your attempts.
+
+  (nl:2)
+
+  (if:$bar_girl contains "traits")[
+    (if:$bar_girl's "traits" contains "bitch")[
+      "(twirl:'That was painful to watch.','Are you done? That was embarrassing.','Wow, that was really bad.','Please stop, for both our sakes.')"
+    ](else-if:$bar_girl's "traits" contains "kind")[
+      "(twirl:'That was sweet, but... maybe try a different approach?','Points for effort, I guess.','It's okay, not everyone can be smooth.','A for effort, at least.')"
+    ](else:)[
+      "(twirl:'Nice try, but no.','That didn't really work for me.','Maybe pickup lines aren't your thing.','I appreciate the effort, but...')"
+    ]
+  ](else:)[
+    "(twirl:'Nice try, but no.','That didn't really work for me.','Maybe pickup lines aren't your thing.','I appreciate the effort, but...')"
+  ]
+
+  (set:$gain_attraction to (twist:-2,-1))
+  (set:$npc_select to (text:$bar_girl's "id"))
+  (display:"change relationship")
+
+  (display:"bar chat girl options female")
 }
 
 :: bar girl buy drink lesbian
