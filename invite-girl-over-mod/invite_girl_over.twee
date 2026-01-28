@@ -521,39 +521,39 @@ baseGameVersion:
     (if:$girl contains "traits")[
       (if:$girl's "traits" contains "slut")[
         (twirl:
-          "$her_name wastes no time, pushing you onto the bed and kissing down your body.",
-          "She's clearly experienced with women. Her hands and lips know exactly where to go.",
-          "$her_name grins wickedly as she spreads your legs.",
-          "Her fingers trace teasing patterns on your inner thighs."
+          "$her_name wastes no time, pushing you onto the bed with surprising force. Her hungry mouth trails kisses down your neck, across your collarbone, pausing to suck and bite at the soft skin between your breasts. Her experienced hands roam your body like she's mapping every curve, every sensitive spot for later exploitation.",
+          "She's clearly experienced with women - every touch is deliberate, calculated to drive you wild. Her fingers slip under your clothes, tracing patterns on your heated skin while her tongue explores your earlobe. 'I've been wanting to taste you all night,' she breathes against your neck.",
+          "$her_name grins wickedly as she spreads your legs, positioning herself between your thighs. Her eyes lock onto yours with predatory hunger as her fingers trace teasing patterns along your inner thighs, dangerously close to where you ache for her touch.",
+          "Her fingers trace maddening patterns on your inner thighs as she kisses down your stomach. Each brush of her lips sends electric shocks through your core. She knows exactly what she's doing - every touch designed to make you desperate, needy, dripping with anticipation."
         )
       ](else-if:$girl's "traits" contains "bimbo")[
         (twirl:
-          "$her_name giggles as she explores your body. 'Like, this is so hot!'",
-          "She's clumsy but enthusiastic, her hands wandering everywhere.",
-          "'Hehe, I've like, always wanted to try this,' she admits.",
-          "Her inexperience is endearing as she figures out what feels good."
+          "$her_name giggles as she explores your body with innocent curiosity. 'Like, this is so hot!' she exclaims, her wandering hands squeezing your breasts experimentally. 'Omg, they're so soft!' Her enthusiasm is infectious despite her clumsy technique.",
+          "She's clumsy but adorably enthusiastic, her hands wandering everywhere at once like she can't decide what to touch first. 'Hehe, you feel amazing,' she breathes, accidentally grazing a sensitive spot that makes you gasp. 'Oh! Did you like that?'",
+          "'Hehe, I've like, always wanted to try this with another girl,' she admits, her cheeks flushed pink. Her inexperience shows, but what she lacks in technique she makes up for with eagerness, her tongue tracing uncertain paths along your collarbone.",
+          "Her inexperience is endearing as she figures out what feels good, asking 'Like this?' and 'Is that okay?' between giggly kisses. When her fingers brush against your nipple and you moan, her face lights up. 'Omg, yay! I'm like, actually good at this!'"
         )
       ](else-if:$girl's "traits" contains "religious")[
         (twirl:
-          "$her_name blushes deeply as her hands explore forbidden territory.",
-          "'This is so wrong...' she whispers, but her actions say otherwise.",
-          "The forbidden nature of this seems to excite her even more.",
-          "She prays for forgiveness between kisses, but doesn't stop."
+          "$her_name blushes deeply as her trembling hands explore forbidden territory. Each touch seems to war with her conscience, but desire wins every battle. 'Forgive me...' she whispers against your skin, even as her fingers find the clasp of your bra with surprising determination.",
+          "'This is so wrong...' she whispers, but her actions tell a different story. Her breath comes in shaky gasps as she presses her body against yours, soft curves meeting soft curves. The conflict in her eyes only seems to heighten her arousal, her nipples hardening against you.",
+          "The forbidden nature of this seems to excite her even more than the physical pleasure. 'I shouldn't... we shouldn't...' But her hands keep exploring, her lips keep tasting. Each moan she tries to stifle makes the next one even louder.",
+          "She prays for forgiveness between kisses, but her body doesn't stop sinning. Her fingers trace reverent paths along your skin like you're something sacred and profane all at once. 'Lord help me, I can't stop,' she breathes, pulling you closer."
         )
       ](else:)[
         (twirl:
-          "$her_name kisses you deeply as your bodies intertwine.",
-          "Her soft hands explore your curves with growing confidence.",
-          "You feel her breath hot against your neck as she works her way down.",
-          "She looks up at you with desire in her eyes."
+          "$her_name kisses you deeply as your bodies intertwine on the bed. Her tongue dances with yours while her hands slide beneath your shirt, fingertips tracing the curve of your waist, the swell of your hips. Every touch is tender but building in intensity.",
+          "Her soft hands explore your curves with growing confidence, learning the landscape of your body. She pulls back from the kiss to look at you, her eyes dark with desire. 'You're so beautiful,' she murmurs, before trailing kisses down your throat.",
+          "You feel her breath hot against your neck as she works her way down, leaving a trail of gentle kisses and soft bites. Her hands cup your breasts through your clothes, thumbs circling your nipples until they harden against her palms.",
+          "She looks up at you with desire burning in her eyes as her fingers hook into the waistband of your underwear. 'Is this okay?' she asks, and when you nod, she slowly peels them down, exposing you inch by inch to her hungry gaze."
         )
       ]
     ](else:)[
       (twirl:
-        "$her_name kisses you deeply as your bodies intertwine.",
-        "Her soft hands explore your curves with growing confidence.",
-        "You feel her breath hot against your neck as she works her way down.",
-        "She looks up at you with desire in her eyes."
+        "$her_name kisses you deeply as your bodies intertwine on the bed. Her tongue dances with yours while her hands slide beneath your shirt, fingertips tracing the curve of your waist, the swell of your hips. Every touch is tender but building in intensity.",
+        "Her soft hands explore your curves with growing confidence, learning the landscape of your body. She pulls back from the kiss to look at you, her eyes dark with desire. 'You're so beautiful,' she murmurs, before trailing kisses down your throat.",
+        "You feel her breath hot against your neck as she works her way down, leaving a trail of gentle kisses and soft bites. Her hands cup your breasts through your clothes, thumbs circling your nipples until they harden against her palms.",
+        "She looks up at you with desire burning in her eyes as her fingers hook into the waistband of your underwear. 'Is this okay?' she asks, and when you nod, she slowly peels them down, exposing you inch by inch to her hungry gaze."
       )
     ]
   }]<text|
@@ -620,27 +620,24 @@ baseGameVersion:
 
 :: ff kiss
 {
-  (set:$ff_events to it + (a:"kiss"))
-  (set:$sex_loop to "kiss loop 1")(display:"play sex loop")
+  (set:$ff_stage to 1)
+  (set:$her_name to $girl's "name")
 
   [(vid:"scenes/characters/jia/sex/workout/ff/09 start licking.mp4")]<image|
 
   [{
-    (twirl:
-      "You pull $her_name into a deep kiss. Her lips are soft and taste faintly of lip gloss.",
-      "Your lips meet hers in a passionate kiss. She moans softly into your mouth.",
-      "She kisses you back eagerly, her tongue dancing with yours.",
-      "The kiss deepens, both of you losing yourselves in the moment."
-    )
+    $her_name looks up at you with hungry eyes. "(twirl:"What do you want me to do?","How do you want it?","Tell me what you need...","I want to make you feel good...")"
   }]<text|
 
-  (gain_npc_arousal:1)
-  (if:(count:$ff_events,"kiss") > 3)[(gain_npc_pleasure:-1)]
-
-  (display:"ff sex options")
+  <div class='options'>
+    (link:"Have her lick you")[(set:$ff_position to "licking")($cs:"ff passive action select")]
+    (link:"Have her finger you")[(set:$ff_position to "fingering")($cs:"ff passive action select")]
+    (link:"Have her suck your clit")[(set:$ff_position to "sucking")($cs:"ff passive action select")]
+    (link:"Back")[($cs:"ff sex options")]
+  </div>
 }
 
-:: invite girl ff passive
+:: ff passive action select
 {
   (set:$current_location to "Your Bedroom")
   (set:$ff_stage to 1)
@@ -802,22 +799,169 @@ baseGameVersion:
   (display:"ff sex options")
 }
 
-:: ff passive result
+:: ff passive enjoy
 {
-  (gain_pleasure:(twist:1,3))
+  (gain_pleasure:(twist:2,4))
+  (gain_stamina:1)
 
-  (nl:2)
+  [{
+    (nl:2)
+    You relax and let the pleasure wash over you. $her_name continues her ministrations, her (if:$ff_position is "licking")["tongue working its magic"](else-if:$ff_position is "fingering")["fingers pumping steadily"](else:)["lips sucking expertly"].
 
-  (if:$girl contains "traits")[
-    (if:$girl's "traits" contains "slut")[
-      "(twirl:"You like that, don't you?","Mmm, you taste so good...","I'm gonna make you cum so hard...","Tell me how much you love this.")" she purrs.
-    ](else-if:$girl's "traits" contains "bimbo")[
-      "(twirl:"Like, is this good?","Hehe, you're so wet!","Am I doing it right?","This is so fun!")" she giggles.
+    (nl:2)
+
+    (if:$girl contains "traits")[
+      (if:$girl's "traits" contains "slut")[
+        "(twirl:"You like that, don't you? I can taste how much you're enjoying this...","Mmm, you're getting so wet for me...","I love how your body responds to me...","Your pussy is so delicious...")" she purrs between licks.
+      ](else-if:$girl's "traits" contains "bimbo")[
+        "(twirl:"Like, you taste really good!","Hehe, I can tell you like this!","Omg you're so wet!","Am I doing good?")" she giggles.
+      ](else:)[
+        "(twirl:"You're so beautiful when you're turned on...","I love the sounds you make...","Tell me what feels good...","Just let go...")" she whispers.
+      ]
     ](else:)[
-      "(twirl:"You're so beautiful...","I love making you feel good...","Tell me what you want...","Just relax and enjoy...")" she whispers.
+      "(twirl:"You're so beautiful when you're turned on...","I love the sounds you make...","Tell me what feels good...","Just let go...")" she whispers.
     ]
+  }]<text|
+
+  (display:"ff sex options")
+}
+
+:: ff passive resist
+{
+  (set:$quicktime_params to (dm:
+    "objective","Don't cum yet!",
+    "skill check","orgasm control",
+    "skill check difficulty",(get_pleasure:) * 10,
+    "victory","You manage to hold back the orgasm building inside you.",
+    "failure","The pleasure is too intense - you can't hold back!",
+    "result passage","ff passive resist result",
+    "interrupt passage","ff passive interrupt",
+    "type","resist cum",
+    "interrupts", (get_pleasure:),
+    "backdrop","scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " passive " + $ff_position + ".mp4"
+  ))
+  ($cs:"dont cum initialize")
+}
+
+:: ff passive resist result
+{
+  (if:(win:))[
+    (gain_pleasure:(twist:0,1))
+
+    [{
+      (nl:2)
+      You manage to pull yourself back from the edge, your body trembling with the effort. $her_name notices and slows down, giving you a moment to recover.
+
+      (nl:2)
+
+      "(twirl:"Getting close? Don't worry, I'll edge you properly...","Saving that orgasm for later? Smart girl...","I can feel you tensing up... we're just getting started.")" she says with a knowing smile.
+    }]<text|
   ](else:)[
-    "(twirl:"You're so beautiful...","I love making you feel good...","Tell me what you want...","Just relax and enjoy...")" she whispers.
+    (gain_pleasure:(twist:3,5))
+
+    [{
+      (nl:2)
+      Despite your best efforts, the pleasure overwhelms you. Your hips buck against her face as waves of sensation crash through you.
+
+      (nl:2)
+
+      "(twirl:"Don't fight it, baby...","That's it, let it build...","You can't resist forever...")" she teases.
+    }]<text|
+  ]
+
+  (display:"ff sex options")
+}
+
+:: ff passive guide
+{
+  (set:$word_game to (dm:
+    "challenge", "",
+    "near victory", "She's responding to your guidance!",
+    "near defeat", "You're losing focus...",
+    "victory", "Perfect!",
+    "defeat", "The pleasure is too distracting...",
+    "points to win", 8,
+    "points", 3,
+    "failure passage", "ff passive guide result",
+    "victory passage", "ff passive guide result",
+    "backdrop", "scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " passive " + $ff_position + ".mp4",
+    "dealer name", "$her_name",
+    "difficulty", 50,
+    "text color", "black",
+    "sentences", (a:),
+    "first lines", (a:),
+    "type", "pick up",
+    "fail passage", "ff passive guide lose",
+    "win passage", "ff passive guide win"
+  ))
+
+  (display:"ff passive guide lines")
+  ($cs:"word game initialize")
+}
+
+:: ff passive guide lines
+{
+  (set:_guide_lines to (a:
+    "Right there...","Yes, just like that...",
+    "A little slower...","Take your time...",
+    "Mmm, that feels amazing...","You're so good at this...",
+    "Deeper...","Go deeper...",
+    "Faster...","A little faster...",
+    "Don't stop...","Keep going...",
+    "Yes, yes, yes...","Right there, right there...",
+    "Harder...","More pressure...",
+    "Your tongue feels incredible...","I love your mouth...",
+    "Fuck, that's good...","God yes..."
+  ))
+
+  ($word_game_setup:_guide_lines)
+}
+
+:: ff passive guide win
+{
+  (twirl:
+    "She follows your guidance perfectly, adjusting her technique.",
+    "$her_name responds eagerly to your direction.",
+    "Your words spur her on, her efforts redoubling.",
+    "She moans approvingly at your instructions."
+  )
+}
+
+:: ff passive guide lose
+{
+  (twirl:
+    "The pleasure makes it hard to form coherent words...",
+    "Your guidance comes out as incoherent moans...",
+    "You try to give direction but it's hard to focus...",
+    "The sensation overwhelms your ability to speak..."
+  )
+}
+
+:: ff passive guide result
+{
+  (if:(win:))[
+    (gain_pleasure:(twist:1,2))
+    (gain_npc_arousal:2)
+
+    [{
+      (nl:2)
+      Your guidance pays off. $her_name adjusts her technique exactly as you asked, and the pleasure intensifies in all the right ways.
+
+      (nl:2)
+
+      "(twirl:"Like that? I aim to please...","Mmm, I love when you tell me what you want...","Anything for you, baby...")" she murmurs against your flesh.
+    }]<text|
+  ](else:)[
+    (gain_pleasure:(twist:2,4))
+
+    [{
+      (nl:2)
+      Your attempts at guidance dissolve into moans and whimpers. $her_name chuckles and continues at her own pace.
+
+      (nl:2)
+
+      "(twirl:"Cat got your tongue?","Too distracted to talk?","I'll take those moans as a compliment...")" she teases.
+    }]<text|
   ]
 
   (display:"ff sex options")
@@ -829,108 +973,266 @@ baseGameVersion:
     "The pleasure is almost too much to bear...",
     "You feel yourself getting dangerously close...",
     "Your body trembles as waves of pleasure wash over you...",
-    "You gasp, struggling to maintain control..."
+    "You gasp, struggling to maintain control...",
+    "Your thighs clench around her head involuntarily...",
+    "A moan escapes your lips as the pleasure builds..."
   )
 }
 
-:: invite girl ff active
+:: ff active position select
 {
-  (set:$current_location to "Your Bedroom")
   (set:$ff_stage to 1)
-  (set:$ff_events to it + (a:"give"))
-
   (set:$her_name to $girl's "name")
-  (set:$ff_position to (twirl:"licking","fingering","tongue"))
+
+  [(vid:"scenes/characters/jia/sex/workout/ff/30 active going down.mp4")]<image|
+
+  [{
+    You position yourself between $her_name's thighs. She looks down at you with anticipation, spreading her legs wider to give you access.
+
+    (if:$girl contains "traits" and $girl's "traits" contains "slut")[
+      "(twirl:"Eat my pussy, baby...","I need your mouth on me...","Make me cum with that tongue...")" she demands.
+    ](else:)[
+      "(twirl:"I want to feel you...","Please...","I need you...")" she whispers breathlessly.
+    ]
+  }]<text|
+
+  <div class='options'>
+    (link:"Lick her pussy")[(set:$ff_position to "licking")(set:$ff_events to it + (a:"lick"))($cs:"ff active action select")]
+    (link:"Finger her")[(set:$ff_position to "fingering")(set:$ff_events to it + (a:"finger"))($cs:"ff active action select")]
+    (link:"Tongue and fingers")[(set:$ff_position to "combo")(set:$ff_events to it + (a:"combo"))($cs:"ff active action select")]
+    (link:"Back")[($cs:"ff sex options")]
+  </div>
+}
+
+:: ff active action select
+{
+  (set:$ff_events to it + (a:"give",$ff_position))
   (set:$ff_vid_num to (twist:30,36))
 
   [(vid:"scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " active " + $ff_position + ".mp4")]<image|
 
+  [{
+    (display:"ff active position text")
+  }]<text|
+
+  <div class='options'>
+    (if:(get_stamina:) >= 1)[(link:"Slow and sensual ⚡")[(set:$ff_action to "slow")(gain_stamina:-1)($cs:"ff active slow")]]
+    (if:(get_stamina:) >= 2)[(link:"Rough and intense ⚡⚡")[(set:$ff_action to "rough")(gain_stamina:-2)($cs:"ff active rough")]]
+    (if:(get_npc_pleasure:) >= 3)[(link:"Edge her")[(set:$ff_action to "edge")($cs:"ff active edge")]]
+    (link:"Let her take control")[($cs:"ff passive position select")]
+  </div>
+}
+
+:: ff active position text
+{
+  (if:$ff_position is "licking")[
+    (twirl:
+      "You lower your mouth to her glistening pussy, inhaling her intoxicating scent. Your tongue parts her folds, tasting her arousal as she gasps above you.",
+      "You drag your tongue slowly up her slit, from her entrance to her clit, savoring every drop of her wetness. She moans and grabs the sheets.",
+      "Your lips find her clit and you begin circling it with your tongue, feeling it pulse and swell under your attention.",
+      "You bury your face in her pussy, lapping at her hungrily while she writhes and moans beneath you."
+    )
+  ](else-if:$ff_position is "fingering")[
+    (twirl:
+      "You slide one finger inside her, feeling her wet heat envelop you. She's so ready, clenching around you immediately as you curl your finger upward.",
+      "Two fingers slip inside her easily, and you begin pumping them slowly while your thumb finds her clit.",
+      "Your fingers explore her inner walls, searching for that spot that makes her cry out. When you find it, her whole body jerks.",
+      "You finger her steadily, watching her face contort with pleasure as your digits work their magic inside her."
+    )
+  ](else:)[
+    (twirl:
+      "You attack her pussy with both tongue and fingers, overwhelming her senses. Your tongue circles her clit while your fingers pump inside her.",
+      "The combination of oral and manual stimulation has her writhing uncontrollably. You lick and finger her in perfect rhythm.",
+      "Your mouth sucks on her clit while two fingers thrust inside her, hitting her G-spot with each stroke. She's already trembling.",
+      "You double your assault, tongue and fingers working in concert to drive her wild. Her moans fill the room."
+    )
+  ]
+}
+
+:: ff active slow
+{
+  (set:$quicktime_params to (dm:
+    "difficulty","easy",
+    "skill check","girl pleasure",
+    "skill check difficulty",40,
+    "victory","You bring her pleasure slowly and deliberately.",
+    "defeat","You lose your rhythm...",
+    "points to win",25,
+    "points",10,
+    "result passage","ff active slow result",
+    "sequence",(a:"left","right","left","right","up","down","up","down"),
+    "quicktime timer",1.5,
+    "backdrop","scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " active " + $ff_position + ".mp4"
+  ))
+  ($cs:"quicktime initialize")
+}
+
+:: ff active slow result
+{
+  (if:(win:))[
+    (gain_npc_pleasure:(twist:1,3))
+    (gain_npc_arousal:1)
+
+    [{
+      (nl:2)
+      You take your time, building her pleasure slowly and deliberately. Each (if:$ff_position is "licking")["lick is languid and thorough"](else-if:$ff_position is "fingering")["thrust is deep and measured"](else:)["touch is perfectly paced"], drawing out her anticipation.
+
+      (nl:2)
+
+      $her_name (twirl:"moans softly, savoring every sensation","sighs with contentment as you worship her","relaxes into the pleasure you're giving","whispers encouragements as you continue").
+
+      (if:$girl contains "traits" and $girl's "traits" contains "slut")[
+        "(twirl:"Mmm, you're such a tease...","Don't rush... make me beg for it...","God, you know exactly what you're doing...")" she purrs.
+      ](else:)[
+        "(twirl:"That feels so good...","You're amazing...","I love how gentle you are...","Don't stop...")" she whispers.
+      ]
+    }]<text|
+  ](else:)[
+    (gain_npc_pleasure:(twist:0,1))
+
+    [{
+      (nl:2)
+      You try to maintain a slow, sensual pace, but your rhythm falters. $her_name doesn't seem to mind, but the pleasure doesn't build as intensely as you'd hoped.
+
+      (nl:2)
+
+      "(twirl:"It's okay, just keep going...","That still feels nice...","Find your rhythm...")" she encourages.
+    }]<text|
+  ]
+
+  (display:"ff sex options")
+}
+
+:: ff active rough
+{
+  (set:$quicktime_params to (dm:
+    "difficulty","hard",
+    "skill check","girl pleasure",
+    "skill check difficulty",60,
+    "victory","You drive her wild with intense pleasure!",
+    "defeat","The intensity is hard to maintain...",
+    "points to win",35,
+    "points",10,
+    "result passage","ff active rough result",
+    "sequence",(a:"up","down","left","right","up","down","left","right","up","down"),
+    "quicktime timer",0.8,
+    "backdrop","scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " active " + $ff_position + ".mp4"
+  ))
+  ($cs:"quicktime initialize")
+}
+
+:: ff active rough result
+{
+  (if:(win:))[
+    (gain_npc_pleasure:(twist:3,5))
+    (gain_pleasure:(twist:1,2))
+
+    [{
+      (nl:2)
+      You go hard, attacking her pussy with fierce determination. Your (if:$ff_position is "licking")["tongue works furiously against her clit"](else-if:$ff_position is "fingering")["fingers pound into her relentlessly"](else:)["mouth and fingers assault her in tandem"], driving her toward the edge at a breakneck pace.
+
+      (nl:2)
+
+      $her_name (twirl:"cries out, her body arching off the bed","grabs your hair and pulls you closer","wraps her thighs around your head","screams with pleasure").
+
+      (if:$girl contains "traits" and $girl's "traits" contains "slut")[
+        "(twirl:"Fuck YES! Just like that!","Don't you dare stop! Harder!","God, you're gonna make me cum so fast!","YES! Eat my fucking pussy!")" she screams.
+      ](else-if:$girl contains "traits" and $girl's "traits" contains "religious")[
+        "(twirl:"Oh God... oh GOD!","This is... I can't... oh LORD!","Forgive me, this is too good!","JESUS CHRIST!")" she cries out.
+      ](else:)[
+        "(twirl:"Oh my god! Yes!","Right there! Don't stop!","I'm gonna cum if you keep doing that!","Fuck, that's intense!")" she moans loudly.
+      ]
+    }]<text|
+  ](else:)[
+    (gain_npc_pleasure:(twist:1,2))
+
+    [{
+      (nl:2)
+      You try to go hard and fast, but the intensity is difficult to maintain. Still, your enthusiasm doesn't go unnoticed.
+
+      (nl:2)
+
+      "(twirl:"That was good... keep trying...","I appreciate the effort...","Almost there, baby...")" she pants.
+    }]<text|
+  ]
+
+  (display:"ff sex options")
+}
+
+:: ff active edge
+{
   (set:$quicktime_params to (dm:
     "difficulty","medium",
     "skill check","girl pleasure",
     "skill check difficulty",50,
-    "victory","She moans loudly, clearly enjoying your efforts.",
-    "defeat","She seems a bit underwhelmed...",
+    "victory","You keep her right on the edge of orgasm...",
+    "defeat","She gets too close to stop...",
     "points to win",30,
     "points",10,
-    "result passage","ff active result",
-    "sequence",(a:"left","right","up","down","left","right"),
+    "result passage","ff active edge result",
+    "sequence",(a:"left","up","right","down","left","up","right","down"),
     "quicktime timer",1,
     "backdrop","scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " active " + $ff_position + ".mp4"
   ))
   ($cs:"quicktime initialize")
 }
 
-:: ff active result
+:: ff active edge result
 {
-  [{
-    (if:$ff_position is "licking" or $ff_position is "tongue")[
-      (twirl:
-        "You bury your face between her thighs, tasting her arousal.",
-        "Your tongue traces slow circles around her clit as she moans.",
-        "You lick her pussy with long, slow strokes that make her squirm.",
-        "She grabs your hair as you work your tongue inside her."
-      )
-    ](else-if:$ff_position is "fingering")[
-      (twirl:
-        "You slide your fingers inside her, feeling her warmth envelop you.",
-        "Your fingers pump in and out as she gasps with pleasure.",
-        "You curl your fingers against her G-spot, making her cry out.",
-        "She clenches around your fingers as you find her sweet spot."
-      )
-    ](else:)[
-      (twirl:
-        "You take control, kissing down her body to her waiting pussy.",
-        "She trembles as you tease her with your breath.",
-        "You explore her folds with your tongue, savoring her taste.",
-        "She moans your name as you pleasure her."
-      )
-    ]
-  }]<text|
+  (if:(win:))[
+    (gain_npc_pleasure:-1)
+    (gain_npc_arousal:2)
 
-  (if:(win:))[(gain_npc_pleasure:(twist:2,4))](else:)[(gain_npc_pleasure:(twist:0,1))]
+    [{
+      (nl:2)
+      You read her body perfectly, bringing her to the precipice of orgasm and then backing off. She whimpers with frustrated desire as you deny her release, keeping her hovering on that maddening edge.
 
-  (nl:2)
+      (nl:2)
 
-  $her_name (twirl:"moans loudly","gasps with pleasure","writhes beneath you","grabs your hair","arches her back","cries out in ecstasy").
+      $her_name (twirl:"whines desperately, hips chasing your retreating touch","grabs at you, trying to pull you back","begs incoherently for more","trembles with pent-up need").
 
-  (if:$girl contains "traits")[
-    (if:$girl's "traits" contains "slut")[
-      "(twirl:"Fuck yes, right there!","Don't stop, I'm so close!","God, you're good at this!","More, I need more!")" she begs.
-    ](else-if:$girl's "traits" contains "religious")[
-      "(twirl:"Oh God... oh God...","This is so wrong but so good...","Forgive me... don't stop...","I can't believe how good this feels...")" she whimpers.
-    ](else:)[
-      "(twirl:"That feels amazing...","Yes, just like that...","You're incredible...","I'm getting close...")" she moans.
-    ]
+      (if:$girl contains "traits" and $girl's "traits" contains "slut")[
+        "(twirl:"You fucking TEASE! Let me cum!","Don't you dare stop now! I need it!","Please, please, PLEASE let me cum!","I'll do anything, just make me cum!")" she begs.
+      ](else:)[
+        "(twirl:"Please... I was so close...","Don't tease me like this...","I need to cum...","You're driving me crazy...")" she whimpers.
+      ]
+    }]<text|
   ](else:)[
-    "(twirl:"That feels amazing...","Yes, just like that...","You're incredible...","I'm getting close...")" she moans.
+    (gain_npc_pleasure:(twist:1,2))
+
+    [{
+      (nl:2)
+      You try to edge her, but she's too close - or you misjudge her signals. Her pleasure continues building despite your attempts to slow things down.
+
+      (nl:2)
+
+      "(twirl:"You can't stop me now...","I'm too close, keep going...","Don't stop!")" she moans.
+    }]<text|
   ]
 
   (display:"ff sex options")
 }
 
-:: ff active interrupt
+:: ff kiss
 {
-  (twirl:
-    "She writhes and moans as you pleasure her...",
-    "You can feel her body responding to your touch...",
-    "Her breathing becomes more ragged...",
-    "She grips the sheets tightly..."
-  )
-}
+  (set:$ff_events to it + (a:"kiss"))
+  (set:$sex_loop to "kiss loop 1")(display:"play sex loop")
 
-:: ff switch position
-{
-  (set:$ff_events to it + (a:"switch"))
+  [(vid:"scenes/characters/jia/sex/workout/ff/09 start licking.mp4")]<image|
 
-  (if:$ff_events contains "give" and not ($ff_events contains "receive"))[
-    ($cs:"invite girl ff passive")
-  ](else-if:$ff_events contains "receive" and not ($ff_events contains "give"))[
-    ($cs:"invite girl ff active")
-  ](else:)[
-    (set:$switch_roll to (twist:1,2))
-    (if:$switch_roll is 1)[($cs:"invite girl ff passive")](else:)[($cs:"invite girl ff active")]
-  ]
+  [{
+    (twirl:
+      "You pull $her_name into a deep, hungry kiss. Her lips are impossibly soft, tasting faintly of lip gloss and something uniquely her. She sighs into your mouth as your tongues meet, hands sliding into each other's hair.",
+      "Your lips meet hers in a kiss that quickly turns passionate, tongues tangling as soft moans escape between you. She pulls you closer, pressing her body against yours until you can feel her heart racing against your chest.",
+      "She kisses you back with matching eagerness, her tongue dancing with yours in an intimate duel. The kiss is wet and messy and perfect, leaving you both breathless when you finally part for air.",
+      "The kiss deepens until nothing else exists - just the soft press of her lips, the warmth of her breath, the way her fingers trace patterns on the back of your neck. You lose yourselves completely in the moment."
+    )
+  }]<text|
+
+  (gain_npc_arousal:1)
+  (if:(count:$ff_events,"kiss") > 3)[(gain_npc_pleasure:-1)]
+
+  (display:"ff sex options")
 }
 
 :: invite girl ff 69
@@ -962,18 +1264,20 @@ baseGameVersion:
 {
   [{
     (twirl:
-      "You flip into a 69 position, both pleasuring each other simultaneously.",
-      "Her tongue works on your pussy as you lick hers - it's overwhelming.",
-      "The mutual pleasure is incredible as you both race toward orgasm.",
-      "You can barely concentrate on pleasuring her as waves of pleasure wash over you."
+      "You flip into a 69 position, her pussy hovering above your face as she settles between your thighs. The first touch of her tongue makes you gasp, and you return the favor by pulling her hips down to meet your eager mouth. The symmetry of mutual pleasure is almost too much to process.",
+      "Her tongue works frantically on your pussy as you lick hers, creating a feedback loop of escalating pleasure. Every moan she makes vibrates against your most sensitive flesh, and you feel her shudder when you moan back. It's overwhelming, intoxicating.",
+      "The mutual pleasure is incredible as you both race toward orgasm, tongues and fingers working desperately. You can taste her getting wetter, feel her getting closer, and the knowledge that you're both racing toward the same cliff makes everything more intense.",
+      "You can barely concentrate on pleasuring her as waves of pleasure crash over you, but somehow you manage. Your face is coated in her arousal, your own dripping into her waiting mouth. Neither of you can form words anymore - just desperate, muffled moans."
     )
 
     (nl:2)
 
     (if:$girl contains "traits" and $girl's "traits" contains "slut")[
-      "Mmm, I love 69ing," she moans into your pussy. "Let's see who cums first!"
+      "'Mmm, I fucking love 69ing,' she moans against your pussy, the vibrations making you shiver. 'Let's see who cums first, baby!' She doubles her efforts, determined to win this delicious competition."
+    ](else-if:$girl contains "traits" and $girl's "traits" contains "religious")[
+      "'Oh Lord...' she whimpers against you, 'this is... this is...' She can't finish the thought, too overwhelmed by the dual sensations of giving and receiving forbidden pleasure.
     ](else:)[
-      She moans against you, the vibrations adding to your pleasure.
+      She moans against you, the vibrations adding another layer of sensation to your already overloaded senses. You return the favor, humming against her clit as you lap at her wetness.
     ]
   }]<text|
 
@@ -988,10 +1292,10 @@ baseGameVersion:
   (nl:2)
 
   (twirl:
-    "You feel your orgasm building as her tongue works its magic.",
-    "It's a race to see who can make the other cum first.",
-    "Your bodies move in sync, both giving and receiving pleasure.",
-    "The room fills with the sounds of your mutual pleasure."
+    "You feel your orgasm building inexorably as her tongue works its magic on your clit. Your thighs clamp around her head as the tension coils tighter and tighter in your core.",
+    "It's a race to see who can make the other cum first, and neither of you intends to lose. Her competitive licking makes you double your own efforts, creating a spiral of escalating pleasure.",
+    "Your bodies move in perfect sync, hips grinding against each other's faces, tongues working in complementary rhythms. It feels like you're becoming one being, united in shared ecstasy.",
+    "The room fills with the obscene, wet sounds of your mutual pleasure, punctuated by muffled moans and desperate whimpers. The air is thick with the scent of arousal, heady and intoxicating."
   )
 
   (display:"ff sex options")
@@ -1277,37 +1581,43 @@ baseGameVersion:
 
   [{
     (twirl:
-      "You both reach your peaks almost simultaneously.",
-      "The pleasure builds to an incredible crescendo.",
-      "Neither of you can hold back any longer.",
-      "The tension finally releases in a wave of ecstasy."
+      "You both reach your peaks almost simultaneously, bodies tensing in mirror images of ecstasy. The air crackles with shared pleasure as you crest the wave together.",
+      "The pleasure builds to an impossible crescendo, every nerve ending in your body singing in harmony with hers. You can feel her pulse racing against yours, hearts beating as one.",
+      "Neither of you can hold back any longer - the dam finally breaks, releasing a flood of pure, overwhelming sensation that wipes every thought from your mind.",
+      "The tension that's been building explodes into blinding waves of ecstasy that crash through both of you, connecting you in the most intimate way possible."
     )
 
     (nl:2)
 
     (twirl:
-      "Your body tenses and you cry out as the orgasm crashes over you.",
-      "Waves of pleasure radiate through your body as you cum hard.",
-      "You can't hold back any longer - you scream as you climax.",
-      "The orgasm hits you like a tidal wave, leaving you breathless."
+      "Your body tenses like a bowstring before snapping, and you cry out as the orgasm crashes over you in rolling waves. Every muscle contracts and releases, your pussy clenching around nothing as pleasure pulses through your core.",
+      "Waves of white-hot pleasure radiate outward from your center, spreading through your limbs like wildfire. You cum hard, harder than you have in a long time, your vision going white at the edges.",
+      "You can't hold back any longer - you scream as the climax tears through you, your back arching off the bed as your whole body shakes with the force of your release.",
+      "The orgasm hits you like a tidal wave, drowning you in sensation. Your toes curl, your fingers dig into the sheets, and for a perfect endless moment, nothing exists but pure ecstasy."
     )
 
     (nl:2)
 
     (twirl:
-      "$her_name's body shudders as she reaches her peak, crying out your name.",
-      "She cums hard, her whole body trembling with release.",
-      "You watch as waves of pleasure wash over her face.",
-      "She moans loudly as the orgasm takes her."
+      "$her_name's body shudders violently as she reaches her peak, crying out your name like a benediction. Her thighs clamp around your head (or fingers, depending) as her pussy contracts in rhythmic waves.",
+      "She cums hard, her whole body trembling uncontrollably as the orgasm takes her. You can see every muscle in her stomach clench, watch her nipples tighten, hear the desperate sounds she can't contain.",
+      "You watch, mesmerized, as waves of pleasure transform her face - the way her eyes roll back, her mouth falls open, her whole body goes rigid before dissolving into trembling aftershocks.",
+      "She moans your name as the orgasm takes her, the sound raw and primal and utterly beautiful. Her juices gush against your tongue (or hand), and you lap them up eagerly."
     )
 
     (nl:2)
 
-    Afterwards, you both collapse onto the bed, breathing heavily and satisfied.
+    Afterwards, you both collapse onto the bed, tangled together in a sweaty, satisfied heap. Your hearts pound in sync as you catch your breath, skin still tingling with aftershocks.
 
     (nl:2)
 
-    "(twirl:"That was incredible...","Wow... just wow...","We definitely need to do this again.","You're amazing.")" $her_name sighs contentedly.
+    (if:$girl contains "traits" and $girl's "traits" contains "slut")[
+      "'Holy fuck,' $her_name pants, running her fingers through your hair. 'That was... you're incredible. I don't usually cum that hard.' She pulls you in for a slow, deep kiss, letting you taste yourself on her lips."
+    ](else-if:$girl contains "traits" and $girl's "traits" contains "religious")[
+      "'That was...' $her_name trails off, still catching her breath. 'I've never felt anything like that. Is it always...?' She blushes, unable to finish the question, but pulls you close anyway."
+    ](else:)[
+      "'That was incredible,' $her_name sighs contentedly, tracing lazy patterns on your skin. 'I mean it. We definitely need to do this again.' She snuggles closer, her warmth comforting against you."
+    ]
   }]<text|
 
   (set:$orgasm_type to "sex")(display:"sex orgasm")
@@ -1335,23 +1645,25 @@ baseGameVersion:
 
   [{
     (twirl:
-      "Your body tenses and you cry out as the orgasm crashes over you.",
-      "Waves of pleasure radiate through your body as you cum hard.",
-      "You can't hold back any longer - you scream as you climax.",
-      "The orgasm hits you like a tidal wave, leaving you breathless."
+      "Your body goes rigid as the orgasm builds to its peak, then shatters into a thousand pieces of pure sensation. You cry out, voice raw and desperate, as wave after wave of pleasure crashes through you.",
+      "The pleasure that's been building in your core finally crests, and you cum hard - harder than you expected. Your pussy clenches rhythmically as arousal pulses through every nerve ending, leaving you gasping and shaking.",
+      "You can't hold back any longer. The climax tears through you like lightning, and you scream - actually scream - as your body convulses with the force of your release. Stars explode behind your closed eyelids.",
+      "The orgasm hits you like a freight train, sudden and overwhelming. Your back arches, your thighs clamp together, and you ride out the waves of pleasure while $her_name continues to work you through every last tremor."
     )
 
     (nl:2)
 
     (if:$girl contains "traits" and $girl's "traits" contains "slut")[
-      "(twirl:"That's it, cum for me!","Fuck yes, I love watching you cum!","Mmm, you're so hot when you orgasm!")" $her_name encourages you.
+      "'That's it, cum for me!' $her_name growls against your flesh, not letting up for a second. 'Fuck yes, I love watching you come undone. You're so fucking hot when you orgasm!' She continues to lick and suck, drawing out your pleasure until you're begging her to stop."
+    ](else-if:$girl contains "traits" and $girl's "traits" contains "bimbo")[
+      "'Omg, that was like, so hot!' $her_name giggles, looking up at you with bright eyes. 'Your face was all scrunchy and stuff! Hehe, I made you cum!' She seems almost prouder of herself than you are satisfied."
     ](else:)[
-      $her_name watches you with satisfaction, pleased to have brought you such pleasure.
+      $her_name watches you come apart with a satisfied smile, her eyes dark with desire. She continues to stroke and touch you gently, helping you ride out every last aftershock. 'You're beautiful when you cum,' she murmurs.
     ]
 
     (nl:2)
 
-    You collapse onto the bed, breathing heavily. But the night isn't over yet...
+    You collapse onto the bed, chest heaving as you struggle to catch your breath. Your limbs feel like jelly, your mind still floating somewhere above your body. But the night isn't over yet...
   }]<text|
 
   (set:$orgasm_type to "sex")(display:"sex orgasm")
@@ -1377,19 +1689,25 @@ baseGameVersion:
 
   [{
     (twirl:
-      "$her_name's body shudders as she reaches her peak, crying out your name.",
-      "She cums hard, her whole body trembling with release.",
-      "You watch as waves of pleasure wash over her face.",
-      "She moans loudly as the orgasm takes her."
+      "$her_name's body shudders violently as she reaches her peak, back arching off the bed as she cries out your name. You can feel her pussy clenching and pulsing as the orgasm tears through her, her juices flooding against your mouth (or fingers).",
+      "She cums hard, her whole body trembling with the force of her release. Her thighs clamp around your head (or hand), muscles spasming as wave after wave of pleasure crashes through her. It's intoxicating to watch.",
+      "You watch, mesmerized, as ecstasy transforms her face - eyes squeezed shut, mouth falling open in a silent scream that finally escapes as a raw, primal moan. Her entire body quakes as she comes undone.",
+      "She moans, loud and unrestrained, as the orgasm overtakes her. Her hands grip the sheets so hard her knuckles go white, hips bucking against you as her body surrenders completely to the pleasure you've given her."
     )
 
     (nl:2)
 
-    "(twirl:"Oh god... oh god yes!","I'm cumming!","Don't stop, don't stop!","Yesss!")" she cries.
+    (if:$girl contains "traits" and $girl's "traits" contains "slut")[
+      "'Oh fuck... oh FUCK yes!' she screams, not caring who hears. 'I'm cumming! Don't you fucking stop!' Her body writhes and shakes as you work her through every last tremor of her climax."
+    ](else-if:$girl contains "traits" and $girl's "traits" contains "religious")[
+      "'Oh God... oh God forgive me... YES!' she cries, the forbidden pleasure making her orgasm even more intense. Her body convulses as waves of guilty ecstasy wash over her."
+    ](else:)[
+      "'I'm cumming!' she gasps, voice cracking. 'Yes, yes, just like that... don't stop!' Her body trembles as she rides out the waves, clinging to you like an anchor in a storm."
+    ]
 
     (nl:2)
 
-    She collapses, panting heavily.
+    She collapses back onto the bed, chest heaving, skin flushed and glistening with sweat. A dreamy, satisfied smile plays across her lips as she catches her breath.
   }]<text|
 
   (set_npc_pleasure:0)
@@ -1520,10 +1838,7 @@ baseGameVersion:
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$npc's "events" to it + (a:"introduce female"))
-
-  (if:$bar_girl contains "img")[
-    (pic:$bar_girl's "img")
-  ]
+  (set:$events to $events + (a:"introduce female"))
 
   (set:$intro to (twist:1,4))
   (if:$intro is 1)[
@@ -1544,19 +1859,22 @@ baseGameVersion:
 
     (if:$bar_girl contains "traits")[
       (if:$bar_girl's "traits" contains "slut")[
-        "(twirl:"Well hello there, gorgeous. I'm $bar_girl_name.","Mmm, hi. I'm $bar_girl_name. Aren't you cute?","$bar_girl_name. Charmed, I'm sure.")" she purrs.
+        "(twirl:"Well hello there, gorgeous. I'm $bar_girl_name.","Mmm, hi. I'm $bar_girl_name. Aren't you cute?","$bar_girl_name. Charmed, I'm sure.")" she purrs, her eyes trailing appreciatively over your body.
       ](else-if:$bar_girl's "traits" contains "bimbo")[
-        "(twirl:"Hiii! I'm $bar_girl_name!","Omg hi! I'm $bar_girl_name, nice to meet you!","Oh hey! I'm $bar_girl_name!")" she says brightly.
+        "(twirl:"Hiii! I'm $bar_girl_name!","Omg hi! I'm $bar_girl_name, nice to meet you!","Oh hey! I'm $bar_girl_name!")" she says brightly, giving you a bubbly smile.
       ](else-if:$bar_girl's "traits" contains "religious")[
-        "(twirl:"Oh, hello. I'm $bar_girl_name. Nice to meet you.","Hi there. $bar_girl_name. It's nice to meet a friendly face.","I'm $bar_girl_name. Pleased to meet you.")" she says politely.
+        "(twirl:"Oh, hello. I'm $bar_girl_name. Nice to meet you.","Hi there. $bar_girl_name. It's nice to meet a friendly face.","I'm $bar_girl_name. Pleased to meet you.")" she says politely, a hint of shyness in her smile.
       ](else:)[
-        "(twirl:"Nice to meet you. I'm $bar_girl_name.","Hey, I'm $bar_girl_name. Good to meet you.","$bar_girl_name. Nice of you to come say hi.")" she replies.
+        "(twirl:"Nice to meet you. I'm $bar_girl_name.","Hey, I'm $bar_girl_name. Good to meet you.","$bar_girl_name. Nice of you to come say hi.")" she replies warmly.
       ]
     ](else:)[
-      "(twirl:"Nice to meet you. I'm $bar_girl_name.","Hey, I'm $bar_girl_name. Good to meet you.","$bar_girl_name. Nice of you to come say hi.")" she replies.
+      "(twirl:"Nice to meet you. I'm $bar_girl_name.","Hey, I'm $bar_girl_name. Good to meet you.","$bar_girl_name. Nice of you to come say hi.")" she replies warmly.
     ]
 
-    (set:$gain_attraction to (twist:0,1))
+    <div class='options'><mark>First impression:</mark></div>
+    (display:"display relationship status")
+
+    (set:$gain_attraction to (twist:0,2))
     (set:$gain_friendship to (twist:1,2))
     (set:$npc_select to (text:$bar_girl's "id"))
     (display:"change relationship")
@@ -1566,9 +1884,7 @@ baseGameVersion:
     "(twirl:"Oh, hi. I'm $bar_girl_name.","$bar_girl_name. Hi.","Yeah, I'm $bar_girl_name.")" she says, not seeming too interested.
   ]
 
-  <div class='options'>
-    (link:"Back")[($cs:"bar chat girl options female")]
-  </div>
+  (display:"bar chat girl options female")
 }
 
 :: bar girl chat female
@@ -1576,10 +1892,6 @@ baseGameVersion:
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$events to $events + (a:"chat"))
-
-  (if:$bar_girl contains "img")[
-    (pic:$bar_girl's "img")
-  ]
 
   (set:$topic to (twist:1,6))
   (if:$topic is 1)[
@@ -1622,9 +1934,7 @@ baseGameVersion:
     The conversation is pleasant enough, though there are a few awkward silences.
   ]
 
-  <div class='options'>
-    (link:"Back")[($cs:"bar chat girl options female")]
-  </div>
+  (display:"bar chat girl options female")
 }
 
 :: bar girl pickup line lesbian
@@ -1700,10 +2010,6 @@ baseGameVersion:
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
 
-  (if:$bar_girl contains "img")[
-    (pic:$bar_girl's "img")
-  ]
-
   (dec:'boredom',4)
   (set:$gain_attraction to (twist:2,4))
   (set:$max_attraction to 6)
@@ -1731,10 +2037,6 @@ baseGameVersion:
 {
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
-
-  (if:$bar_girl contains "img")[
-    (pic:$bar_girl's "img")
-  ]
 
   (inc:'boredom',4)
   (set:$gain_attraction to -2)
@@ -2118,9 +2420,7 @@ baseGameVersion:
     ]
   ]
 
-  <div class='options'>
-    (link:"Back")[($cs:"bar chat girl options female")]
-  </div>
+  (display:"bar chat girl options female")
 }
 
 :: bar girl ask number lesbian
@@ -2128,10 +2428,6 @@ baseGameVersion:
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$events to $events + (a:"ask number lesbian"))
-
-  (if:$bar_girl contains "img")[
-    (pic:$bar_girl's "img")
-  ]
 
   "(twirl:"I've really enjoyed talking to you. Could I get your number?","I'd love to see you again sometime. Want to exchange numbers?","I feel like we have a connection. Can I call you sometime?")" you ask.
 
@@ -2179,9 +2475,7 @@ baseGameVersion:
     "(twirl:"I'm sorry, but I don't think so.","I'm flattered, but I'm not looking for anything right now.","Thanks, but I don't think we're compatible.")"
   ]
 
-  <div class='options'>
-    (link:"Back")[($cs:"bar chat girl options female")]
-  </div>
+  (display:"bar chat girl options female")
 }
 
 :: bar girl ask hookup lesbian
@@ -2189,10 +2483,6 @@ baseGameVersion:
   (set:$bar_girl to $npc)
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$events to $events + (a:"ask hookup lesbian"))
-
-  (if:$bar_girl contains "img")[
-    (pic:$bar_girl's "img")
-  ]
 
   You lean in close to $bar_girl_name.
 
@@ -2241,9 +2531,7 @@ baseGameVersion:
     (set:$npc_select to (text:$bar_girl's "id"))
     (display:"change relationship")
 
-    <div class='options'>
-      (link:"Back")[($cs:"bar chat girl options female")]
-    </div>
+    (display:"bar chat girl options female")
   ]
 }
 
@@ -2282,15 +2570,15 @@ baseGameVersion:
 
   [(vid:"places/home/bedroom/bedroom 1.mp4")]<image|
 
-  You bring $bar_girl_name to your bedroom.
+  You bring $bar_girl_name to your bedroom, anticipation crackling between you like electricity.
 
   (nl:2)
 
   (twirl:
-    "The moment the door closes, her lips are on yours.",
-    "She pushes you against the wall, kissing you hungrily.",
-    "You pull her onto the bed, your bodies tangling together.",
-    "Clothes start coming off before you even reach the bed."
+    "The moment the door clicks shut, her lips crash against yours with hungry desperation. She tastes like the drinks you shared, sweet and intoxicating. Her hands are already working at your clothes, impatient and eager.",
+    "She pushes you against the wall before you can even turn on the lights, kissing you with a ferocity that makes your knees weak. Her body presses against yours, soft curves meeting soft curves, heat radiating through the thin fabric of your clothes.",
+    "You pull her onto the bed, and she lands on top of you with a breathless laugh that dissolves into a moan as your bodies tangle together. Her hands are everywhere - in your hair, under your shirt, gripping your hips.",
+    "Clothes start coming off before you even reach the bed - her shirt hits the floor, then yours, bras following as you stumble toward the mattress in a tangle of limbs and heated kisses. By the time you fall onto the sheets, you're both half-naked and desperate for more."
   )
 
   (set:$stats's "sex as girl" to it + 1)
@@ -2298,9 +2586,11 @@ baseGameVersion:
   (nl:2)
 
   (if:$girl contains "traits" and $girl's "traits" contains "slut")[
-    "(twirl:"I've wanted this all night.","God, you're so hot.","I'm going to make you feel so good.","I can't wait to taste you.")" she breathes.
+    "'I've wanted this all night,' she breathes against your neck, her hands sliding down to cup your ass and pull you closer. 'God, you're so fucking hot. I'm going to make you feel so good - I can't wait to taste you.' Her tongue traces a hot path down your collarbone."
+  ](else-if:$girl contains "traits" and $girl's "traits" contains "religious")[
+    "'I shouldn't be doing this,' she whispers, even as her hands explore your body with trembling eagerness. 'But I can't stop. You're too beautiful... I've been thinking about this all night.' She kisses you again, guilt and desire warring in her eyes."
   ](else:)[
-    "(twirl:"I've been thinking about this since we started talking.","You're beautiful.","I want you so badly.","This feels right.")" she whispers.
+    "'I've been thinking about this since we started talking,' she whispers against your lips, her voice husky with want. 'You're so beautiful.' Her hands cup your face tenderly before sliding down to explore the rest of you. 'I want you so badly. This feels right.'"
   ]
 
   (unless:$relationships contains $girl_to_load)[
