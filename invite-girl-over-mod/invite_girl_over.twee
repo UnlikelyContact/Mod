@@ -1,7 +1,7 @@
 # meta
 metaVersion: 1
 name: "Invite Girl Over"
-version: "1.4.0"
+version: "1.5.0"
 author: "Mod Author"
 baseGameVersion:
   atLeast: "0.17f"
@@ -1307,7 +1307,18 @@ baseGameVersion:
 
     (nl:2)
 
-    "(twirl:"That was incredible...","Wow... just wow...","We definitely need to do this again.","You're amazing.")" $her_name sighs contentedly.
+    (set:$afterglow to (twist:1,5))
+    (if:$afterglow is 1)[
+      "(twirl:"That was incredible...","Wow... just wow...","We definitely need to do this again.","You're amazing.")" $her_name sighs contentedly.
+    ](else-if:$afterglow is 2)[
+      "(twirl:"That was like something out of a movie.","I feel like we're in our own little romance film.","Better than any scene in The L Word, honestly.")" $her_name says dreamily.
+    ](else-if:$afterglow is 3)[
+      "(twirl:"I feel like Villanelle just seduced me.","That was very Portrait of a Lady on Fire.","You made me feel things I didn't know I could feel.")" she murmurs against your skin.
+    ](else-if:$afterglow is 4)[
+      "(twirl:"Okay, that was even better than I imagined.","You're incredible, you know that?","I've been with other women before, but that was... different. Special.")" $her_name whispers.
+    ](else:)[
+      "(twirl:"That was perfect.","I haven't felt this good in so long.","You really know how to treat a woman.","I'm so glad I met you tonight.")" $her_name sighs happily.
+    ]
   }]<text|
 
   (set:$orgasm_type to "sex")(display:"sex orgasm")
@@ -1422,7 +1433,16 @@ baseGameVersion:
 
   $her_name gets dressed, stealing glances at you as she does.
 
-  "(twirl:"Thanks for tonight. That was... special.","Call me again sometime, okay?","I had an amazing time.","We should definitely do this again.")" she says, giving you a soft kiss goodbye.
+  (set:$pillow_talk to (twist:1,4))
+  (if:$pillow_talk is 1)[
+    "(twirl:"Thanks for tonight. That was... special.","Call me again sometime, okay?","I had an amazing time.","We should definitely do this again.")" she says, giving you a soft kiss goodbye.
+  ](else-if:$pillow_talk is 2)[
+    "(twirl:"That was better than any movie scene.","You know, this was way better than watching Carol alone on my couch.","I feel like I'm in my own romance film right now.")" she says with a dreamy smile, giving you a soft kiss goodbye.
+  ](else-if:$pillow_talk is 3)[
+    "(twirl:"I feel like we should put on The L Word and cuddle... but I really have to go.","Next time we should watch Portrait of a Lady on Fire together.","We should do a movie night sometime. I have a whole list of sapphic films we need to watch.")" she says, giving you a soft kiss goodbye.
+  ](else:)[
+    "(twirl:"That was incredible. You're incredible.","I haven't felt like this in a long time.","Call me tomorrow?","I'm already looking forward to next time.")" she says, giving you a soft kiss goodbye.
+  ]
 
   <div class='options'>
     (link:"Go to sleep")[
@@ -1439,7 +1459,7 @@ baseGameVersion:
 
   (set:$her_name to $girl's "name")
 
-  "(twirl:"Stay the night?","Want to cuddle?")" you ask.
+  "(twirl:"Stay the night?","Want to cuddle?","We could watch something together...")" you ask.
 
   (set:$roll to (twist:1,10))
   (if:$roll > 3)[
@@ -1447,7 +1467,28 @@ baseGameVersion:
 
     (nl:2)
 
-    She curls up next to you, and you fall asleep in each other's arms.
+    (set:$stay_activity to (twist:1,4))
+    (if:$stay_activity is 1)[
+      She curls up next to you, and you fall asleep in each other's arms.
+    ](else-if:$stay_activity is 2)[
+      You put on The L Word as background noise. Neither of you really watch it - you're too busy stealing glances at each other and occasionally kissing.
+
+      (nl:2)
+
+      Eventually, you both drift off to sleep tangled together.
+    ](else-if:$stay_activity is 3)[
+      "(twirl:"Have you seen Imagine Me & You?","Want to watch Carol?","Let's put on something romantic.")" she suggests.
+
+      (nl:2)
+
+      You cuddle up together and put on a movie. She traces lazy patterns on your skin as you watch, and you fall asleep before the credits roll.
+    ](else:)[
+      You spend the next hour talking about everything and nothing - your dreams, your fears, your favorite books and movies.
+
+      (nl:2)
+
+      "(twirl:"You know, this is exactly what I needed tonight.","I love nights like this.","You're really easy to talk to.")" she murmurs as you both finally start to drift off.
+    ]
 
     (set:$gain_friendship to (twist:1,3))
     (if:$relationships contains $girl_to_load)[
@@ -1499,6 +1540,14 @@ baseGameVersion:
       ]
       (unless:_skip_drink)[
         (link:"Buy her a drink")[($cs:"bar girl buy drink lesbian")]
+      ]
+      (set:_skip_her_drink to false)
+      (if:(length:$events) >= 1)[(if:$events's last is "she bought drink lesbian")[(set:_skip_her_drink to true)]]
+      (if:(length:$events) >= 2)[(if:$events's 2ndlast is "she bought drink lesbian")[(set:_skip_her_drink to true)]]
+      (unless:_skip_her_drink)[
+        (if:$bar_girl_attraction >= 2 or (twist:1,4) is 1)[
+          (link:"Let her buy you a drink")[($cs:"bar girl offers drink lesbian")]
+        ]
       ]
       (unless:$events contains "ask number lesbian" or $npc's "events" contains "got number")[
         (link:"Ask for her number")[($cs:"bar girl ask number lesbian")]
@@ -1581,7 +1630,7 @@ baseGameVersion:
     (pic:$bar_girl's "img")
   ]
 
-  (set:$topic to (twist:1,6))
+  (set:$topic to (twist:1,8))
   (if:$topic is 1)[
     You and $bar_girl_name chat about your favorite places in the city.
 
@@ -1589,11 +1638,11 @@ baseGameVersion:
   ](else-if:$topic is 2)[
     You ask $bar_girl_name what she does for fun.
 
-    "(twirl:"I'm really into hiking lately.","I've been binge-watching this show, it's so good.","I love trying new restaurants.")" she says.
+    "(twirl:"I'm really into hiking lately.","I've been binge-watching The L Word - have you seen it?","I love trying new restaurants.","I just started watching Gentleman Jack. It's so romantic.")" she says.
   ](else-if:$topic is 3)[
     The conversation turns to music.
 
-    "(twirl:"I've been listening to a lot of indie stuff lately.","I'm kind of obsessed with this new album.","Have you been to any good concerts recently?")" she asks.
+    "(twirl:"I've been listening to a lot of indie stuff lately.","I'm kind of obsessed with girl in red right now.","Have you been to any good concerts recently?","I've been really into Hayley Kiyoko lately.")" she asks.
   ](else-if:$topic is 4)[
     You talk about your week and share some laughs.
 
@@ -1602,10 +1651,26 @@ baseGameVersion:
     $bar_girl_name tells you about her day.
 
     "(twirl:"Work was crazy today, but this is nice.","I almost didn't come out tonight, but I'm glad I did.","I needed this. Just a good conversation.")" she says.
-  ](else:)[
+  ](else-if:$topic is 6)[
     You and $bar_girl_name debate about the best drinks.
 
     "(twirl:"You have to try their signature cocktail.","I'm a wine girl, personally.","Nothing beats a classic margarita.")" she insists.
+  ](else-if:$topic is 7)[
+    The conversation turns to movies.
+
+    "(twirl:"Have you seen Portrait of a Lady on Fire? It wrecked me.","I just rewatched Carol the other night. Cate Blanchett, you know?","I'm obsessed with Imagine Me & You lately.","But I'm a Cheerleader is such a classic, don't you think?","I watched Blue is the Warmest Color last week - it's so intense.")" she says.
+
+    (nl:2)
+
+    "(twirl:"There's something about seeing women fall in love on screen...","I feel like I relate to those stories so much more.","Queer cinema just hits different, you know?")" she adds.
+  ](else:)[
+    The conversation turns to TV shows.
+
+    "(twirl:"Have you watched Killing Eve? The tension between them is everything.","I'm currently rewatching Orange is the New Black. Guilty pleasure.","I just finished A League of Their Own - so good.","Work in Progress is hilarious, have you seen it?","I've been binging Gentleman Jack. Anne Lister is goals.")" she says.
+
+    (nl:2)
+
+    "(twirl:"I love that there's so much good sapphic content now.","We're really in a golden age for queer TV.","It's nice to see ourselves represented, right?")" she adds.
   ]
 
   (nl:2)
@@ -2286,12 +2351,40 @@ baseGameVersion:
 
   (nl:2)
 
-  (twirl:
-    "The moment the door closes, her lips are on yours.",
-    "She pushes you against the wall, kissing you hungrily.",
-    "You pull her onto the bed, your bodies tangling together.",
-    "Clothes start coming off before you even reach the bed."
-  )
+  (set:$entrance_scene to (twist:1,5))
+  (if:$entrance_scene is 1)[
+    (twirl:
+      "The moment the door closes, her lips are on yours.",
+      "She pushes you against the wall, kissing you hungrily.",
+      "You pull her onto the bed, your bodies tangling together.",
+      "Clothes start coming off before you even reach the bed."
+    )
+  ](else-if:$entrance_scene is 2)[
+    The tension that's been building all night finally breaks. She kisses you like she's been waiting her whole life for this moment.
+
+    (nl:2)
+
+    *(twirl:"This feels like a scene from a movie.","You've seen this in films, but living it is something else entirely.","The anticipation makes everything more intense.")*
+  ](else-if:$entrance_scene is 3)[
+    She looks at you with a hunger in her eyes that makes your heart race.
+
+    "(twirl:"I've been imagining this since I first saw you.","You're even more beautiful up close.","Come here.")" she murmurs, pulling you close.
+  ](else-if:$entrance_scene is 4)[
+    You both pause for a moment, looking at each other. The air is electric with anticipation.
+
+    (twirl:
+      "Then she kisses you, soft at first, then deeper.",
+      "She reaches up to touch your face, and you melt into her.",
+      "The waiting is over. Your lips meet and everything else fades away."
+    )
+  ](else:)[
+    (twirl:
+      "The moment the door closes, her lips are on yours.",
+      "She pushes you against the wall, kissing you hungrily.",
+      "You pull her onto the bed, your bodies tangling together.",
+      "Clothes start coming off before you even reach the bed."
+    )
+  ]
 
   (set:$stats's "sex as girl" to it + 1)
 
@@ -2300,7 +2393,7 @@ baseGameVersion:
   (if:$girl contains "traits" and $girl's "traits" contains "slut")[
     "(twirl:"I've wanted this all night.","God, you're so hot.","I'm going to make you feel so good.","I can't wait to taste you.")" she breathes.
   ](else:)[
-    "(twirl:"I've been thinking about this since we started talking.","You're beautiful.","I want you so badly.","This feels right.")" she whispers.
+    "(twirl:"I've been thinking about this since we started talking.","You're beautiful.","I want you so badly.","This feels right.","I feel like I've been waiting for someone like you.")" she whispers.
   ]
 
   (unless:$relationships contains $girl_to_load)[
@@ -2319,5 +2412,126 @@ baseGameVersion:
 
   <div class='options'>
     (link:"Continue...")[($cs:"invite girl ff sex scene")]
+  </div>
+}
+
+:: bar girl offers drink lesbian
+{
+  (set:$bar_girl to $npc)
+  (set:$bar_girl_name to $bar_girl's "name")
+  (set:$events to $events + (a:"she bought drink lesbian"))
+
+  (set:$purchase to (twirl:"beer","tequila","wine","fruity cocktail","whisky","fruity cocktail","wine"))
+
+  (set:$alcohol_content to $purchase of (dm:
+    "beer",(twist:12,15) / 10,
+    "tequila",(twist:18,20) / 10,
+    "wine",(twist:12,16) / 10,
+    "fruity cocktail",(twist:7,11) / 10,
+    "whisky",(twist:16,17) / 10,
+    "nothing",0
+  ))
+
+  (set:$se to $purchase)(display:"play sound")
+  (pic:"places/bar/drinks/" + $purchase + ".jpg")
+
+  (if:$bar_girl contains "traits")[
+    (if:$bar_girl's "traits" contains "slut")[
+      "(twirl:"Let me buy you a drink, gorgeous.","I want to get you a drink... and maybe more later.","A pretty girl like you shouldn't have to buy her own drinks.")" $bar_girl_name says with a wink, and
+    ](else-if:$bar_girl's "traits" contains "bimbo")[
+      "(twirl:"Omg, let me get you a drink!","Hehe, I wanna buy you something!","Can I like, get you a drink?")" $bar_girl_name giggles, and
+    ](else-if:$bar_girl's "traits" contains "religious")[
+      "(twirl:"Can I get you something to drink?","Would you like a drink? My treat.","Let me buy you a drink.")" $bar_girl_name offers politely, and
+    ](else-if:$bar_girl's "traits" contains "likes assertive")[
+      "(twirl:"I'm getting you a drink.","You're having a drink with me.","I insist on buying you a drink.")" $bar_girl_name says confidently, and
+    ](else:)[
+      "(twirl:"Can I buy you a drink?","Let me get you something to drink.","Want me to grab you a drink?")" $bar_girl_name offers, and
+    ]
+  ](else:)[
+    "(twirl:"Can I buy you a drink?","Let me get you something to drink.","Want me to grab you a drink?")" $bar_girl_name offers, and
+  ]
+
+  (if:$purchase is "beer")[(twirl:"orders you a beer.","gets you a cold beer.","orders you both some beer.")]
+  (else-if:$purchase is "tequila")[(twirl:"gets you a shot of tequila.","orders tequila shots for both of you.","gets you some tequila.")]
+  (else-if:$purchase is "wine")[(twirl:"gets you a glass of wine.","orders you a nice glass of wine.","gets you both some wine.")]
+  (else-if:$purchase is "fruity cocktail")[(twirl:"gets you a colorful cocktail.","orders you a fruity cocktail.","gets you both fancy cocktails.")]
+  (else-if:$purchase is "whisky")[(twirl:"gets you a glass of whisky.","orders you some whisky.","gets you both whisky.")]
+
+  *(twirl:"A woman buying you a drink... this feels nice.","It's kind of nice being treated for once.","You could get used to this.","Role reversal, and you're into it.")*
+
+  <div class='options'>
+    (link:"Accept the drink")[
+      (set:$response to "accept drink")
+      ($cs:"bar girl offers drink react lesbian")
+    ]
+    (if:$character's "arousal" > 5 or $character's "alcohol status" > 1)[
+      *(twirl:"It'd be rude to refuse...","She already ordered it...","You'd feel bad saying no.")* (link:"Use Action Point (to reject drink)")[
+        (set:$response to "reject drink")
+        (set:$action_params to (dm:"cost",1,"result","bar girl offers drink react lesbian","type","replace text"))
+        (display:"use action point")
+      ]
+    ](else:)[
+      (link:"Politely decline")[
+        (set:$response to "reject drink")
+        ($cs:"bar girl offers drink react lesbian")
+      ]
+    ]
+  </div>
+}
+
+:: bar girl offers drink react lesbian
+{
+  (set:$bar_girl to $npc)
+  (set:$bar_girl_name to $bar_girl's "name")
+
+  (if:$bar_girl contains "img")[
+    (pic:$bar_girl's "img")
+  ]
+
+  (if:$response is "accept drink")[
+    You accept the drink with a smile.
+
+    (set:$character's "alcohol status" to it + $alcohol_content)
+
+    (nl:2)
+
+    (twirl:
+      "You clink glasses and take a sip. It's good.",
+      "The drink is exactly what you needed.",
+      "You thank her and enjoy the drink together.",
+      "The gesture is sweet, and the drink is even better."
+    )
+
+    (nl:2)
+
+    (if:$bar_girl contains "traits" and $bar_girl's "traits" contains "slut")[
+      "(twirl:"Cheers, beautiful.","To new friends... and maybe more.","I love watching you drink that.")" she says flirtatiously.
+    ](else-if:$bar_girl contains "traits" and $bar_girl's "traits" contains "bimbo")[
+      "(twirl:"Hehe, cheers!","Omg, isn't this fun?","Yay, drink buddies!")" she giggles.
+    ](else:)[
+      "(twirl:"Cheers.","To a good night.","I'm glad you accepted.","Here's to meeting new people.")" she says warmly.
+    ]
+
+    (set:$gain_attraction to (twist:1,2))
+    (set:$gain_friendship to (twist:1,2))
+    (set:$npc_select to (text:$bar_girl's "id"))
+    (display:"change relationship")
+    (dec:'boredom',2)
+  ](else:)[
+    "(twirl:"Oh, no thank you. I appreciate it though.","That's sweet, but I'm okay.","I shouldn't, but thanks for offering.")" you say.
+
+    (nl:2)
+
+    (if:$bar_girl contains "traits" and $bar_girl's "traits" contains "slut")[
+      $bar_girl_name looks slightly disappointed. "(twirl:"Your loss, gorgeous.","Suit yourself.","More for me then.")"
+    ](else:)[
+      $bar_girl_name nods understandingly. "(twirl:"No worries.","That's fine.","No problem.")"
+    ]
+
+    (inc:'boredom',1)
+  ]
+
+  <div class='options'>
+    (link:"Back")[($cs:"bar chat girl options female")]
   </div>
 }
