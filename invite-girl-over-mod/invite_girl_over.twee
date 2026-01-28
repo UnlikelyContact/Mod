@@ -1233,6 +1233,9 @@ baseGameVersion:
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$events to $events + (a:"pickup lesbian"))
 
+  (set:_backdrop to "npc/girls/generic/bar_normal.jpg")
+  (if:$bar_girl contains "img")[(set:_backdrop to $bar_girl's "img")]
+
   (set:$word_game to (dm:
     "challenge", "",
     "near victory", "She's warming up to you!",
@@ -1243,7 +1246,7 @@ baseGameVersion:
     "points", 5,
     "failure passage", "bar girl pickup line lesbian failure",
     "victory passage", "bar girl pickup line lesbian success",
-    "backdrop", (if:$bar_girl contains "img")[$bar_girl's "img"](else:)["npc/girls/generic/bar_normal.jpg"],
+    "backdrop", _backdrop,
     "dealer name", "Dealer",
     "difficulty", 50,
     "text color", "black",
@@ -1260,7 +1263,8 @@ baseGameVersion:
     (set:$word_game's "difficulty" to 100)
   ]
 
-  ($cs:"word game initialize")
+  (set:$next to "word game initialize")
+  (display:"change screen")
 }
 
 :: lesbian pickup lines
