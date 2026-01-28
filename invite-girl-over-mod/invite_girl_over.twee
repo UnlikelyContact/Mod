@@ -713,7 +713,6 @@ baseGameVersion:
     "points to win",30,
     "points",10,
     "result passage","ff active result",
-    "interrupt passage","ff active interrupt",
     "sequence",(a:"left","right","up","down","left","right"),
     "quicktime timer",1,
     "backdrop","scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " active " + $ff_position + ".mp4"
@@ -811,7 +810,6 @@ baseGameVersion:
     "points to win",35,
     "points",10,
     "result passage","ff 69 result",
-    "interrupt passage","ff 69 interrupt",
     "sequence",(a:"up","down","left","right","up","down","left","right"),
     "quicktime timer",1,
     "backdrop","scenes/characters/jia/sex/workout/ff/37 active 69.mp4"
