@@ -709,10 +709,13 @@ baseGameVersion:
     "skill check","girl pleasure",
     "skill check difficulty",50,
     "victory","She moans loudly, clearly enjoying your efforts.",
-    "failure","She seems a bit underwhelmed...",
+    "defeat","She seems a bit underwhelmed...",
+    "points to win",30,
+    "points",10,
     "result passage","ff active result",
     "interrupt passage","ff active interrupt",
     "sequence",(a:"left","right","up","down","left","right"),
+    "quicktime timer",1,
     "backdrop","scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " active " + $ff_position + ".mp4"
   ))
   ($cs:"quicktime initialize")
@@ -800,14 +803,17 @@ baseGameVersion:
   [(vid:"scenes/characters/jia/sex/workout/ff/37 active 69.mp4")]<image|
 
   (set:$quicktime_params to (dm:
-    "objective","Balance giving and receiving pleasure!",
+    "difficulty","medium",
     "skill check","girl pleasure",
     "skill check difficulty",60,
     "victory","You both moan in sync as the pleasure builds.",
-    "failure","You lose focus as the pleasure overwhelms you...",
+    "defeat","You lose focus as the pleasure overwhelms you...",
+    "points to win",35,
+    "points",10,
     "result passage","ff 69 result",
     "interrupt passage","ff 69 interrupt",
     "sequence",(a:"up","down","left","right","up","down","left","right"),
+    "quicktime timer",1,
     "backdrop","scenes/characters/jia/sex/workout/ff/37 active 69.mp4"
   ))
   ($cs:"quicktime initialize")
@@ -1227,67 +1233,156 @@ baseGameVersion:
   (set:$bar_girl_name to $bar_girl's "name")
   (set:$events to $events + (a:"pickup lesbian"))
 
+  (set:$word_game to (dm:
+    "challenge", "",
+    "near victory", "She's warming up to you!",
+    "near defeat", "She seems skeptical...",
+    "victory", "You've charmed her!",
+    "defeat", "That didn't land well...",
+    "points to win", 10,
+    "points", 5,
+    "failure passage", "bar girl pickup line lesbian failure",
+    "victory passage", "bar girl pickup line lesbian success",
+    "backdrop", (if:$bar_girl contains "img")[$bar_girl's "img"](else:)["npc/girls/generic/bar_normal.jpg"],
+    "dealer name", "Dealer",
+    "difficulty", 50,
+    "text color", "black",
+    "sentences", (a:),
+    "first lines", (a:),
+    "type", "pick up",
+    "fail passage", "bar girl pickup line lesbian lose",
+    "win passage", "bar girl pickup line lesbian win"
+  ))
+
+  (display:"lesbian pickup lines")
+
+  (if:(get_charm:) < 3)[
+    (set:$word_game's "difficulty" to 100)
+  ]
+
+  ($cs:"word game initialize")
+}
+
+:: lesbian pickup lines
+{
+  (set:_pickup_lines to (a:
+    "I don't usually do this, but...","I had to come talk to you. You're gorgeous.",
+    "I couldn't help but notice you...","From across the bar. You're stunning.",
+    "I love your style.","You have amazing taste.",
+    "That outfit looks incredible...","On you especially.",
+    "Can I buy you a drink?","I promise I'm more interesting than I look.",
+    "You look like you could use...","Some good company tonight.",
+    "I noticed you noticing me...","So I thought I'd come say hi.",
+    "Sorry if this is forward, but...","You have the most beautiful smile.",
+    "Your smile lit up...","The whole room.",
+    "You look like someone...","I'd like to get to know better.",
+    "There's something about you...","I find really intriguing.",
+    "Life's too short...","Not to talk to beautiful women.",
+    "I figured I'd regret it...","If I didn't come say hi.",
+    "Are you always this captivating...","Or is it just tonight?",
+    "I had to come meet...","The most attractive person here.",
+    "Something about your energy...","Drew me right over.",
+    "I've been trying to work up the courage...","To come talk to you all night.",
+    "You have this magnetic quality...","I just couldn't resist.",
+    "I don't believe in love at first sight...","But I might make an exception.",
+    "Do you believe in fate?","Because I think we were meant to meet."
+  ))
+
+  ($word_game_setup:_pickup_lines)
+}
+
+:: bar girl pickup line lesbian success
+{
+  (set:$bar_girl to $npc)
+  (set:$bar_girl_name to $bar_girl's "name")
+
   (if:$bar_girl contains "img")[
     (pic:$bar_girl's "img")
   ]
 
-  You lean in closer to $bar_girl_name with a flirty smile.
+  (dec:'boredom',4)
+  (set:$gain_attraction to (twist:2,4))
+  (set:$max_attraction to 6)
+  (set:$npc_select to (text:$bar_girl's "id"))
+  (display:"change relationship")
 
-  (set:$line to (twist:1,8))
-  (if:$line is 1)[
-    "(twirl:"I don't usually do this, but I had to come talk to you. You're gorgeous.","I couldn't help but notice you from across the bar. You're stunning.")"
-  ](else-if:$line is 2)[
-    "(twirl:"I love your style. You have great taste.","That outfit looks amazing on you.")"
-  ](else-if:$line is 3)[
-    "(twirl:"Can I buy you a drink? I promise I'm more interesting than I look.","You look like you could use some company.")"
-  ](else-if:$line is 4)[
-    "(twirl:"I noticed you noticing me, so I thought I'd come say hi.","I felt like we had a moment from across the bar.")"
-  ](else-if:$line is 5)[
-    "(twirl:"Sorry if this is forward, but you have the most beautiful smile.","I just had to tell you - your smile lit up the whole room.")"
-  ](else-if:$line is 6)[
-    "(twirl:"You look like someone I'd like to get to know better.","There's something about you I find really intriguing.")"
-  ](else-if:$line is 7)[
-    "(twirl:"Life's too short not to talk to beautiful women, don't you think?","I figured I'd regret it if I didn't come say hi.")"
-  ](else:)[
-    "(twirl:"I had to come meet the most attractive person in this bar.","Are you always this captivating, or is it just tonight?")"
-  ]
-
-  (nl:2)
-
-  (set:$roll to (twist:1,10))
-  (if:$roll > 4)[
-    $bar_girl_name blushes and smiles.
-
-    (if:$bar_girl contains "traits")[
-      (if:$bar_girl's "traits" contains "slut")[
-        "(twirl:"Mmm, I like a woman who knows what she wants.","Ooh, confident. I like that.","Well aren't you charming?","Straight to the point. I appreciate that.")" she purrs.
-      ](else-if:$bar_girl's "traits" contains "bimbo")[
-        "(twirl:"Hehe, that's like, so sweet!","Omg, you're so nice!","Aww, thank you!","Hehe, you're making me blush!")" she giggles.
-      ](else-if:$bar_girl's "traits" contains "religious")[
-        "(twirl:"Oh my... that's very flattering.","I... I don't usually... thank you.","That's sweet of you to say.","You're making me blush.")" she says, looking flustered.
-      ](else:)[
-        "(twirl:"That's really sweet of you.","Thank you, that's flattering.","Aren't you charming?","I'm flattered.")" she replies with a smile.
-      ]
+  (if:$bar_girl contains "traits")[
+    (if:$bar_girl's "traits" contains "slut")[
+      "(twirl:"Mmm, I like a woman who knows what she wants.","Ooh, confident. I like that.","Well aren't you charming?","Straight to the point. I appreciate that.")" she purrs.
+    ](else-if:$bar_girl's "traits" contains "bimbo")[
+      "(twirl:"Hehe, that's like, so sweet!","Omg, you're so nice!","Aww, thank you!","Hehe, you're making me blush!")" she giggles.
+    ](else-if:$bar_girl's "traits" contains "religious")[
+      "(twirl:"Oh my... that's very flattering.","I... I don't usually... thank you.","That's sweet of you to say.","You're making me blush.")" she says, looking flustered.
     ](else:)[
       "(twirl:"That's really sweet of you.","Thank you, that's flattering.","Aren't you charming?","I'm flattered.")" she replies with a smile.
     ]
-
-    (set:$gain_attraction to (twist:1,3))
-    (set:$npc_select to (text:$bar_girl's "id"))
-    (display:"change relationship")
   ](else:)[
-    $bar_girl_name looks a bit uncomfortable.
-
-    "(twirl:"Oh, um... thanks, I guess.","That's... flattering, but I'm not really interested.","Sorry, I'm not really into... that.","I appreciate it, but no thanks.")"
-
-    (set:$gain_attraction to (twist:-2,-1))
-    (set:$npc_select to (text:$bar_girl's "id"))
-    (display:"change relationship")
+    "(twirl:"That's really sweet of you.","Thank you, that's flattering.","Aren't you charming?","I'm flattered.")" she replies with a smile.
   ]
 
-  <div class='options'>
-    (link:"Back")[($cs:"bar chat girl options female")]
-  </div>
+  (display:"bar chat girl options female")
+}
+
+:: bar girl pickup line lesbian failure
+{
+  (set:$bar_girl to $npc)
+  (set:$bar_girl_name to $bar_girl's "name")
+
+  (if:$bar_girl contains "img")[
+    (pic:$bar_girl's "img")
+  ]
+
+  (inc:'boredom',4)
+  (set:$gain_attraction to -2)
+  (set:$min_attraction to -1)
+  (set:$npc_select to (text:$bar_girl's "id"))
+  (display:"change relationship")
+
+  $bar_girl_name looks a bit uncomfortable.
+
+  (if:$bar_girl contains "traits" and $bar_girl's "traits" contains "bimbo")[
+    "(twirl:"Hehe, that was like... kinda weird.","Um, that was super cringe.","Like, that was SO cringe.")"
+  ](else:)[
+    (twirl:
+      "That didn't go well.",
+      "Nope, better luck next time.",
+      "She doesn't seem interested in talking to you anymore.",
+      "Crash and burn.",
+      "Mission failed."
+    )
+  ]
+
+  (display:"bar chat girl options female")
+}
+
+:: bar girl pickup line lesbian win
+{
+  (set:$bar_girl_name to $npc's "name")
+
+  (if:$npc contains "traits" and $npc's "traits" contains "slut")[
+    "(twirl:"Ooh, smooth...","I see what you're doing there...","Mmm, keep going...","You've got my attention now...")"
+  ](else-if:$npc contains "traits" and $npc's "traits" contains "bimbo")[
+    "(twirl:"Hehe, that's so sweet!","Omg, you're so cute!","Aww!","Hehe!")"
+  ](else:)[
+    "(twirl:"Oh, that's sweet...","Haha, nice one...","Okay, that was good...","You're pretty charming...")"
+  ]
+}
+
+:: bar girl pickup line lesbian lose
+{
+  (set:$bar_girl_name to $npc's "name")
+
+  (if:$npc contains "traits" and $npc's "traits" contains "bimbo")[
+    "(twirl:"Um, what?","Hehe, that's kinda weird...","Like, what does that even mean?","Awkward...")"
+  ](else:)[
+    (twirl:
+      "She raises an eyebrow skeptically.",
+      "She looks unimpressed.",
+      "She shifts uncomfortably.",
+      "That line didn't land well.",
+      "She seems to be losing interest."
+    )
+  ]
 }
 
 :: bar girl buy drink lesbian
