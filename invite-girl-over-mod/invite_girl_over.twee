@@ -649,9 +649,32 @@ baseGameVersion:
   (unless:$ff_type is "slow" or $ff_type is "edge" or $ff_type is "normal")[(set:$ff_type to "normal")]
 
   (set:$her_name to $girl's "name")
-  (set:$ff_position to (twirl:"licking","fingering","sucking"))
-  (set:$ff_vid_num to (twist:20,27))
-  (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " passive " + $ff_position + ".mp4")
+  (set:$ff_vid_select to (twist:1,8))
+  (if:$ff_vid_select is 1)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/20 passive yoga block.mp4")
+    (set:$ff_position to "licking")
+  ](else-if:$ff_vid_select is 2)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/21 passive pile licker.mp4")
+    (set:$ff_position to "licking")
+  ](else-if:$ff_vid_select is 3)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/22 passive upside down fingering.mp4")
+    (set:$ff_position to "fingering")
+  ](else-if:$ff_vid_select is 4)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/23 passive slow licking.mp4")
+    (set:$ff_position to "licking")
+  ](else-if:$ff_vid_select is 5)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/24 passive fingering from behind.mp4")
+    (set:$ff_position to "fingering")
+  ](else-if:$ff_vid_select is 6)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/25 passive fast fingering.mp4")
+    (set:$ff_position to "fingering")
+  ](else-if:$ff_vid_select is 7)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/26 passive licking lips.mp4")
+    (set:$ff_position to "sucking")
+  ](else:)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/27 passive pussy sucking.mp4")
+    (set:$ff_position to "sucking")
+  ]
 
   [(vid:$ff_backdrop)]<image|
 
@@ -723,7 +746,7 @@ baseGameVersion:
       "rhythm",600,
       "interrupt passage","ff passive interrupt",
       "type","resist cum",
-      "interrupts", 2
+      "interrupt count", 2
     ))
     ($cs:"dont cum initialize")
   ](else-if:$ff_type is "slow")[
@@ -742,7 +765,7 @@ baseGameVersion:
       "rhythm",750,
       "interrupt passage","ff passive interrupt",
       "type","resist cum",
-      "interrupts", 1
+      "interrupt count", 1
     ))
     ($cs:"dont cum initialize")
   ]
@@ -840,10 +863,31 @@ baseGameVersion:
   (set:$ff_events to it + (a:"give"))
 
   (set:$her_name to $girl's "name")
-  (set:$ff_position to (twirl:"licking","fingering","tongue"))
-  (set:$ff_vid_num to (twist:30,36))
+  (set:$ff_vid_select to (twist:1,7))
+  (if:$ff_vid_select is 1)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/30 active going down.mp4")
+    (set:$ff_position to "licking")
+  ](else-if:$ff_vid_select is 2)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/31 active circular licking.mp4")
+    (set:$ff_position to "licking")
+  ](else-if:$ff_vid_select is 3)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/32 active tongue and fingers.mp4")
+    (set:$ff_position to "tongue")
+  ](else-if:$ff_vid_select is 4)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/33 active clit focus.mp4")
+    (set:$ff_position to "licking")
+  ](else-if:$ff_vid_select is 5)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/34 active fingering.mp4")
+    (set:$ff_position to "fingering")
+  ](else-if:$ff_vid_select is 6)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/35 active up and down.mp4")
+    (set:$ff_position to "licking")
+  ](else:)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/36 active fast double action.mp4")
+    (set:$ff_position to "fingering")
+  ]
 
-  [(vid:"scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " active " + $ff_position + ".mp4")]<image|
+  [(vid:$ff_backdrop)]<image|
 
   (set:$quicktime_params to (dm:
     "difficulty","medium",
@@ -856,7 +900,7 @@ baseGameVersion:
     "result passage","ff active result",
     "sequence",(a:"left","right","up","down","left","right"),
     "quicktime timer",1,
-    "backdrop","scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " active " + $ff_position + ".mp4"
+    "backdrop",$ff_backdrop
   ))
   ($cs:"quicktime initialize")
 }
@@ -1127,7 +1171,7 @@ baseGameVersion:
     "rhythm",500,
     "interrupt passage","ff edge interrupt",
     "type","resist cum",
-    "interrupts", 3
+    "interrupt count", 3
   ))
   ($cs:"dont cum initialize")
 }
@@ -1182,9 +1226,20 @@ baseGameVersion:
   (set:$ff_events to it + (a:"make cum"))
   (set:$her_name to $girl's "name")
 
-  (set:$ff_position to (twirl:"licking","fingering","sucking"))
-  (set:$ff_vid_num to (twist:30,36))
-  (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/" + (text:$ff_vid_num) + " active " + $ff_position + ".mp4")
+  (set:$ff_vid_select to (twist:1,4))
+  (if:$ff_vid_select is 1)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/33 active clit focus.mp4")
+    (set:$ff_position to "licking")
+  ](else-if:$ff_vid_select is 2)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/36 active fast double action.mp4")
+    (set:$ff_position to "fingering")
+  ](else-if:$ff_vid_select is 3)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/32 active tongue and fingers.mp4")
+    (set:$ff_position to "sucking")
+  ](else:)[
+    (set:$ff_backdrop to "scenes/characters/jia/sex/workout/ff/35 active up and down.mp4")
+    (set:$ff_position to "licking")
+  ]
 
   [(vid:$ff_backdrop)]<image|
 
