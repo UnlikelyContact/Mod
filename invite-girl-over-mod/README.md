@@ -73,7 +73,8 @@ The "Invite girl over" option appears in evening activities when:
   - 30 active going down, 31 active circular licking, 32 active tongue and fingers
   - 33 active clit focus, 34 active fingering, 35 active up and down, 36 active fast double action
 - **Combined positions:**
-  - 37 active 69, 38 scissors
+  - 28 passive 69 (base game's actual 69 video)
+  - Scissors: Uses 35/36 as substitutes (no dedicated scissors video in base game)
 
 ## Compatibility
 
@@ -91,9 +92,13 @@ The "Invite girl over" option appears in evening activities when:
   - Active positions: go down gently (free), pleasure her (free), tongue and fingers (1⚡), make her scream (2⚡⚡)
   - Scissor positions: slow (1⚡), intense (2⚡⚡)
 - Different quicktime difficulties and pleasure gains based on position intensity
-- Fixed media path bug: "27 passive sucking.mp4" → "27 passive pussy sucking.mp4"
+- **Fixed media path bugs:**
+  - "27 passive sucking.mp4" → "27 passive pussy sucking.mp4"
+  - "37 active 69.mp4" → "28 passive 69.mp4" (correct base game path)
+  - "38 scissors.mp4" → Uses 35/36 active videos (scissors video doesn't exist in base game)
 - Added dedicated result passages for each intensity level
 - Video selection now matches intensity choice (gentle positions use slower videos, intense uses faster videos)
+- Added extensive code comments for easier modification by other modders
 
 ### v1.3.0
 - Fixed attraction check error (was checking NPC directly instead of relationships)
