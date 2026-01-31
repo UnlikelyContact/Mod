@@ -14,9 +14,24 @@ A mod for X-Change Life that allows players to invite girlfriends over in the ev
 ### For Female Players (Lesbian Content)
 - Same "Invite girl over" activity when playing as female
 - Dedicated female-female sex scenes with video/image media
-- Multiple position options (passive, active, 69)
+- **Position selection menus with varying energy costs** (like male player scenes):
+  - **Passive (being pleasured):**
+    - Slow and sensual (free) - gentle licking positions
+    - Let her have her way (free) - random position
+    - Beg for more (1⚡) - intense fingering positions
+    - Edge yourself (1⚡) - try to hold back
+  - **Active (pleasuring her):**
+    - Go down on her gently (free) - gentle oral
+    - Pleasure her (free) - random position
+    - Tongue and fingers (1⚡) - skilled combo techniques
+    - Make her scream (2⚡⚡) - intense positions, harder quicktime
+  - **Combined positions:**
+    - 69 together (1⚡) - mutual pleasure
+    - Scissor slow (1⚡) - standard tribbing
+    - Scissor intense (2⚡⚡) - aggressive grinding, harder quicktime
 - Uses existing ff media from the game (Jia/Callie workout scenes)
 - Trait-based dialogue for lesbian encounters
+- Different quicktime difficulties and pleasure gains based on position intensity
 
 ### Lesbian Bar Pickup
 - Override for `bar chat girl options female` passage
@@ -50,7 +65,15 @@ The "Invite girl over" option appears in evening activities when:
 
 ### Female Player (lesbian scenes)
 - Uses Jia workout ff media: `scenes/characters/jia/sex/workout/ff/`
-- Positions include: active going down, circular licking, tongue and fingers, clit focus, fingering, 69
+- **Passive positions (8 videos):**
+  - 20 passive yoga block, 21 passive pile licker, 22 passive upside down fingering
+  - 23 passive slow licking, 24 passive fingering from behind, 25 passive fast fingering
+  - 26 passive licking lips, 27 passive pussy sucking
+- **Active positions (7 videos):**
+  - 30 active going down, 31 active circular licking, 32 active tongue and fingers
+  - 33 active clit focus, 34 active fingering, 35 active up and down, 36 active fast double action
+- **Combined positions:**
+  - 37 active 69, 38 scissors
 
 ## Compatibility
 
@@ -61,6 +84,16 @@ The "Invite girl over" option appears in evening activities when:
 - Compatible with other mods that add bar girls (uses dynamic detection)
 
 ## Changelog
+
+### v1.4.0
+- **Added position selection menus with energy costs for lesbian sex scenes**
+  - Passive positions: slow and sensual (free), let her have her way (free), beg for more (1⚡), edge yourself (1⚡)
+  - Active positions: go down gently (free), pleasure her (free), tongue and fingers (1⚡), make her scream (2⚡⚡)
+  - Scissor positions: slow (1⚡), intense (2⚡⚡)
+- Different quicktime difficulties and pleasure gains based on position intensity
+- Fixed media path bug: "27 passive sucking.mp4" → "27 passive pussy sucking.mp4"
+- Added dedicated result passages for each intensity level
+- Video selection now matches intensity choice (gentle positions use slower videos, intense uses faster videos)
 
 ### v1.3.0
 - Fixed attraction check error (was checking NPC directly instead of relationships)
