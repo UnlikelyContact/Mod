@@ -1,6 +1,6 @@
-# Invite Girl Over Mod
+# Girlfriend Experience
 
-A mod for X-Change Life that allows players to invite girlfriends over in the evening, mirroring the "Invite guy over" feature. Works for both male and female players.
+A comprehensive relationship mod for X-Change Life that adds girlfriend mechanics, intimate encounters, and bar pickup features for both male and female players.
 
 ## Features
 
