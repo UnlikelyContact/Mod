@@ -1,8 +1,8 @@
 # meta
 metaVersion: 1
-name: "Invite Girl Over"
+name: "Girlfriends"
 version: "1.5.0"
-author: "Mod Author"
+author: "UnlikelyContact"
 baseGameVersion:
   atLeast: "0.17f"
 # /meta
