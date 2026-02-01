@@ -1,6 +1,6 @@
-# Girlfriend Experience
+# Sapphic Girlfriends
 
-A comprehensive relationship mod for X-Change Life that adds girlfriend mechanics, intimate encounters, and bar pickup features for both male and female players.
+A relationship mod for X-Change Life that adds lesbian encounters, girlfriend mechanics, and female-female bar pickup features.
 
 ## Features
 
