@@ -1,4 +1,4 @@
-# Sapphic Girlfriends
+# Girlfriends
 
 A relationship mod for X-Change Life that adds lesbian encounters, girlfriend mechanics, and female-female bar pickup features.
 
