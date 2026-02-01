@@ -29,6 +29,14 @@ A mod for X-Change Life that allows players to invite girlfriends over in the ev
     - 69 together (1⚡) - mutual pleasure
     - Scissor slow (1⚡) - standard tribbing
     - Scissor intense (2⚡⚡) - aggressive grinding, harder quicktime
+- **Fitness-based stamina system:** High fitness (8+) reduces energy costs by 1
+- **NPC arousal system:** Build arousal through kissing and foreplay to unlock intense options
+- **Trait-specific bonuses:**
+  - Slut NPCs: Start at high arousal, easier to please
+  - Shy NPCs: Start at low arousal, intense options locked until aroused
+  - Athletic NPCs: Additional stamina cost reduction
+- **Mutual orgasm bonus:** Special scene when both climax together
+- **Post-sex options:** Cuddle, pillow talk, or go again
 - Uses existing ff media from the game (Jia/Callie workout scenes)
 - Trait-based dialogue for lesbian encounters
 - Different quicktime difficulties and pleasure gains based on position intensity
@@ -85,6 +93,32 @@ The "Invite girl over" option appears in evening activities when:
 - Compatible with other mods that add bar girls (uses dynamic detection)
 
 ## Changelog
+
+### v1.5.0
+- **Fitness-based stamina system:**
+  - Players with fitness 8+ get 1⚡ discount on all position costs
+  - Athletic NPCs provide additional stamina bonus
+  - Minimum cost is always 0 (free positions stay free)
+- **NPC arousal system:**
+  - NPCs have arousal level (0-5) that builds during the scene
+  - Kissing increases arousal by 1
+  - Arousal affects dialogue ("She's getting into it...", "She's desperate for release...")
+  - High arousal (3+) unlocks intense options for shy NPCs
+  - Higher arousal = more pleasure gain per action
+- **Trait-specific bonuses:**
+  - **Slut:** Starts at arousal 3, +2 arousal bonus throughout
+  - **Shy:** Starts at arousal 0, intense options locked until arousal reaches 3
+  - **Athletic:** Extra stamina cost reduction (stacks with player fitness)
+- **Mutual orgasm bonus:**
+  - If both player and NPC are near climax (80%+ pleasure), triggers special scene
+  - Bonus relationship gains (+2 attraction, +2 friendship)
+  - Unique dialogue celebrating the shared moment
+- **Post-sex options:**
+  - **Cuddle:** Relaxing afterglow (+1 friendship, small energy recovery)
+  - **Pillow talk:** Deepen connection (+2 friendship, +1 attraction)
+  - **Go again:** Start another round (if stamina permits)
+- Arousal-based dialogue throughout all menus
+- Updated code comments documenting all new systems
 
 ### v1.4.0
 - **Added position selection menus with energy costs for lesbian sex scenes**
